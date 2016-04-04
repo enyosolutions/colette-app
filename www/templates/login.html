@@ -1,0 +1,17 @@
+        <ion-nav-view name="menuContent" class="login-page">  <form ng-submit="doLogin()">
+            <div class="login-form list card">
+                <h3>Identifiez-vous pour accéder à votre espace personnel</h3>
+                <span class="assertive">Votre e-mail</span>
+                <label class="item item-input">
+                    <input type="email" ng-model="loginData.username" required>
+                </label>
+                <span class="assertive">Votre mot de passe</span>
+                <label class="item item-input">
+
+                    <input type="password" ng-model="loginData.password" required>
+                </label>
+                    <button class="button button-block button-assertive" type="submit">SE CONNECTER</button>
+                    <a class="button button-block button-assertive button-clear" href="#/register">S'inscrire</a>
+
+            </div>
+        </form></ion-nav-view>

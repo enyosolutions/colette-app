@@ -1,0 +1,63 @@
+<ion-nav-view name="registerContent" class="register-page register-intro-page">
+    <div class="page-body">
+        <form ng-submit="doRegisterStep4()">
+
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Votre photo</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <div style="width:100%; height: auto;background:url('/img/profil.png') no-repeat;background-size: cover;">
+                            <img ng-src="{{ uploadedImage }}" src="/img/profil.png" style="width:100%; height: auto;"/>
+                        </div>
+                        <button class="button button-full button-assertive" type="button"
+                                ng-click="getImageSaveContact()">
+                            Choisir une image
+                        </button>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Vous pouvez choisir votre photo de profil parmis celles dont
+                            vous disposez déjà sur votre tablette,
+                            ou bien vous prendre directement en photo grâce à la webcam de votre tablette
+                        </div>
+                    </div>
+                </div>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Votre mot de passe</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <input type="password" ng-model="newUser.password" class="input-item" required>
+                        <div class="error-message">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Il vous permettra d’accéder à votre compte en toute sécurité
+                        </div>
+                    </div>
+                </div>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Confirmation de votre mot de passe</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <input type="password" ng-model="newUser.password" class="input-item" required>
+                        <div class="error-message">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Il vous permettra d’accéder à votre compte en toute sécurité
+                        </div>
+                    </div>
+                </div>
+            </label>
+
+            <a nav-direction="back" class="button button-assertive button-previous" href="#/register/step3/form"><i
+                    class="fa fa-angle-left"></i></a>
+            <button class="button button-assertive button-next" type="submit"><i class="fa fa-angle-right"></i> Terminer
+            </button>
+        </form>
+    </div>
+</ion-nav-view>

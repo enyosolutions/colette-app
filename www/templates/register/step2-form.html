@@ -1,0 +1,73 @@
+<ion-nav-view name="registerContent" class="register-page register-intro-page">
+    <form ng-submit="doRegisterStep2()">
+        <div class="page-body">
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Votre pathologie</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <div class="item item-input item-select input-item">
+                            <select ng-model="newUser.sickness" class="input-item" required>
+                                <option></option>
+                                <option>Parkinson</option>
+                                <option>Alzheimer</option>
+                                <option>Cancer</option>
+                                <option>Défience physique</option>
+                            </select>
+                            <div class="error-message">Ce champ est obligatoire</div>
+                        </div>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Ceci nous permettra de vous recommander des intervenants
+                            spécialisés.
+                        </div>
+                    </div>
+                </div>
+            </label>
+
+
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Votre perte de capacité</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <div class="item item-input item-select input-item">
+                            <select ng-model="newUser.sicknessLevel" class="input-item" required >
+                                <option></option>
+                                <option>IP 1</option>
+                                <option>IP 2</option>
+                                <option>IP 3</option>
+                                <option>IP 4</option>
+                            </select>
+                            <div class="error-message">Ce champ est obligatoire</div>
+                        </div>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Ceci nous permettra de vous recommander des intervenants
+                            spécialisés.
+                        </div>
+                    </div>
+                </div>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Quelque chose à ajouter ?</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <textarea ng-model="newUser.lastname" class="input-item" rows="10"></textarea>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Tout complément permettra aux intervenants de mieux
+                            s’occuper de vous.
+                        </div>
+                    </div>
+                </div>
+            </label>
+            <a  nav-direction="back" class="button button-assertive button-previous" href="#/register/step1/form"><i class="fa fa-angle-left"></i></a>
+            <button class="button button-assertive button-next" type="submit"><i class="fa fa-angle-right"></i> Suivant</button>
+        </div>
+
+
+    </form>
+</ion-nav-view>

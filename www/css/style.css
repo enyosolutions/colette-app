@@ -1,0 +1,456 @@
+/*
+
+  MENU LEFT
+  LANDING PAGE                  : intro page that leads to registration or connexion
+  LOGIN PAGE                    : Login page
+  REGISTER PAGES                : pages for registering in the app
+  NATURAL FORM                  : form with the select embedded
+  INTERVENANTS RESULTS          : Results of intervenants search
+  INTERVENANTS MODAL            : Modal that displays the intervenant profile
+  INTERVENANTS MAP              : Map with the nearest intervenants
+
+ */
+
+
+
+.scroll {
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: #000;
+  font-weight: 500;
+  font-family: "Raleway", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+}
+
+/**
+MENU LEFT
+*/
+
+.menu .button-back {
+    background: #F56D74;
+}
+
+.infinite-list .button.square {
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    line-height: 1.2;
+    margin: 5px auto;
+}
+
+.infinite-list .button.square i {
+    display: block;
+
+}
+.document-list
+{
+    overflow-x:scroll;
+    overflow-y:hidden;
+    height:100%;
+    padding: 0 15px;
+    -webkit-overflow-scrolling: touch;
+    padding: 15px 15px 12px;
+    white-space: nowrap;
+    list-style: none;
+}
+
+.document-item
+{
+    padding:0;
+    height:100%;
+    min-width: 100px;
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+    margin: 0 10px
+}
+
+.list-inline {
+    white-space:nowrap;
+    height: 100%;
+}
+
+
+input,
+select,
+textarea {
+    transition: all 40ms linear;
+    direction: ltr !important;
+}
+
+input.ng-invalid:not(.ng-untouched),
+select.ng-invalid:not(.ng-untouched),
+textarea.ng-invalid:not(.ng-untouched) {
+    border: 1px solid red;
+}
+.error-message {
+    display: none;
+}
+input.ng-invalid:not(.ng-untouched) + .error-message ,
+select.ng-invalid:not(.ng-untouched) + .error-message ,
+textarea.ng-invalid:not(.ng-untouched) + .error-message {
+    display: block;
+    color: red;
+}
+/**
+
+LANDING PAGE
+
+*/
+
+.landing-page {
+    background: url('/img/bg/colette.jpg') no-repeat;
+    background-position: top left;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.landing-page .button-register {
+    text-align: center;
+}
+
+.landing-page .header-left {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.landing-page .intro-section {
+    position: absolute;
+    left: 100px;
+    top: 300px;
+}
+
+
+/**
+LOGIN PAGE
+*/
+
+.login-page , .register-page, .inapp-page  {
+    background: url('/img/bg/colette-floue.png') no-repeat;
+    background-position: top left;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
+/**
+REGISTER PAGES
+*/
+
+.register-intro-page .page-body {
+    padding-left: 100px;
+    padding-top: 50px;
+    top: 50%;
+    margin-top: -25px;
+    height: 50px;
+}
+
+.register-intro-page .page-title {
+    top: 50%;
+    margin-top: -50px;
+    height: 100px;
+    position: absolute;
+}
+
+.register-intro-page h1, .register-intro-page h2
+{
+    color: #2A565C;
+}
+
+
+.register-intro-page h1 {
+    font-size: 3em;
+}
+
+.register-intro-page h2 {
+    font-size: 3em;
+    font-weight: 200;
+}
+
+.register-page form {
+    width: 70%;
+
+}
+
+.register-page form .item {
+    margin-bottom: 20px;
+}
+
+.register-page form .label {
+    display: block;
+    color: #5A3B4F;
+    font-size: 20px;
+    font-weight: 900;
+    padding-left: 10px;
+}
+
+.register-page form .label.align-fix {
+    padding-left: 0px;
+}
+.register-page form .item-stacked-label {
+    border: none;
+}
+
+.register-page form .input-legend {
+    border: none;
+    color: #5A3B4F;
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: normal;
+    margin-left: 25px;
+
+}
+.register-page form .input-item {
+    min-height: 70px;
+    padding: 10px 15px;
+    font-size: 1.5em;
+    border-radius: 5px;
+}
+
+.register-page form select {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 15px;
+}
+
+.register-page form .row.aligned-left,
+.register-page form .row.aligned-left .col-60{
+    padding-left: 0px;
+}
+
+.button-previous {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 70px;
+    color: white;
+    border-radius: 0;
+    font-size: 3em;
+    padding: 15px 20px;
+}
+
+.button-next {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -25px;
+    height: 75px;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 0;
+    font-size: 2em;
+
+}
+
+
+/**
+  #PANELS
+
+*/
+
+.home-panel   {
+    background-color: #D8D8D8;
+}
+
+.intervenants-panel {
+    background: url('/img/bg/colette-floue.png') no-repeat;
+    background-position: top left;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/**
+* NATURAL FORM
+*/
+.natural-form {
+    position: relative;
+    font-size: 3em;
+    color: #5A3B4F;
+}
+
+.intervenants-natural-form form {
+    height: 159px;
+    top: 50%;
+    margin-top: -79.5px;
+}
+
+.intervenants-natural-form .form-text-section {
+    width: 90%;
+    font-size: 1em;
+}
+
+
+.natural-form .item-select
+{
+    outline: none;
+    display: inline-block;
+    background: transparent;
+    border: none;
+    padding: 0px;
+    #border-bottom: 5px dotted #F56D74;
+}
+
+
+.natural-form .item-select:focus
+.natural-form select:focus
+{
+    outline: none;
+}
+
+.natural-form .item-select:after {
+    display: none;
+}
+
+.natural-form .item-select select {
+    background: transparent;
+    position: relative;
+    width: 100%;
+    min-width: 100%;
+    padding: 5px 10px;
+    text-align: center;
+    direction: ltr;
+    color: #F56D74;
+    font-size: 42px;
+}
+.natural-form .form-text {
+    display: inline-block;
+}
+
+.natural-form .item-select.first-input,
+.natural-form .item-select.second-input {
+    width: auto;
+    min-width: 150Px;
+    overflow: visible;
+}
+
+.natural-form .button-next {
+    font-size: 1em;
+    margin-top: 50px;
+}
+
+
+
+/**
+* INTERVENANTS RESULTS
+*/
+
+.results-recap-section {
+    color: #2A565C;
+    top: 50%;
+    margin-top: -50px;
+    height: 100px;
+    position: relative;
+}
+
+.results-recap-section .results-count {
+    display: inline-block;
+    font-size: 20em;
+}
+
+.results-recap-section .results-text {
+    display: inline-block;
+    font-size: 2em;
+}
+
+.card-intervenant {
+    height: 534px;
+    padding: 20px;
+    width: 320px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+}
+
+
+.card-intervenant img.round {
+    border-radius: 50%;
+    width: 225px;
+    margin-bottom: 30px;
+}
+
+
+.card-intervenant .name {
+    font-weight: 500;
+    font-size: 2em;
+}
+
+
+.card-intervenant .age {
+    font-size: 2em;
+    font-weight: 300;
+}
+
+
+.card-intervenant .score {
+
+}
+
+.card-intervenant .action-block {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    left: 52.5px;
+    width: 208px;
+}
+.card-intervenant .button-open-profile {
+    margin: 0 auto;
+    width: 208px;
+    border-radius: 0px;
+}
+
+.card-intervenant .button-open-map {
+    margin: 0 auto;
+    width: 208px;
+}
+
+
+
+/**
+* INTERVENANTS MODAL
+*/
+
+.intervenant-profile-modal.modal {
+    border-radius: 12px;
+    top: 10%;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    width: 80%;
+}
+.intervenant-profile .profile-side {
+    background-color: #F6F0F1;
+    width: auto;
+}
+
+
+.intervenant-profile .profile-info {
+    position: relative;
+}
+
+.intervenant-profile .profile-info h1 {
+    background-color: #3F98A7;
+    color: #fff;
+    top: 0;
+    text-align: center;
+}
+
+.intervenant-profile .button-return {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+
+/**
+INTERVENANTS MAP
+*/
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+

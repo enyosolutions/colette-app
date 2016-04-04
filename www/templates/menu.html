@@ -1,0 +1,36 @@
+<ion-side-menus enable-menu-with-back-views="false" expose-aside-when="large">
+    <ion-side-menu-content >
+
+        <ion-nav-view name="menuContent" class="inapp-page"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left" class="left-menu" width="100">
+
+        <ion-content class="main-menu">
+            <ion-list>
+                <ion-item nav-direction="back" ng-show="$state.current.name !== 'app.home'" href="#/app/intervenants/recherche" class="assertive button-assertive button-back">
+                    <i class="fa fa-angle-left fa-3x button-assertive"></i>
+                </ion-item>
+                <ion-item menu-close href="#/app/notifications">
+                    <i class="ionicons ion-bag"></i>
+                </ion-item>
+                <ion-item menu-close href="#/app/intervenants/recherche">
+                    <i class="ionicons ion-heart"></i>
+                </ion-item>
+                <ion-item menu-close href="#/app/browse">
+                    <i class="ionicons ion-ios-people"></i>
+                </ion-item>
+                <ion-item menu-close href="#/app/playlists">
+                    <i class="ionicons ion-ios-calendar-outline"></i>
+                </ion-item>
+                <ion-item menu-close href="#/app/playlists">
+                    <i class="ionicons ion-help"></i>
+                </ion-item>
+                <ion-item></ion-item>
+                <ion-item menu-close href="#/app/home">
+                    <i class="ionicons ion-home"></i>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

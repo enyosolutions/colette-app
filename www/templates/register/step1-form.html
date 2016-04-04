@@ -1,0 +1,157 @@
+<ion-nav-view name="registerContent" class="register-page register-intro-page">
+    <div class="page-body">
+        <form ng-submit="doRegisterStep1()">
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Votre prénom</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <input type="text" ng-model="newUser.firstname" class="input-item" required>
+                        <div class="error-message">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Il sera visible par la communauté Bonjour Colette.
+                        </div>
+                    </div>
+                </div>
+            </label>
+
+
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Votre nom</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <input type="text" ng-model="newUser.lastname" class="input-item" required>
+                        <div class="error-message">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Il ne sera pas publié, c’est juste pour nous !</div>
+                    </div>
+                </div>
+            </label>
+
+            <div class="row">
+                <div class="col col-60 ">
+                    <div class="row">
+                        <label class="item item-input item-stacked-label col col-30">
+                            <span class="royal label align-fix">Jour</span>
+                            <div class="item item-input item-select input-item">
+                                <select ng-model="newUser.age.day" class="input-item" required>
+                                    <option></option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                    <option>20</option>
+                                    <option>21</option>
+                                    <option>22</option>
+                                    <option>23</option>
+                                    <option>24</option>
+                                    <option>25</option>
+                                    <option>26</option>
+                                    <option>27</option>
+                                    <option>28</option>
+                                    <option>29</option>
+                                    <option>30</option>
+                                    <option>31</option>
+                                </select>
+                                <div class="error-message">Ce champ est obligatoire</div>
+                            </div>
+                        </label>
+                        <label class="item item-input item-stacked-label align-fix col col-40">
+                            <span class="royal label">Mois</span>
+                            <div class="item item-input item-select input-item">
+                            <select ng-model="newUser.age.number" class="input-item" required>
+                                <option></option>
+                                <option>Janvier</option>
+                                <option>Fevrier</option>
+                                <option>Mars<option>
+                                <option>Avril</option>
+                                <option>Mai</option>
+                                <option>Juin</option>
+                                <option>Juillet</option>
+                                <option>Aout</option>
+                                <option>Septembre</option>
+                                <option>Octobre</option>
+                                <option>Novembre</option>
+                                <option>Décembre</option>
+                            </select>
+                                <div class="error-message">Ce champ est obligatoire</div>
+                                </div>
+                        </label>
+                          <label class="item item-input item-stacked-label align-fix col col-30">
+                            <span class="royal label">Année</span>
+                              <div class="item item-input item-select input-item">
+                            <select ng-model="newUser.age.year" class="input-item" required>
+                                <option></option>
+                                <option ng-repeat="n in range(1900, 1998)">{{n}}</option>
+                            </select>
+                                  <div class="error-message">Ce champ est obligatoire</div>
+                            </div>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="col col-40">
+                    <span class="royal label">&nbsp;</span>
+                    <div class="input-legend royal">Tout simplement pour déterminer votre âge.</div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col col-60 ">
+                    <div class="row">
+                        <div class="item-input">
+                            <input type="radio" name="user-sex" ng-model="user.sex" ng-value="male" selected checked/> Homme
+                            <input type="radio" name="user-sex" ng-model="user.sex" ng-value="female"/> Femme
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-40">
+                </div>
+            </div>
+
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Votre situation familiale</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <div class="item item-input item-select input-item">
+                        <select ng-model="newUser.relationshipStatus" class="input-item" required>
+                            <option>Célibataire</option>
+                            <option selected>Marié(e)</option>
+                            <option>Veuf(ve)</option>
+                            <option>Autre</option>
+                        </select>
+                            <div class="error-message">Ce champ est obligatoire</div>
+                        </div>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Pour vous recommander les intervenants les plus
+                            adaptés.
+                        </div>
+                    </div>
+                </div>
+            </label>
+            <button class="button button-assertive button-next" type="submit"><i class="fa fa-angle-right"></i> Suivant</button>
+        </form>
+    </div>
+</ion-nav-view>

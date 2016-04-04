@@ -1,0 +1,72 @@
+<ion-nav-view name="registerContent" class="register-page register-intro-page">
+    <div class="page-body">
+        <form ng-submit="doRegisterStep3()">
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Votre email</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <input type="email" ng-model="newUser.email" class="input-item" required>
+                        <div class="error-message">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Il sera visible par la communauté Bonjour Colette.
+                        </div>
+                    </div>
+                </div>
+            </label>
+
+
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Votre numéro de téléphone</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <input type="text" ng-model="newUser.phonenumber" class="input-item" required>
+                        <div class="error-message">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Il ne sera pas publié, c’est juste pour nous !</div>
+                    </div>
+                </div>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="royal label">Votre adresse</span>
+
+                <div class="row">
+                    <div class="col col-60">
+                        <input type="text" ng-model="newUser.address" class="input-item">
+                        <div class="error-message">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="col col-40">
+                        <div class="input-legend royal">Il sera visible par la communauté Bonjour Colette.!</div>
+                    </div>
+                </div>
+            </label>
+
+
+            <label class="item item-input item-stacked-label row">
+                <div class="row">
+                    <div class="col col-60">
+                        <label class="item item-input item-stacked-label">
+                            <span class="royal label">Votre ville</span>
+                            <div class="error-message">Ce champ est obligatoire</div>
+                            <input type="text" ng-model="newUser.city" class="input-item" required>
+                        </label>
+                    </div>
+                    <div class="col col-40">
+                        <label class="item item-input item-stacked-label">
+                            <span class="royal label">Votre code postal</span>
+                            <div class="error-message">Ce champ est obligatoire</div>
+                            <input type="text" ng-model="newUser.zipCode" class="input-item" required>
+                        </label>
+                    </div>
+                </div>
+            </label>
+
+            <a  nav-direction="back" class="button button-assertive button-previous" href="#/register/step2/form"><i class="fa fa-angle-left"></i></a>
+            <button class="button button-assertive button-next" type="submit"><i class="fa fa-angle-right"></i> Suivant</button>
+        </form>
+    </div>
+</ion-nav-view>

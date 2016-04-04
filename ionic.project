@@ -1,0 +1,12 @@
+{
+  "name": "colette",
+  "app_id": "fb8fce8e",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
