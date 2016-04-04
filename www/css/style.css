@@ -83,7 +83,7 @@ textarea {
 input.ng-invalid:not(.ng-untouched),
 select.ng-invalid:not(.ng-untouched),
 textarea.ng-invalid:not(.ng-untouched) {
-    border: 1px solid red;
+    border: 3px solid red;
 }
 .error-message {
     display: none;
@@ -209,6 +209,7 @@ REGISTER PAGES
     padding: 10px 15px;
     font-size: 1.5em;
     border-radius: 5px;
+    font-weight: 600;
 }
 
 .register-page form select {
