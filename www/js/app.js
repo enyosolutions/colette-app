@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', 'ngResource', 'ngCordova'])
+angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', 'ngResource', 'ngCordova', 'ui.calendar'])
     .config(['$sceDelegateProvider', function ($sceDelegateProvider) {
         $sceDelegateProvider.resourceUrlWhitelist(['self', 'http://colette.dev/**']);
     }])
@@ -127,17 +127,26 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/intervenants/map.html',
-                        controller: 'MapCtrl'
+                        controller: 'IntervenantsCtrl'
                     }
                 }
             })
 
             .state('app.intervenants-map-user', {
-                url: '/intervenants/map/:id',
+                url: '/intervenants/map/:intervenantId',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/intervenants/map.html',
-                        controller: 'MapCtrl'
+                        controller: 'IntervenantsCtrl'
+                    }
+                }
+            })
+            .state('app.intervenants-agenda', {
+                url: '/intervenants/intervenants/:intervenantId/agenda',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/intervenants/agenda.html',
+                        controller: 'IntervenantsCtrl'
                     }
                 }
             })

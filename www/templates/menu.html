@@ -4,11 +4,11 @@
         <ion-nav-view name="menuContent" class="inapp-page"></ion-nav-view>
     </ion-side-menu-content>
 
-    <ion-side-menu side="left" class="left-menu" width="100">
+    <ion-side-menu side="left" class="left-menu" width="100" on-swipe-left="onSwipeLeft()">
 
         <ion-content class="main-menu">
             <ion-list>
-                <ion-item nav-direction="back" ng-show="$state.current.name !== 'app.home'" href="#/app/intervenants/recherche" class="assertive button-assertive button-back">
+                <ion-item nav-direction="back" ng-show="$state.current.name !== 'app.home'"  ng-click="goBack()" class="assertive button-assertive button-back">
                     <i class="fa fa-angle-left fa-3x button-assertive"></i>
                 </ion-item>
                 <ion-item menu-close href="#/app/notifications">

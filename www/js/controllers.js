@@ -1,7 +1,6 @@
 angular.module('colette.controllers', [])
 
     .controller('AppCtrl', function ($scope, $state, $ionicModal, $timeout, $localstorage, $ionicLoading, User, Intervenant) {
-
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
         // To listen for when this page is active (for example, to refresh data),
@@ -70,6 +69,8 @@ angular.module('colette.controllers', [])
             console.error(e);
             $localstorage.setObject('user.temp', {});
         }
+
+        $scope.newUser = $localstorage.getObject('user.temp');
 
         function codeAddress(address) {
             geocoder.geocode({'address': address}, function (results, status) {
@@ -165,16 +166,15 @@ angular.module('colette.controllers', [])
             console.log('Doing register', $scope.newUser);
             var tmp = $localstorage.getObject('user.temp');
             var user = angular.extend(tmp, $scope.newUser);
-            $localstorage.setObject('User', user);
+
             console.log(user);
-            var user = new User(user);
-            user.$save();
-
-
-            $timeout(function () {
+            var userClass = new User(user);
+            userClass.$save().then(function (data) {
+                console.log(data);
+                $localstorage.setObject('User', data);
                 $ionicLoading.hide();
                 $state.go('app.home');
-            }, 500);
+            });
         };
 
 
@@ -225,10 +225,84 @@ angular.module('colette.controllers', [])
 
     }
 )
-    .controller('IntervenantsCtrl', function ($scope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicLoading, User, Intervenant, Meeting) {
+    .controller('IntervenantsCtrl', function ($scope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
+                                              $ionicBackdrop, $ionicLoading, $cordovaGeolocation, uiCalendarConfig, User, Intervenant, Meeting) {
 
+        $scope.User = $localstorage.getObject('User');
+        console.log($scope.User._id);
+        $scope.goBack = function () {
+            $ionicHistory.goBack();
+        };
 
         $scope.showBackButton = false;
+        $scope.eventSources = [];
+
+        $scope.uiConfig = {
+            calendar: {
+                editable: true,
+                firstDay: 1,
+                defaultView: 'agendaWeek',
+                views: {
+                    defaultView: 'agendaWeek'
+                },
+                header: {
+                    left: 'prev',
+                    center: 'title',
+                    right: 'next'
+                },
+                slotDuration: '00:30:00',
+                defaultTimedEventDuration: '01:00:00',
+                allDaySlot: false,
+                defaultDate: new moment(),
+                selectable: true,
+                selectHelper: true,
+                minTime: '08:00:00',
+                maxTime: '20:00:00',
+                select: function (start, end) {
+                    var events = uiCalendarConfig.calendars.modalCalendar.fullCalendar( 'clientEvents');
+                    console.log(events);
+                    
+                    for(var i in events){
+                        var mStart = new moment(start);
+                        var mEnd = new moment(end);
+                        console.log(events[i].start, events[i].end, start, end);
+                        if (events[i].start.isBetween(start, end) || events[i].end.isBetween(start, end)
+                        ||  mStart.isBetween(events[i].start, events[i].end) || mEnd.isBetween(events[i].start, events[i].end)
+                        ){
+                            uiCalendarConfig.calendars.modalCalendar.fullCalendar('unselect');
+                            return alert("Cet horaire n'est pas disponible dans vos agendas communs" );
+                        }
+                    }
+                    if (confirm('Proposer un rendez-vous à ' + $scope.focusIntervenant.firstname + ' ? ')) {
+                        var meeting = {
+                            clientId: $scope.User._id,
+                            intervenantId: $scope.focusIntervenant._id,
+                            start: start,
+                            end: end,
+                            skill: $scope.search ? $scope.search.skills : null,
+                            status: "attente-intervenant"
+                        };
+
+                        var m = new Meeting(meeting);
+                        m.$save().then(function () {
+                            meeting.title = 'Rendez vous avec : ' + $scope.focusIntervenant.firstname;
+                            meeting.className = 'assertive-bg';
+                            console.log(meeting);
+                            //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
+
+                            uiCalendarConfig.calendars.modalCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
+                            alert("Votre demande de rendez vous a bien été transmise à " + $scope.focusIntervenant.firstname + ". Elle vous répondra très rapidement.");
+                        });
+                    }
+                    uiCalendarConfig.calendars.modalCalendar.fullCalendar('unselect');
+
+                },
+                editable: false,
+                slotEventOverlap: false
+            }
+        };
+
+        console.log(uiCalendarConfig);
 
         $scope.doSearch = function () {
 
@@ -241,7 +315,6 @@ angular.module('colette.controllers', [])
 
         //Launch the search on the server
         $scope.execSearch = function () {
-            console.log($scope.search);
             $scope.showBackButton = true;
             if ($state.params.search) {
                 $scope.search = JSON.parse($state.params.search);
@@ -257,101 +330,177 @@ angular.module('colette.controllers', [])
                 }
             }
             $scope.intervenants = Intervenant.query(remoteQuery);
-            $scope.intervenants.$promise.then(function(intervenants){
+            $scope.intervenants.$promise.then(function (intervenants) {
                 $localstorage.setObject('intervenants', intervenants);
             });
-
-            console.log(remoteQuery);
-            console.log($scope.intervenants);
         }
 
 
         // set up meeting between the intervenant and the client
-        $scope.createMeeting = function (intervenantId, date, startTime, endTime) {
 
-            $scope.User = $localstorage.getObject('User');
-            var meeting = {clientId: User._id, intervenantId: intervenantId, date: date, startTime: startTime, endTime: endTime };
-
-
-        };
-
-
-
-
-
-        // Create the login modal that we will use later
+        // Create the profile modal that we will use later
         $ionicModal.fromTemplateUrl('templates/intervenants/profile.html', {
-            scope: $scope
+            scope: $scope,
+            animation: 'animated bounceIn',
+            hideDelay: 220
         }).then(function (modal) {
             $scope.modal = modal;
-        })
+            $ionicBackdrop.release();
+        });
 
+        // Create the modal for the planning
+        $ionicModal.fromTemplateUrl('templates/intervenants/agenda.html', {
+            scope: $scope,
+            animation: 'animated bounceIn',
+            hideDelay: 220
+        }).then(function (modal) {
+            $scope.agendaModal = modal;
+            $ionicBackdrop.release();
+        });
 
         $scope.openProfileModal = function (intervenantId) {
-            for (var i in $scope.intervenants) {
-                if ($scope.intervenants[i]._id === intervenantId) {
-                    $scope.intervenant = $scope.intervenants[i];
-                    console.log($scope.intervenant);
-                    $scope.modal.show();
-                    return;
+            if (!$scope.focusIntervenant || $scope.focusIntervenant._id !== intervenantId) {
+                for (var i in $scope.intervenants) {
+                    if ($scope.intervenants[i]._id === intervenantId) {
+                        $scope.focusIntervenant = $scope.intervenants[i];
+                    }
                 }
             }
+
+            $scope.modal.show();
+            $ionicBackdrop.release();
+            $timeout(function () {
+                // uiCalendarConfig.calendars.profileCalendar.fullCalendar("render");
+            }, 1000);
+        }
+
+
+        $scope.openAgendaModal = function (intervenantId) {
+
+            // $scope.modal.hide();
+            console.log(intervenantId);
+            if (!$scope.focusIntervenant || $scope.focusIntervenant._id !== intervenantId) {
+                for (var i in $scope.intervenants) {
+                    if ($scope.intervenants[i]._id === intervenantId) {
+                        $scope.focusIntervenant = $scope.intervenants[i];
+                    }
+                }
+            }
+            uiCalendarConfig.calendars.modalCalendar.fullCalendar('removeEvents');
+
+            $timeout(function () {
+                uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
+            }, 250);
+            var meetingsList = Meeting.query({'query[intervenantId]': $scope.focusIntervenant._id});
+            meetingsList.$promise.then(function (data) {
+                $scope.eventSources = [];
+                $scope.agendaModal.show();
+                data = data.map(function(d){
+                    if (d.clientId === $scope.User._id) {
+                        d.className = 'assertive-bg';
+                        d.title = 'Mon rendez-vous';
+                    }
+                    else{
+                        d.className = 'royal-bg';
+                    }
+
+                    //$scope.eventSources.push(d);
+                    return d;
+                });
+
+                uiCalendarConfig.calendars.modalCalendar.fullCalendar('addEventSource', {events: data});
+                /*
+                if (data) {
+                    $scope.eventSources = data;
+                }
+                else{
+                    $scope.eventSources = [];
+                }
+                */
+                console.log(data);
+
+                //uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
+                console.log(uiCalendarConfig.calendars);
+
+                $timeout(function () {
+
+                }, 250);
+
+            });
+
         };
+
         $scope.closeModal = function () {
             $scope.modal.hide();
         };
 
-
-        if ($state.is('app.intervenants-resultats')) {
-            $scope.execSearch();
-        }
-    })
-
-    .controller('MapCtrl', function ($scope, $state, $localstorage,  $cordovaGeolocation) {
-        var options = {timeout: 10000, enableHighAccuracy: true};
-
-        $scope.User = $localstorage.getObject('User');
-        $scope.intervenants = $localstorage.getObject('intervenants');
-
-        if(!$scope.User.location){
-            $scope.User.location = {lat:1, lng:1}
-        }
-        var myLatlng = new google.maps.LatLng($scope.User.location.lat, $scope.User.location.lng);
-
-
-        var mapOptions = {
-            center: myLatlng,
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-
-        $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: $scope.map,
-            title: 'moi',
-            animation: google.maps.Animation.DROP
+        $scope.$on('$destroy', function () {
+            $scope.modal.remove();
         });
 
-        var focusIntervenant = undefined;
-        if($state.params.intervenantId){
-            focusIntervenant = $state.params.intervenantId;
+        if ($state.is('app.intervenants-resultats')) {
+
+            $scope.execSearch();
         }
 
-        for (var i in $scope.intervenants) {
-            console.log($scope.intervenants);
-            var latlng = new google.maps.LatLng($scope.intervenants[i].location.lat, $scope.intervenants[i].location.lng);
+        if ($state.is('app.intervenants-map-user') || $state.is('app.intervenants-map') || $state.is('app.intervenants-agenda')) {
+
+            var options = {timeout: 10000, enableHighAccuracy: true};
+
+            $scope.User = $localstorage.getObject('User');
+            $scope.intervenants = $localstorage.getObject('intervenants');
+            $scope.focusIntervenant = undefined;
+            console.log($state.params.intervenantId);
+
+            if ($state.params.intervenantId) {
+                var focusIntervenantId = $state.params.intervenantId;
+                for (var i in $scope.intervenants) {
+                    if (focusIntervenantId === $scope.intervenants[i]._id) {
+                        $scope.focusIntervenant = $scope.intervenants[i];
+                    }
+                }
+            }
+
+            var location = {lat: 1, lng: 1};
+            if ($scope.focusIntervenant && $scope.focusIntervenant.location) {
+                location = $scope.focusIntervenant.location;
+            }
+            else if ($scope.User.location) {
+                location = $scope.User.location;
+            }
+            var myLatlng = new google.maps.LatLng(location.lat, location.lng);
+
+
+            var mapOptions = {
+                center: myLatlng,
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+
+            $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
             var marker = new google.maps.Marker({
-                position: latlng,
+                position: myLatlng,
                 map: $scope.map,
-                animation: google.maps.Animation.DROP,
-                title: $scope.intervenants[i].firstname,
-                icon: '/img/intervenants/map-anastasia-2.png'
+                title: 'moi',
+                animation: google.maps.Animation.DROP
             });
+
+
+            for (var i in $scope.intervenants) {
+                var latlng = new google.maps.LatLng($scope.intervenants[i].location.lat, $scope.intervenants[i].location.lng);
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: $scope.map,
+                    animation: google.maps.Animation.DROP,
+                    title: $scope.intervenants[i].firstname,
+                    icon: '/img/intervenants/map-' + $scope.intervenants[i].firstname.toLowerCase() + '-' + ($scope.focusIntervenant._id === $scope.intervenants[i]._id ? 'rose' : 'bleu') + '.png'
+                });
+                google.maps.event.addListener(marker, 'click', function () {
+                    $scope.openProfileModal($scope.intervenants[i]._id);
+                });
+            }
         }
-
-
-
     });
+
