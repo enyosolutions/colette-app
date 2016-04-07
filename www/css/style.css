@@ -101,7 +101,7 @@ LANDING PAGE
 */
 
 .landing-page {
-    background: url('/img/bg/colette.jpg') no-repeat;
+    background: url('../img/bg/colette.jpg') no-repeat;
     background-position: top left;
     background-attachment: fixed;
     background-size: cover;
@@ -129,7 +129,7 @@ LOGIN PAGE
 */
 
 .login-page , .register-page, .inapp-page  {
-    background: url('/img/bg/colette-floue.png') no-repeat;
+    background: url('../img/bg/colette-floue.png') no-repeat;
     background-position: top left;
     background-attachment: fixed;
     background-size: cover;
@@ -260,7 +260,7 @@ REGISTER PAGES
 }
 
 .intervenants-panel {
-    background: url('/img/bg/colette-floue.png') no-repeat;
+    background: url('../img/bg/colette-floue.png') no-repeat;
     background-position: top left;
     background-attachment: fixed;
     background-size: cover;
@@ -370,6 +370,7 @@ REGISTER PAGES
     letter-spacing: -10px;
     margin-right: 10px;
     margin-left: 30px;
+    width: 350px;
 }
 
 .results-recap-section .results-text {
@@ -489,6 +490,12 @@ REGISTER PAGES
     left: 0;
 }
 
+.intervenant-profile .calendar-image img{
+    width: 100%;
+    cursor: pointer;
+
+}
+
 /**
 INTERVENANTS MAP
 */
@@ -498,3 +505,44 @@ INTERVENANTS MAP
     height: 100%;
 }
 
+
+/**
+INTERVENANTS AGENDA
+*/
+
+.intervenant-agenda-modal {
+    background-color: #F6F0F1;
+    width: 80%;
+    height: 80%;
+    left: 10%;
+    top: 10%;
+    box-shadow: 0 0 3px #555;
+}
+
+
+
+.intervenant-agenda {
+    background-color: #F6F0F1;
+}
+
+
+.intervenant-agenda h2 {
+    color: #3F98A7;
+}
+
+
+.intervenant-agenda .fc-time-grid-event {
+    background-color: #3F98A7;
+    border: none;
+    color: white;
+    border-radius: 0;
+    font-weight: 500;
+    text-align: center;
+}
+
+
+.intervenant-agenda .button-return {
+    position: fixed;
+    top: 0;
+    left: 0;
+}

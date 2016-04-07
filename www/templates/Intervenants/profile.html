@@ -5,7 +5,7 @@
                 <div class="col col-30">
                     <div class="card-intervenant profile-side">
                         <img class="round" alt="{{ focusIntervenant.firstname }}"
-                             src="/img/intervenants/snap-{{ focusIntervenant.firstname | lowercase}}.jpg"/>
+                             src="img/intervenants/snap-{{ focusIntervenant.code }}.jpg"/>
 
                         <div class="name balanced">{{ focusIntervenant.firstname }}</div>
                         <div class="age balanced">{{ focusIntervenant.age }} ans</div>
@@ -27,7 +27,7 @@
                                href="#/register/step1/intro"> <i
                                     class="fa fa-angle-right"></i> Voir ses commentaires</a>
                             <button class="button button-assertive button-new-interview button-block"
-                               ng-click="openAgendaModal('{{ focusIntervenant._id }}')"> <i
+                               ng-click="openAgendaModal('{{ focusIntervenant._id }}')"><i
                                     class="fa fa-angle-right"></i> Proposer un entretien</button>
                         </div>
                     </div>
@@ -43,7 +43,9 @@
                             {{ focusIntervenant.diploma }}
                         </div>
 
-
+                        <div class="calendar-image">
+                            <img src="img/planning.png" alt="planning" ng-click="openAgendaModal('{{ focusIntervenant._id }}')"/>
+                        </div>
                     </div>
                 </div>
 

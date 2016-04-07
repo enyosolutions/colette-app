@@ -103,7 +103,6 @@ angular.module('colette.controllers', [])
             });
 
             var tmp = $localstorage.getObject('user.temp');
-            console.log(tmp);
             var user = angular.extend(tmp, $scope.newUser);
             console.log(user);
             $localstorage.setObject('user.temp', user);
@@ -228,6 +227,66 @@ angular.module('colette.controllers', [])
     .controller('IntervenantsCtrl', function ($scope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
                                               $ionicBackdrop, $ionicLoading, $cordovaGeolocation, uiCalendarConfig, User, Intervenant, Meeting) {
 
+        moment.locale('fr', {
+            months : "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
+            monthsShort : "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split("_"),
+            weekdays : "dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi".split("_"),
+            weekdaysShort : "dim._lun._mar._mer._jeu._ven._sam.".split("_"),
+            weekdaysMin : "Di_Lu_Ma_Me_Je_Ve_Sa".split("_"),
+            longDateFormat : {
+                LT : "HH:mm",
+                LTS : "HH:mm:ss",
+                L : "DD/MM/YYYY",
+                LL : "D MMMM YYYY",
+                LLL : "D MMMM YYYY LT",
+                LLLL : "dddd D MMMM YYYY LT"
+            },
+            calendar : {
+                sameDay: "[Aujourd'hui à] LT",
+                nextDay: '[Demain à] LT',
+                nextWeek: 'dddd [à] LT',
+                lastDay: '[Hier à] LT',
+                lastWeek: 'dddd [dernier à] LT',
+                sameElse: 'L'
+            },
+            relativeTime : {
+                future : "dans %s",
+                past : "il y a %s",
+                s : "quelques secondes",
+                m : "une minute",
+                mm : "%d minutes",
+                h : "une heure",
+                hh : "%d heures",
+                d : "un jour",
+                dd : "%d jours",
+                M : "un mois",
+                MM : "%d mois",
+                y : "une année",
+                yy : "%d années"
+            },
+            ordinalParse : /\d{1,2}(er|ème)/,
+            ordinal : function (number) {
+                return number + (number === 1 ? 'er' : 'ème');
+            },
+            meridiemParse: /PD|MD/,
+            isPM: function (input) {
+                return input.charAt(0) === 'M';
+            },
+            // in case the meridiem units are not separated around 12, then implement
+            // this function (look at locale/id.js for an example)
+            // meridiemHour : function (hour, meridiem) {
+            //     return /* 0-23 hour, given meridiem token and hour 1-12 */
+            // },
+            meridiem : function (hours, minutes, isLower) {
+                return hours < 12 ? 'PD' : 'MD';
+            },
+            week : {
+                dow : 1, // Monday is the first day of the week.
+                doy : 4  // The week that contains Jan 4th is the first week of the year.
+            }
+        });
+
+
         $scope.User = $localstorage.getObject('User');
         console.log($scope.User._id);
         $scope.goBack = function () {
@@ -250,7 +309,7 @@ angular.module('colette.controllers', [])
                     center: 'title',
                     right: 'next'
                 },
-                slotDuration: '00:30:00',
+                slotDuration: '01:00:00',
                 defaultTimedEventDuration: '01:00:00',
                 allDaySlot: false,
                 defaultDate: new moment(),
@@ -259,28 +318,30 @@ angular.module('colette.controllers', [])
                 minTime: '08:00:00',
                 maxTime: '20:00:00',
                 select: function (start, end) {
-                    var events = uiCalendarConfig.calendars.modalCalendar.fullCalendar( 'clientEvents');
+                    var events = uiCalendarConfig.calendars.modalCalendar.fullCalendar('clientEvents');
                     console.log(events);
-                    
-                    for(var i in events){
+
+                    for (var i in events) {
                         var mStart = new moment(start);
                         var mEnd = new moment(end);
                         console.log(events[i].start, events[i].end, start, end);
                         if (events[i].start.isBetween(start, end) || events[i].end.isBetween(start, end)
-                        ||  mStart.isBetween(events[i].start, events[i].end) || mEnd.isBetween(events[i].start, events[i].end)
-                        ){
+                            || mStart.isBetween(events[i].start, events[i].end) || mEnd.isBetween(events[i].start, events[i].end)
+                        ) {
                             uiCalendarConfig.calendars.modalCalendar.fullCalendar('unselect');
-                            return alert("Cet horaire n'est pas disponible dans vos agendas communs" );
+                            return alert("Cet horaire n'est pas disponible dans vos agendas communs");
                         }
                     }
-                    if (confirm('Proposer un rendez-vous à ' + $scope.focusIntervenant.firstname + ' ? ')) {
+                    start.locale('fr');
+                    if (confirm('Proposer un rendez-vous à ' + $scope.focusIntervenant.firstname + ' le ' + start.format("D MMM YY") + ' à ' + start.format("M:mm") + ' ? ') ){
                         var meeting = {
                             clientId: $scope.User._id,
                             intervenantId: $scope.focusIntervenant._id,
                             start: start,
                             end: end,
                             skill: $scope.search ? $scope.search.skills : null,
-                            status: "attente-intervenant"
+                            status: "attente-intervenant",
+                            type: "rdv-innitial"
                         };
 
                         var m = new Meeting(meeting);
@@ -292,6 +353,7 @@ angular.module('colette.controllers', [])
 
                             uiCalendarConfig.calendars.modalCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
                             alert("Votre demande de rendez vous a bien été transmise à " + $scope.focusIntervenant.firstname + ". Elle vous répondra très rapidement.");
+                            $scope.agendaModal.hide();
                         });
                     }
                     uiCalendarConfig.calendars.modalCalendar.fullCalendar('unselect');
@@ -304,6 +366,9 @@ angular.module('colette.controllers', [])
 
         console.log(uiCalendarConfig);
 
+
+        $scope.originalCount = 0;
+        $scope.finalCount = 0;
         $scope.doSearch = function () {
 
             /*$ionicLoading.show({
@@ -316,10 +381,12 @@ angular.module('colette.controllers', [])
         //Launch the search on the server
         $scope.execSearch = function () {
             $scope.showBackButton = true;
+            console.log($state.params.search, $scope.search);
             if ($state.params.search) {
                 $scope.search = JSON.parse($state.params.search);
                 $state.params.search = undefined;
             }
+            console.log($state.params.search, $scope.search);
             var remoteQuery = {};
             if ($scope.search) {
                 if ($scope.search.sort) {
@@ -331,6 +398,9 @@ angular.module('colette.controllers', [])
             }
             $scope.intervenants = Intervenant.query(remoteQuery);
             $scope.intervenants.$promise.then(function (intervenants) {
+                $scope.originalCount = $scope.finalCount;
+                $scope.finalCount = intervenants.length;
+                console.log($scope.finalCount, $scope.originalCount);
                 $localstorage.setObject('intervenants', intervenants);
             });
         }
@@ -369,14 +439,13 @@ angular.module('colette.controllers', [])
 
             $scope.modal.show();
             $ionicBackdrop.release();
-            $timeout(function () {
-                // uiCalendarConfig.calendars.profileCalendar.fullCalendar("render");
-            }, 1000);
         }
 
 
         $scope.openAgendaModal = function (intervenantId) {
-
+            $ionicLoading.show({
+                template: 'Chargement..'
+            });
             // $scope.modal.hide();
             console.log(intervenantId);
             if (!$scope.focusIntervenant || $scope.focusIntervenant._id !== intervenantId) {
@@ -390,34 +459,36 @@ angular.module('colette.controllers', [])
 
             $timeout(function () {
                 uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
-            }, 250);
+            }, 500);
             var meetingsList = Meeting.query({'query[intervenantId]': $scope.focusIntervenant._id});
             meetingsList.$promise.then(function (data) {
                 $scope.eventSources = [];
                 $scope.agendaModal.show();
-                data = data.map(function(d){
+                uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
+                data = data.map(function (d) {
                     if (d.clientId === $scope.User._id) {
                         d.className = 'assertive-bg';
                         d.title = 'Mon rendez-vous';
-                    }
-                    else{
-                        d.className = 'royal-bg';
                     }
 
                     //$scope.eventSources.push(d);
                     return d;
                 });
+                $ionicLoading.hide();
 
-                uiCalendarConfig.calendars.modalCalendar.fullCalendar('addEventSource', {events: data});
+                if (data.length > 0) {
+                    uiCalendarConfig.calendars.modalCalendar.fullCalendar('addEventSource', {events: data});
+                }
+
+
                 /*
-                if (data) {
-                    $scope.eventSources = data;
-                }
-                else{
-                    $scope.eventSources = [];
-                }
-                */
-                console.log(data);
+                 if (data) {
+                 $scope.eventSources = data;
+                 }
+                 else{
+                 $scope.eventSources = [];
+                 }
+                 */
 
                 //uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
                 console.log(uiCalendarConfig.calendars);
@@ -450,7 +521,6 @@ angular.module('colette.controllers', [])
             $scope.User = $localstorage.getObject('User');
             $scope.intervenants = $localstorage.getObject('intervenants');
             $scope.focusIntervenant = undefined;
-            console.log($state.params.intervenantId);
 
             if ($state.params.intervenantId) {
                 var focusIntervenantId = $state.params.intervenantId;
