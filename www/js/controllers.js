@@ -225,7 +225,7 @@ angular.module('colette.controllers', [])
     }
 )
     .controller('IntervenantsCtrl', function ($scope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
-                                              $ionicBackdrop, $ionicLoading, $cordovaGeolocation, uiCalendarConfig, User, Intervenant, Meeting) {
+                                              $ionicBackdrop, $ionicLoading, $cordovaGeolocation, $ionicScrollDelegate, uiCalendarConfig, User, Intervenant, Meeting) {
 
         moment.locale('fr', {
             months : "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
@@ -381,6 +381,9 @@ angular.module('colette.controllers', [])
         //Launch the search on the server
         $scope.execSearch = function () {
             $scope.showBackButton = true;
+
+            $ionicScrollDelegate.scrollTo(0, 0, true);
+            return;
             console.log($state.params.search, $scope.search);
             if ($state.params.search) {
                 $scope.search = JSON.parse($state.params.search);

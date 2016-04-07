@@ -28,6 +28,10 @@ body, html, h1, h2, h3, h4, h5, h6,
 MENU LEFT
 */
 
+.left-menu.open {
+    width: 300px;
+}
+
 .menu .button-back {
     background: #F56D74;
 }
