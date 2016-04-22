@@ -24,6 +24,24 @@ body, html, h1, h2, h3, h4, h5, h6,
   font-family: "Raleway", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
 }
 
+h1, h2 {
+    color: #1F565B;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+h2 {
+    font-weight: 200;
+}
+
+h3 { 
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+}
+
 /**
 MENU LEFT
 */
@@ -139,14 +157,63 @@ LOGIN PAGE
     background-size: cover;
 }
 
+.login-form {
+    width: 500px;
+    height: inherit;
+    padding: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3)!important;
+}
+
+.login-form h3 {
+    font-size: 40px;
+    color: #1F565B;
+    font-weight: 500;
+}
+
+.login-form span {
+    font-size: 25px;
+}
+
+.login-form .item-input {
+    margin: 5px 0 30px;
+    padding: 0;
+    height: 58px;
+    border-radius: 5px;
+    border: 1px solid #EFEFEF;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
+}
+
+.login-form input {
+    padding: 6px 16px 6px 16px;
+    line-height: 30px;
+    height: 56px;
+    padding-right: 0;
+    font-size: 25px;
+}
+
+.login-form .button.button-block.button-assertive {
+    width: 180px;
+    margin: 0 auto;
+    border-radius: 0;
+}
+
 
 /**
 REGISTER PAGES
 */
 
+
+.register-page input[type="text"] {
+    padding: 6px 16px 6px 16px;
+    line-height: 30px;
+    height: 56px;
+    padding-right: 0;
+    font-size: 25px;
+}
+
 .register-intro-page .page-body {
     padding-left: 100px;
-    padding-top: 50px;
+    padding-top: 90px;
     top: 50%;
     margin-top: -25px;
     height: 50px;
@@ -154,7 +221,7 @@ REGISTER PAGES
 
 .register-intro-page .page-title {
     top: 50%;
-    margin-top: -50px;
+    margin: -40px 0 0 50px;
     height: 100px;
     position: absolute;
 }
@@ -165,29 +232,26 @@ REGISTER PAGES
 
 
 .register-intro-page h1 {
-    font-size: 3em;
+    font-size: 40px;
 }
 
 .register-intro-page h2 {
-    font-size: 3em;
+    font-size: 40px;
     font-weight: 200;
 }
 
 .register-page form {
-    width: 70%;
+    width: 69%;
 
-}
-
-.register-page form .item {
-    margin-bottom: 20px;
 }
 
 .register-page form .label {
     display: block;
     color: #5A3B4F;
     font-size: 20px;
-    font-weight: 900;
+    font-weight: 500;
     padding-left: 10px;
+    font-weight: 900;
 }
 
 .register-page form .label.align-fix {
@@ -201,20 +265,27 @@ REGISTER PAGES
 .register-page form .input-legend {
     border: none;
     color: #5A3B4F;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
     word-wrap: break-word;
     white-space: normal;
-    margin-left: 25px;
-
+    margin: 12px 0 0 25px;
 }
 
 .register-page form .input-item {
     min-height: 70px;
     padding: 10px 15px;
-    font-size: 1.5em;
+    font-size: 24px;
     border-radius: 5px;
-    font-weight: 600;
+    font-weight: 900;
+}
+
+::-webkit-input-placeholder {
+  color: #CDCDCD;
+}
+
+.register-page form .item-input, .register-page form select.input-item, .register-page form textarea, .register-page form .input-item {
+    margin: 0 0 20px;
 }
 
 .register-page form select {
@@ -228,29 +299,138 @@ REGISTER PAGES
     padding-left: 0px;
 }
 
+.register-page form .item-input textarea {
+    padding: 15px;
+}
+
+.row {
+    padding: 0 5px;
+}
+
+.col {
+    padding: 5px;
+}
+
+.ng-pristine .row:nth-child(3) .row {
+
+    
+}
+
+.row:nth-child(3) .item-select {
+    margin-top: 5px;
+}
+
+input[type="radio"]:checked,
+input[type="radio"]:not(:checked) {
+    width: 26px;
+    height: 26px;
+    padding-right: 0;
+    margin-right: 10px!important;
+    border: 3px solid #1F565B;
+    border-radius: 100%;
+}
+
+input[type="radio"]:checked:after {
+    content: "";
+    display: block;
+    width: 14px;
+    height: 14px;
+    margin: 3px;
+    background-color: #3F98A7;
+    border-radius: 100%;
+}
+
+input[type="radio"]:nth-child(2) {
+    margin-left: 80px;
+}
+
+input[type="radio"]:checked {
+}
+
+.item-select:after {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    margin-top: -3px;
+    width: 0;
+    height: 0;
+    border-top: 5px solid;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    color: #F56D74;
+    content: "";
+    pointer-events: none;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}
+
 .button.button-previous {
     position: absolute;
     left: 0;
     top: 50%;
-    margin-top: -25px;
-    height: 75px;
+    margin-top: -32px;
+    height: 65px;
     color: white;
     border-radius: 0;
     font-size: 3em;
-    padding: 15px 25px;
+    padding: 0 25px;
 }
 
 .button.button-next {
     position: absolute;
     right: 0;
     top: 50%;
-    margin-top: -25px;
-    height: 75px;
+    margin-top: -32px;
+    height: 65px;
     color: white;
-    padding: 15px 20px;
     border-radius: 0;
-    font-size: 2em;
-    font-weight: 300;
+    font-size: 15px;
+}
+
+/* STEP 3 */
+
+.step3 label.item {
+    float: left;
+    width: 50%;
+}
+
+.register-page form.step3  .input-legend {
+    margin: -10px 0 0 0;
+    color: #1F565B;
+}
+
+.addPicture {
+    flex: initial;
+    display: block;
+    position: relative;
+    width: 46%;
+    margin: 0 7% 5%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.camera {
+    width: 100%;
+    height: 300px;
+    background: url('/img/profil.png') 50% 40% no-repeat #FFF;
+    background-size: 100px 100px;
+}
+
+.addPicture .button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+}
+
+#finishLogin {
+    bottom: 0;
+    top: initial;
+    left: 50%;
+    width: 200px;
+    margin-left: -100px;
 }
 
 
@@ -380,7 +560,7 @@ REGISTER PAGES
 .results-recap-section .results-text {
     display: inline-block;
     width: 300px;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 200;
     line-height: 1em;
 }
@@ -550,3 +730,22 @@ INTERVENANTS AGENDA
     top: 0;
     left: 0;
 }
+
+.fc-time-grid .fc-slats td {
+    height: 2.5em;
+    border-bottom: 0;
+}
+
+
+/* LOGIN PAGE */
+
+.button {
+    border-radius: 0;
+    line-height: 64px!important;
+    padding: 0 20px;
+}
+
+
+
+
+

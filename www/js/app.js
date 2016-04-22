@@ -34,6 +34,11 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 controller: 'AppCtrl'
             })
 
+            .state('landing', {
+                url: '/',
+                templateUrl: 'templates/register/intro.html',
+                controller: 'RegisterCtrl'
+            })
 
             .state('register-intro', {
                 url: '/register',
@@ -152,6 +157,16 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
             })
 
 
+            .state('app.my-agenda', {
+                url: '/my-agenda',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/my-calendar.html',
+                        controller: 'UserCtrl'
+                    }
+                }
+            })
+
         .state('app.notifications', {
                 url: '/notifications',
                 views: {
@@ -161,6 +176,7 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 }
             })
         ;
+
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/register');
+        $urlRouterProvider.otherwise('/login');
     });

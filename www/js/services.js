@@ -39,6 +39,18 @@ angular.module('colette.services', ['ngResource'])
             });
 
     })
+    .factory('Commentaire', function ($resource, CONFIG) {
+        return $resource(CONFIG.baseUrl + '/commentaire/:id', {_id: '@id'},
+            {
+                "update": {
+                    isArray: false, method: "PUT", transformResponse: function (data, headersGetter) {
+                        return data.body;
+                    }
+                },
+                "query": {isArray: true, cancellable: false, method: "GET", transformResponse: transformGet}
+            });
+
+    })
     .factory('User', function ($resource, CONFIG) {
         return $resource(CONFIG.baseUrl + '/user/:id', {_id: '@id'}, {
             "update": {
