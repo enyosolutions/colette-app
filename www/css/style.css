@@ -60,7 +60,7 @@ MENU LEFT
 }
 
 .main-menu .item {
-	height: 18%;
+    height: 18%;
 }
 
 .left-menu.open .item {
@@ -91,14 +91,14 @@ MENU LEFT
 }
 
 .menu .button-back .button-assertive {
-	font-size: 50px;
-	line-height: 70px;
+    font-size: 50px;
+    line-height: 70px;
 }
 
 .menu .button-home {
-	position: absolute;
-	bottom: 0;
-	background-color: #8F637E;
+    position: absolute;
+    bottom: 0;
+    background-color: #8F637E;
     height: 100px;
     width: 100%;
     color: white;
@@ -106,16 +106,16 @@ MENU LEFT
 }
 
 .menu .button-home .button-assertive {
-	font-size: 50px;
-	line-height: 50px;
+    font-size: 50px;
+    line-height: 50px;
 }
 
 .scroll .list {
-	height: 100%;
+    height: 100%;
 }
 
 .menu .item-content {
-	height: 100%;
+    height: 100%;
     background: transparent;
 }
 
@@ -135,7 +135,7 @@ MENU LEFT
 }
 
 .fa-stack, .fa-stack-1x, .fa-stack-2x {
-	line-height: 70px;
+    line-height: 70px;
 }
 
 /*.item-complex.active, a.item-content.activated{
@@ -147,14 +147,14 @@ MENU LEFT
 }
 .item.active.item-complex > .item-content, .item.activated.item-complex > .item-content, .item-complex.active .item-content.item-complex > .item-content, .item-complex.activated .item-content.item-complex > .item-content, .item .item-content.active.item-complex > .item-content, .item .item-content.activated.item-complex > .item-content{
     background-color: #583B50!important;
-    color: #D9D9D9!important;	
+    color: #D9D9D9!important;   
 }*/
 
 .item.active, .item.activated, .item-complex.active .item-content, .item-complex.activated .item-content, .item .item-content.active, .item .item-content.activated {
-	background-color: #583B50!important;
+    background-color: #583B50!important;
 }
 .item.item-complex.active .item-content i.fa {
-	color: #E6DEE1!important;	
+    color: #E6DEE1!important;   
 }
 
 .infinite-list .button.square {
@@ -240,6 +240,7 @@ LANDING PAGE
     position: absolute;
     right: 10px;
     top: 5px;
+    line-height: 65px;
 }
 
 .landing-page .intro-section {
@@ -371,7 +372,7 @@ body {
 }
 
 .register-page .input-legend {
-	font-weight: 500;
+    font-weight: 500;
 }
 
 .register-page form {
@@ -460,15 +461,19 @@ body {
 
 input[type="radio"]:checked,
 input[type="radio"]:not(:checked) {
-    width: 1000px!important;
+    width: 26px !important;
     height: 26px;
-    padding-right: 0;
+    padding: 0;
+    margin: 0;
     border: 3px solid #1F565B;
     border-radius: 100%;
+    flex: none!important;
 }
 
 .item-input span {
-	margin: 0 80px 0 10px!important;
+    margin: 0 80px 0 10px !important;
+    flex: none !important;
+    display: block;
 }
 
 input[type="radio"]:checked:after {
@@ -490,11 +495,12 @@ input[type="radio"]:checked {
 
 .item-select:after {
 
-  content: "";
+    content: "";
     position: absolute;
     top: 50%;
     right: 16px;
-    margin-top: -3px;
+    margin: -3px 0 0 0!important;
+    padding: 0!important;
     width: 0;
     height: 0;
     border-top: 5px solid;
@@ -538,7 +544,7 @@ input[type="radio"]:checked {
 /* STEP 3 */
 
 form.step3 {
-	width: 85%;
+    width: 85%;
     margin-top: 68px;
 }
 
@@ -567,7 +573,7 @@ form.step3 {
 }
 
 .register-page form .input-legend.legendPicture {
-	margin-top: 60px;
+    margin-top: 60px;
 }
 
 .camera {
@@ -647,7 +653,7 @@ form.step3 {
     background: transparent;
     border: none;
     padding: 0px;
-    #border-bottom: 5px dotted #F56D74;
+    /*border-bottom: 5px dotted #F56D74;*/
 }
 
 
@@ -670,14 +676,21 @@ form.step3 {
     text-align: center;
     direction: ltr;
     color: #F56D74;
-    font-size: 42px;
     font-family: "Raleway";
     font-weight: 300;
     letter-spacing: -1px;
+    font-size: 30px!important;
+    text-decoration: underline;
 }
 .natural-form .form-text {
     letter-spacing: -1px;
     display: inline-block;
+    line-height: 40px;
+    font-size: 30px!important;
+}
+
+.calm, a.calm {
+    margin-top: 40px;
 }
 
 .natural-form .item-select.first-input,
@@ -689,7 +702,7 @@ form.step3 {
 
 .natural-form .button-next {
     font-size: 15px;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 
@@ -697,6 +710,18 @@ form.step3 {
 /**
 * INTERVENANTS RESULTS
 */
+
+.balanced, a.balanced {
+    color: #1F565B;
+    font-weight: 500;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.calm, a.calm {
+    color: #1F565B;
+    font-size: 40px;
+}
 
 .modal-backdrop-bg {
     display: none;
@@ -716,15 +741,18 @@ form.step3 {
     letter-spacing: -10px;
     margin-right: 10px;
     margin-left: 30px;
-    width: 350px;
 }
 
 .results-recap-section .results-text {
     display: inline-block;
     width: 300px;
-    font-size: 40px;
-    font-weight: 200;
+    font-size: 35px;
+    font-weight: 400;
     line-height: 1em;
+}
+
+.intervenants-results-panel .fa-4x {
+    font-size: 150px;
 }
 
 .card {
@@ -751,8 +779,9 @@ form.step3 {
 }
 
 .card-intervenant img.round {
-    border-radius: 50%;
     width: 225px;
+    height: 225px;
+    border-radius: 100%;
     margin-top: 10px;
     margin-bottom: 20px;
 }
