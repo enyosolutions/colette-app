@@ -721,7 +721,6 @@ form.step3 {
     color: #1F565B;
     font-weight: 500;
     font-size: 40px;
-    margin-bottom: 30px;
 }
 
 .calm, a.calm {
@@ -794,14 +793,14 @@ form.step3 {
 
 
 .card-intervenant .name {
-    font-weight: 200;
+    font-weight: 400;
     font-size: 35px;
 }
 
 
 .card-intervenant .age {
     font-size: 24px;
-    font-weight: 200;
+    font-weight: 400;
     line-height: 50px;
 }
 
@@ -820,11 +819,14 @@ form.step3 {
     margin: 0 auto;
     width: 208px;
     border-radius: 0px;
+    font-weight: 600;
 }
 
 .card-intervenant .button-open-map {
     margin: 0 auto;
+    padding: 0;
     width: 208px;
+    font-weight: 600;
 }
 
 .score .fa-star {
@@ -832,29 +834,68 @@ form.step3 {
     margin: 5px 5px;
 }
 
+.card-intervenant .button.button-assertive.button-clear {
+    line-height: 40px!important;
+}
+
+.card-intervenant .action {
+    bottom: 8px;
+    position: absolute;
+    width: 78%;
+}
 
 /**
 * INTERVENANTS MODAL
 */
 
+.intervenant-profile .row {
+    padding: 0;
+}
+
 .intervenant-profile-modal.modal {
     border-radius: 15px;
-    top: 10%;
+    top: 2%;
     bottom: -5%;
-    left: 10%;
+    left: 14%;
     right: 10%;
     width: 80%;
 }
 
+.intervenant-profile .calendar-image img {
+    margin-top: 40px;
+}
+
 .intervenant-profile .profile-side {
-    background-color: #F6F0F1;
-    width: 300px;
-    padding: 0;
+    position: absolute;
+    background-color: #F6F0F1;    
+    width: 36%;
+    padding: 4%;
     margin: 0;
+    border-radius: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    z-index: 2;
+}
+
+.intervenant-profile .profile-side .button.button-new-interview {
+    margin-top: 20px;
+}
+
+.intervenant-profile .scroll-content {
+    width: 64%;
+    left: 36%;
 }
 
 .intervenant-profile .profile-info {
     position: relative;
+    padding: 0 30px;
+}
+
+.profile-info .calm, .profile-info a.calm {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
 }
 
 .intervenant-profile .profile-info h1 {
@@ -863,6 +904,11 @@ form.step3 {
     top: 0;
     text-align: center;
     font-weight: 100;
+    width: 350px;
+    margin: 0 auto;
+    padding: 15px 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .intervenant-profile .button-return {
@@ -875,6 +921,43 @@ form.step3 {
     width: 100%;
     cursor: pointer;
 
+}
+
+.intervenant-profile .commentaire {
+    margin: 20px 20px 0;
+    border-bottom: 1px solid #F6F0F1;
+    padding-bottom: 20px;
+}
+
+.info-commentateur {
+    width: 100px;
+    text-align: center;
+}
+
+.intervenant-profile .commentaire img {
+    width: 70px;
+    display: inline-block;
+}
+
+.intervenant-profile .commentaire-text {
+    width: 300px;
+    margin: 0 0 0 20px;
+    color: #1F565B;
+    vertical-align: middle;
+}
+
+.intervenant-profile .info-commentateur, .intervenant-profile .commentaire-text {
+    display: inline-table;
+
+}
+
+.intervenant-profile .commentaire-metadata {
+    color: #1F565B;
+}
+
+.intervenant-profile .diploma {
+    font-weight: 500;
+    font-style: italic;
 }
 
 /**
