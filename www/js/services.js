@@ -58,7 +58,8 @@ angular.module('colette.services', ['ngResource'])
                     return data.body;
                 }
             },
-            "save": {isArray: false, cancellable: false, method: "POST", transformResponse: transformGet}
+            "save": {isArray: false, cancellable: false, method: "POST", transformResponse: transformGet},
+            "query": {isArray: true, cancellable: false, method: "GET", transformResponse: transformGet}
         } );
     });
 
