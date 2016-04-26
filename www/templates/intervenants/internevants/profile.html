@@ -1,0 +1,67 @@
+<ion-modal-view name="menuContent" class="intervenant-profile-modal card">
+    <ion-content>
+        <div class="intervenant-profile ">
+            <div class="row">
+
+                <div class="card-intervenant profile-side">
+                    <img class="round" alt="{{ focusIntervenant.firstname }}"
+                         src="img/intervenants/snap-{{ focusIntervenant.code }}.jpg"/>
+
+                    <div class="name balanced">{{ focusIntervenant.firstname }}</div>
+                    <div class="age balanced">{{ focusIntervenant.age }} ans</div>
+                    <div class="score friendship-score">
+                        <i class="fa fa-star color-light-teal"
+                           ng-repeat="n in range(0, focusIntervenant.friendshipScore)"></i>
+                    </div>
+                    <div class="score skills-score">
+                        <i class="fa fa-star royal" ng-repeat="n in range(0, focusIntervenant.skillsScore)"></i>
+                    </div>
+                    <div class="actions">
+                        <a class="button button-clear button-open-map button-assertive button-block"
+                           href="#section-presentation"> <i
+                                class="fa fa-angle-right"></i> Voir sa présentation</a>
+                        <button class="button button-clear button-open-map button-assertive button-block"
+                                ng-click="openAgendaModal('{{ focusIntervenant._id }}')"><i
+                                class="fa fa-angle-right"></i> Voir son planning
+                        </button>
+                        <a class="button button-clear button-open-map button-assertive button-block"
+                           href="#section-commentaires"><i
+                                class="fa fa-angle-right"></i> Voir ses commentaires</a>
+                        <button class="button button-assertive button-new-interview button-block"
+                                ng-click="openAgendaModal('{{ focusIntervenant._id }}')"><i
+                                class="fa fa-angle-right"></i> Proposer un entretien
+                        </button>
+                    </div>
+                </div>
+
+                <div class="profile-info">
+                    <h1 class="price">{{ focusIntervenant.price}}€ par heure</h1>
+
+                    <div class="calm bio" id="section-presentation">
+                        {{ focusIntervenant.bio }}
+                    </div>
+                    <div class="calm diploma">
+                        {{ focusIntervenant.diploma }}
+                    </div>
+
+                    <div class="calendar-image">
+                        <img src="img/planning-v2.png" alt="planning"
+                             ng-click="openAgendaModal('{{ focusIntervenant._id }}')"/>
+                    </div>
+
+
+                    <div class="commentaires" id="section-commentaires">
+                        <div class="commentaire" ng-repeat="commentaire in commentaires">
+                            <img src="img/mamie.png" alt="planning" class="round"
+                                 />
+                            <div class="commentaire-text">{{ commentaire.text}}</div>
+                            <div class="commentaire-metadata">{{ commentaire.beneficiaire}}</div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>
