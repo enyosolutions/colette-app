@@ -1,5 +1,5 @@
 <ion-modal-view name="menuContent" class="intervenant-profile-modal card">
-    <ion-content>
+    
         <div class="intervenant-profile ">
             <div class="row">
 
@@ -33,7 +33,7 @@
                         </button>
                     </div>
                 </div>
-
+            <ion-content>
                 <div class="profile-info">
                     <h1 class="price">{{ focusIntervenant.price}}€ par heure</h1>
 
@@ -52,16 +52,17 @@
 
                     <div class="commentaires" id="section-commentaires">
                         <div class="commentaire" ng-repeat="commentaire in commentaires">
-                            <img src="img/mamie.png" alt="planning" class="round"
-                                 />
+                            <div class="info-commentateur">
+                                <img src="img/mamie.png" alt="planning" class="round"/>
+                                <div class="commentaire-metadata">{{ commentaire.beneficiaire}}</div>
+                            </div>
                             <div class="commentaire-text">{{ commentaire.text}}</div>
-                            <div class="commentaire-metadata">{{ commentaire.beneficiaire}}</div>
 
                         </div>
                     </div>
                 </div>
+            </ion-content>
 
             </div>
         </div>
-    </ion-content>
 </ion-modal-view>
