@@ -18,9 +18,10 @@ angular
 
 
         $timeout(function () {
-            //  $state.go('app.home');
             console.log($state.current.name);
-        }, 5000);
+              $state.go('app.home');
+            console.log($state.current.name);
+        }, 15000);
     })
     .controller('AppCtrl', function ($scope, $rootScope, $state, $ionicModal, $timeout, $localstorage, $ionicLoading, $ionicHistory, $ionicViewSwitcher, User, Intervenant) {
         // With the new view caching in Ionic, Controllers are only called
