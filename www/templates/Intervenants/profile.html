@@ -18,14 +18,14 @@
                     </div>
                     <div class="actions">
                         <a class="button button-clear button-open-map button-assertive button-block"
-                           href="#/register/step1/intro"> <i
+                           href="#section-presentation"> <i
                                 class="fa fa-angle-right"></i> Voir sa présentation</a>
                         <button class="button button-clear button-open-map button-assertive button-block"
                                 ng-click="openAgendaModal('{{ focusIntervenant._id }}')"><i
                                 class="fa fa-angle-right"></i> Voir son planning
                         </button>
                         <a class="button button-clear button-open-map button-assertive button-block"
-                           href="#/register/step1/intro"> <i
+                           href="#section-commentaires"><i
                                 class="fa fa-angle-right"></i> Voir ses commentaires</a>
                         <button class="button button-assertive button-new-interview button-block"
                                 ng-click="openAgendaModal('{{ focusIntervenant._id }}')"><i
@@ -37,7 +37,7 @@
                 <div class="profile-info">
                     <h1 class="price">{{ focusIntervenant.price}}€ par heure</h1>
 
-                    <div class="calm bio">
+                    <div class="calm bio" id="section-presentation">
                         {{ focusIntervenant.bio }}
                     </div>
                     <div class="calm diploma">
@@ -50,7 +50,7 @@
                     </div>
 
 
-                    <div class="commentaires">
+                    <div class="commentaires" id="section-commentaires">
                         <div class="commentaire" ng-repeat="commentaire in commentaires">
                             <img src="img/mamie.png" alt="planning" class="round"
                                  />

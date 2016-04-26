@@ -1,6 +1,6 @@
 <ion-nav-view name="registerContent" class="register-page register-intro-page">
     <div class="page-body">
-        <form ng-submit="doRegisterStep3()" class="step3" style="width:90%">
+        <form ng-submit="doRegisterStep3()" class="step3">
             <label class="item item-input item-stacked-label col-50">
                 <span class="royal label">Votre email</span>
 
@@ -14,7 +14,7 @@
             </label>
 
 
-            <label class="item item-input item-stacked-label col-50">
+            <label class="item item-input item-stacked-label col-50 phone">
                 <span class="royal label">Votre numéro de téléphone</span>
 
                 <div class="row">
@@ -64,9 +64,8 @@
                 </div>
             </label>
 
-            <a  nav-direction="back" class="button button-assertive button-previous" href="#/register/step2/form"><i class="fa fa-angle-left"></i></a>
+            <a  nav-direction="back" class="button button-assertive button-previous" href="#/register/step1/form"><i class="fa fa-angle-left"></i></a>
+            <button class="button button-assertive button-next" type="submit"><i class="fa fa-angle-right"></i> Suivant</button>
         </form>
     </div>
-
-            <button id="finishLogin" class="button button-assertive button-next" type="submit"><i class="fa fa-angle-right"></i>Terminer l'inscription</button>
 </ion-nav-view>

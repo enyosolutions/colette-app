@@ -1,0 +1,47 @@
+
+/**
+* AGENDA CALENDAR
+*/
+
+.my-agenda  .welcome-text-section ,
+.my-agenda  #profile-calendar
+{
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+}
+
+
+.user-agenda {
+    height: 100%;
+}
+
+
+.pane, .view {
+    background-color: transparent;
+}
+.fc-event {
+    border: none;
+    border-radius: 0;
+    font-width: bold;
+}
+.user-agenda .fc-time-grid .fc-slats td {
+    height: 3.5em;
+    border-bottom: 0;
+    background-color: rgba(255,255,255,0.5);
+    border: 5px solid rgba(255,255,255,0.1);
+
+}
+
+.user-agenda tr {
+    background-color: transparent;
+}
+
+.fc-day-header {
+    background-color: #3F98A7;
+    color: white;
+}
+
+.fc-time-grid-event .fc-time, .fc-time-grid-event .fc-title {
+    white-space: initial;
+}

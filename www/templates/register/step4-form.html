@@ -5,9 +5,9 @@
             <label class="item item-input item-stacked-label">
 
                 <div class="row">
-                    <div class="col col-60 addPicture">
+                    <div class="col col-50 addPicture">
                         <div class="camera">
-                            <img ng-src="{{ uploadedImage }}" style="width:100%; height: auto;"/>
+                            <img ng-src="{{ uploadedImage }}" />
                         </div>
                         <button class="button button-full button-assertive" type="button"
                                 ng-click="getImageSaveContact()">
@@ -15,7 +15,7 @@
                         </button>
                     </div>
                     <div class="col col-40">
-                        <div class="input-legend royal">Vous pouvez choisir votre photo de profil parmis celles dont
+                        <div class="input-legend royal legendPicture">Vous pouvez choisir votre photo de profil parmis celles dont
                             vous disposez déjà sur votre tablette,
                             ou bien vous prendre directement en photo grâce à la webcam de votre tablette
                         </div>
@@ -27,7 +27,7 @@
                 <span class="royal label">Votre mot de passe</span>
 
                 <div class="row">
-                    <div class="col col-60">
+                    <div class="col col-50">
                         <input type="password" ng-model="newUser.password" class="input-item" required>
                         <div class="error-message">Ce champ est obligatoire</div>
                     </div>
@@ -42,7 +42,7 @@
                 <span class="royal label">Confirmation de votre mot de passe</span>
 
                 <div class="row">
-                    <div class="col col-60">
+                    <div class="col col-50">
                         <input type="password" ng-model="newUser.confirmPassword" class="input-item" required>
                         <div class="error-message">Ce champ est obligatoire</div>
                     </div>

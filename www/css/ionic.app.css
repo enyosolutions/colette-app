@@ -7305,7 +7305,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   overflow: hidden;
   min-height: 100%;
   max-height: 100%;
-  width: 275px;
+  width: 200px;
   background-color: #fff; }
   .menu .scroll-content {
     z-index: 10; }
@@ -11839,7 +11839,7 @@ COLORS
   background-color: #583B50; }
 
 .menu {
-  width: 100px !important; }
+  width: 200px !important; }
 
 .main-menu {
   background: transparent;

@@ -1,10 +1,5 @@
-<ion-side-menus enable-menu-with-back-views="false" expose-aside-when="large">
-    <ion-side-menu-content>
-
-        <ion-nav-view name="menuContent" class="inapp-page"></ion-nav-view>
-    </ion-side-menu-content>
-
-    <ion-side-menu side="left" class="left-menu" width="100" on-swipe-left="onSwipeLeft()">
+<ion-side-menus enable-menu-with-back-views="false" expose-aside-when="large"  ng-class="{open:menuIsOpen}" >
+    <ion-side-menu side="left" class="left-menu" width="100"  ng-class="{open:menuIsOpen}">
 
 
         <ion-content class="main-menu">
@@ -12,26 +7,53 @@
                 <ion-item ng-controller="AppCtrl" nav-direction="back" ng-click="goBack()"
                           class="assertive button-assertive button-back"
                           href="{{ backButtonLink }}"
+
                         >
                     <i class="fa fa-angle-left fa-2x button-assertive"></i>
                 </ion-item>
-                <ion-item menu-close href="#/app/notifications">
+                <ion-item menu-close ui-sref="app.notifications" ui-sref-active="active">
                     <i class="fa fa-briefcase fa-2x"></i>
+                    <div class="subtext">2 Choses à faire</div>
                 </ion-item>
-                <ion-item menu-close href="#/app/intervenants/recherche">
-                    <i class="fa fa-heart fa-2x"></i>
+
+
+                <ion-item
+                        nav-direction="enter"
+                          ng-click="menuScrollLeft()"
+                          ui-sref="app.intervenants-recherche"
+                          ui-sref-active="active"
+                        >
+                    <i class="fa fa-search fa-2x"></i>
+                    <div class="subtext">J'ai besoin de... </div>
                 </ion-item>
-                <ion-item menu-close href="#/app/intervenants/recherche">
-                    <i class="fa fa-users fa-2x"></i>
-                </ion-item>
-                <ion-item menu-close href="#/app/my-agenda">
+                <!--
+                INTERVENANT RECHERCHE
+                                <ion-item menu-close
+                                          ui-sref-active="active"
+                                          ui-sref="app.intervenants-recherche"
+                                        >
+                                    <i class="fa fa-users fa-2x"></i>
+                                </ion-item>
+                -->
+                <ion-item
+                          nav-direction="enter"
+                          ui-sref-active="active"
+                          ui-sref="app.my-agenda"
+                          ng-click="menuScrollLeft()"
+                        >
                     <i class="fa fa-calendar-check-o fa-2x"></i>
+                    <div class="subtext">Mon planning</div>
                 </ion-item>
-                <ion-item menu-close href="#/app/intervenants/recherche">
+                <ion-item nav-transition="ios" ui-sref="app.intervenants-recherche" ng-click="menuScrollLeft()">
                     <i class="fa fa-question fa-2x"></i>
+                    <div class="subtext">Aide et mon compte</div>
                 </ion-item>
-                <ion-item></ion-item>
-                <ion-item menu-close class="button-home" href="#/app/home">
+                <ion-item nav-transition="ios" class="button-home"
+                          nav-direction="enter"
+                          ui-sref-active="active"
+                          ui-sref="app.home"
+                          ng-click="menuScrollLeft()"
+                        >
                     <span class="fa-stack fa-lg">
                     <i class="fa fa-home fa-stack-1x"></i>
                     <i class="fa fa-circle-thin fa-stack-2x"></i>
@@ -40,4 +62,10 @@
             </ion-list>
         </ion-content>
     </ion-side-menu>
+    <ion-side-menu-content>
+
+        <ion-nav-view name="menuContent" class="inapp-page" ></ion-nav-view>
+    </ion-side-menu-content>
+
+
 </ion-side-menus>

@@ -5,6 +5,7 @@
   LOGIN PAGE                    : Login page
   REGISTER PAGES                : pages for registering in the app
   NATURAL FORM                  : form with the select embedded
+  AGENDA CALENDAR               : Calendar planning
   INTERVENANTS RESULTS          : Results of intervenants search
   INTERVENANTS MODAL            : Modal that displays the intervenant profile
   INTERVENANTS MAP              : Map with the nearest intervenants
@@ -46,12 +47,114 @@ h3 {
 MENU LEFT
 */
 
+.left-menu {
+    width: 100px !important;
+    z-index: 2;
+    -webkit-transition: width 200ms linear;
+    transition: width 200ms linear;
+}
+
+
 .left-menu.open {
-    width: 300px;
+    width: 200px !important;
+}
+
+.main-menu .item {
+	height: 18%;
+}
+
+.left-menu.open .item {
+    width: 100% !important;
+}
+
+.left-menu.open .button-back .fa-angle-left:before {
+    content: "Retour";
+    font-family: "raleway";
+    font-weight: 100;
+    font-size: 40px;
+}
+
+.left-menu .item .subtext {
+    display: none;
+}
+
+.left-menu.open .item .subtext {
+    display: block;
 }
 
 .menu .button-back {
-    background: #F56D74;
+    background-color: #F56D74;
+    height: 100px;
+    width: 100%;
+    color: white;
+    border-radius: 0;
+}
+
+.menu .button-back .button-assertive {
+	font-size: 50px;
+	line-height: 70px;
+}
+
+.menu .button-home {
+	position: absolute;
+	bottom: 0;
+	background-color: #8F637E;
+    height: 100px;
+    width: 100%;
+    color: white;
+    border-radius: 0;
+}
+
+.menu .button-home .button-assertive {
+	font-size: 50px;
+	line-height: 50px;
+}
+
+.scroll .list {
+	height: 100%;
+}
+
+.menu .item-content {
+	height: 100%;
+    background: transparent;
+}
+
+.list .item-complex:nth-child(2), .list .item-complex:nth-child(3), .list .item-complex:nth-child(4) {
+    margin: 1px 10% 0;
+    width: 80%!important;
+}
+
+.open .list .item-complex:nth-child(2), .open .list .item-complex:nth-child(3), .open .list .item-complex:nth-child(4) {
+    border-bottom: 1px solid #8E627B;
+}
+
+.fa-briefcase, .fa-search, .fa-calendar-check-o, .fa-question {
+    color: #8E627B;
+    margin: 20px 0 5px;
+    font-size: 28px;
+}
+
+.fa-stack, .fa-stack-1x, .fa-stack-2x {
+	line-height: 70px;
+}
+
+/*.item-complex.active, a.item-content.activated{
+    background-color: #583B50!important;
+    color: #D9D9D9!important;
+}a.item-content.activated fa{
+    background-color: #583B50!important;
+    color: #D9D9D9!important;
+}
+.item.active.item-complex > .item-content, .item.activated.item-complex > .item-content, .item-complex.active .item-content.item-complex > .item-content, .item-complex.activated .item-content.item-complex > .item-content, .item .item-content.active.item-complex > .item-content, .item .item-content.activated.item-complex > .item-content{
+    background-color: #583B50!important;
+    color: #D9D9D9!important;	
+}*/
+
+.item.active, .item.activated, .item-complex.active .item-content, .item-complex.activated .item-content, .item .item-content.active, .item .item-content.activated {
+	background-color: #583B50!important;
+}
+.item.item-complex.active .item-content i.fa {
+	color: #E6DEE1!important;	
 }
 
 .infinite-list .button.square {
@@ -66,11 +169,11 @@ MENU LEFT
     display: block;
 
 }
-.document-list
-{
+
+.document-list {
     overflow-x:scroll;
     overflow-y:hidden;
-    height:100%;
+    height: 100%;
     padding: 0 15px;
     -webkit-overflow-scrolling: touch;
     padding: 30px 15px 12px;
@@ -142,7 +245,8 @@ LANDING PAGE
 .landing-page .intro-section {
     position: absolute;
     left: 100px;
-    top: 300px;
+    top: 200px;
+    width: 500px;
 }
 
 
@@ -152,9 +256,14 @@ LOGIN PAGE
 
 .login-page , .register-page, .inapp-page  {
     background: url('../img/bg/colette-floue.png') no-repeat;
+    background: rgba(255, 255, 255, 0);
     background-position: top left;
     background-attachment: fixed;
     background-size: cover;
+}
+
+[nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
+    background: rgba(255, 255, 255, 0);
 }
 
 .login-form {
@@ -202,6 +311,11 @@ LOGIN PAGE
 REGISTER PAGES
 */
 
+body {
+    background: url('../img/bg/colette-floue.png') no-repeat;
+    background-size: cover;
+}
+
 
 .register-page input[type="text"] {
     padding: 6px 16px 6px 16px;
@@ -209,6 +323,22 @@ REGISTER PAGES
     height: 56px;
     padding-right: 0;
     font-size: 25px;
+}
+
+.register-intro-page .col.col-60  .item-input {
+    color: #5A3B4F;
+    font-size: 20px;
+    padding-left: 10px;
+    font-weight: 900;
+}
+
+.registerHeader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    background-color: #5A3B4F;
 }
 
 .register-intro-page .page-body {
@@ -221,7 +351,7 @@ REGISTER PAGES
 
 .register-intro-page .page-title {
     top: 50%;
-    margin: -40px 0 0 50px;
+    margin: -50px 0 0 50px;
     height: 100px;
     position: absolute;
 }
@@ -240,9 +370,12 @@ REGISTER PAGES
     font-weight: 200;
 }
 
-.register-page form {
-    width: 69%;
+.register-page .input-legend {
+	font-weight: 500;
+}
 
+.register-page form {
+    width: 75%;
 }
 
 .register-page form .label {
@@ -278,6 +411,7 @@ REGISTER PAGES
     font-size: 24px;
     border-radius: 5px;
     font-weight: 900;
+        line-height: 25px;
 }
 
 ::-webkit-input-placeholder {
@@ -285,7 +419,11 @@ REGISTER PAGES
 }
 
 .register-page form .item-input, .register-page form select.input-item, .register-page form textarea, .register-page form .input-item {
-    margin: 0 0 20px;
+    margin: 0 0 15px;
+}
+
+.register-page form.step3 .item-input {
+    margin: 0 0 30px;
 }
 
 .register-page form select {
@@ -322,12 +460,15 @@ REGISTER PAGES
 
 input[type="radio"]:checked,
 input[type="radio"]:not(:checked) {
-    width: 26px;
+    width: 1000px!important;
     height: 26px;
     padding-right: 0;
-    margin-right: 10px!important;
     border: 3px solid #1F565B;
     border-radius: 100%;
+}
+
+.item-input span {
+	margin: 0 80px 0 10px!important;
 }
 
 input[type="radio"]:checked:after {
@@ -348,6 +489,8 @@ input[type="radio"]:checked {
 }
 
 .item-select:after {
+
+  content: "";
     position: absolute;
     top: 50%;
     right: 16px;
@@ -369,12 +512,16 @@ input[type="radio"]:checked {
     position: absolute;
     left: 0;
     top: 50%;
-    margin-top: -32px;
-    height: 65px;
+    margin-top: -35px;
+    height: 70px;
+    width: 70px;
     color: white;
     border-radius: 0;
-    font-size: 3em;
-    padding: 0 25px;
+}
+
+.button.button-previous .fa {
+    font-size: 40px;
+    line-height: 70px;
 }
 
 .button.button-next {
@@ -390,12 +537,21 @@ input[type="radio"]:checked {
 
 /* STEP 3 */
 
+form.step3 {
+	width: 85%;
+    margin-top: 68px;
+}
+
 .step3 label.item {
     float: left;
     width: 50%;
 }
 
-.register-page form.step3  .input-legend {
+.ng-invalid.ng-invalid-required:placeholder-shown {
+    content: "ce champ est obligatoire";
+}
+
+.register-page form.step3 .input-legend {
     margin: -10px 0 0 0;
     color: #1F565B;
 }
@@ -405,9 +561,13 @@ input[type="radio"]:checked {
     display: block;
     position: relative;
     width: 46%;
-    margin: 0 7% 5%;
+    margin: 0 2% 5%;
     padding: 0;
     overflow: hidden;
+}
+
+.register-page form .input-legend.legendPicture {
+	margin-top: 60px;
 }
 
 .camera {
@@ -425,7 +585,7 @@ input[type="radio"]:checked {
     margin: 0;
 }
 
-#finishLogin {
+#coordinatedFormular {
     bottom: 0;
     top: initial;
     left: 50%;
@@ -473,10 +633,12 @@ input[type="radio"]:checked {
 }
 
 .intervenants-natural-form .form-text-section {
-    width: 90%;
     font-size: 1em;
 }
 
+.intervenants-results-panel .natural-form {
+
+}
 
 .natural-form .item-select
 {
@@ -716,7 +878,6 @@ INTERVENANTS AGENDA
 
 
 .intervenant-agenda .fc-time-grid-event {
-    background-color: #3F98A7;
     border: none;
     color: white;
     border-radius: 0;
@@ -748,4 +909,14 @@ INTERVENANTS AGENDA
 
 
 
+/**
+* AGENDA CALENDAR
+*/
+
+.my-agenda  .welcome-text-section ,
+.my-agenda  #profile-calendar
+{
+    display: inline-block;
+    text-align: center;
+}
 

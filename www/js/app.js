@@ -155,8 +155,6 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                     }
                 }
             })
-
-
             .state('app.my-agenda', {
                 url: '/my-agenda',
                 views: {
@@ -165,18 +163,17 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                         controller: 'UserCtrl'
                     }
                 }
-            })
-
-        .state('app.notifications', {
+            }).
+            state('app.notifications', {
                 url: '/notifications',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/notifications.html'
                     }
                 }
-            })
-        ;
-
+            });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/login');
+
+
     });

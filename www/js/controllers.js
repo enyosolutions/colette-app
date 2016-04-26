@@ -1,12 +1,37 @@
-angular.module('colette.controllers', [])
+angular
+    .module('colette.controllers', [])
+    .run(function ($rootScope, $timeout, $state) {
+        $rootScope.menuScrollLeft = function () {
+            console.log('scroll left');
+            $rootScope.menuIsOpen = true;
+            $timeout(function () {
+                console.log('cleaning menu');
+                $rootScope.menuIsOpen = false;
+            }, 7000);
 
-    .controller('AppCtrl', function ($scope, $state, $ionicModal, $timeout, $localstorage, $ionicLoading, $ionicHistory, $ionicViewSwitcher, User, Intervenant) {
+        };
+
+        $rootScope.menuScrollRight = function () {
+            console.log('scroll right');
+            $rootScope.menuIsOpen = false;
+        };
+
+
+        $timeout(function () {
+          //  $state.go('app.home');
+            console.log($state.current.name);
+        }, 5000);
+    })
+    .controller('AppCtrl', function ($scope, $rootScope, $state, $ionicModal, $timeout, $localstorage, $ionicLoading, $ionicHistory, $ionicViewSwitcher, User, Intervenant) {
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
         // To listen for when this page is active (for example, to refresh data),
         // listen for the $ionicView.enter event:
         //$scope.$on('$ionicView.enter', function(e) {
         //});
+
+        $rootScope.menuScrollLeft();
+
 
         $scope.range = function (min, max, step) {
             step = step || 1;
@@ -43,15 +68,14 @@ angular.module('colette.controllers', [])
             $ionicLoading.show({
                 template: 'Connexion...'
             });
-            if( !$scope.loginData.email ||  $scope.loginData.email == ""){
+            if (!$scope.loginData.email || $scope.loginData.email == "") {
                 $ionicLoading.hide();
                 alert('Vérifiez votre adresse email.');
             }
-            else if ( !$scope.loginData.password ||  $scope.loginData.password == ""){
+            else if (!$scope.loginData.password || $scope.loginData.password == "") {
                 alert('Vérifiez le mot de passe que vous avez saisi.')
             }
-            else{
-                console.log('Doing login', $scope.loginData);
+            else {
                 $localstorage.set('login', $scope.loginData);
 
 
@@ -126,22 +150,19 @@ angular.module('colette.controllers', [])
             // Simulate a login delay. Remove this and replace with your login
             // code if using a login system
             $ionicLoading.hide();
-            $state.go('register-step2-intro');
+            $state.go('register-step3-intro');
         };
 
 
         // Step 2 : user status, disability
         $scope.doRegisterStep2 = function () {
-            $ionicLoading.show({
-                template: 'Inscription...'
-            });
+
 
             var tmp = $localstorage.getObject('user.temp');
             var user = angular.extend(tmp, $scope.newUser);
             $localstorage.setObject('user.temp', user);
             console.log(user);
 
-            $ionicLoading.hide();
             $state.go('register-step3-intro');
         };
 
@@ -175,21 +196,27 @@ angular.module('colette.controllers', [])
         // Step 4 : user picture
         $scope.doRegisterStep4 = function () {
 
-            $ionicLoading.show({
-                template: 'Finalisation...'
-            });
-            console.log('Doing register', $scope.newUser);
-            var tmp = $localstorage.getObject('user.temp');
-            var user = angular.extend(tmp, $scope.newUser);
 
-            console.log(user);
-            var userClass = new User(user);
-            userClass.$save().then(function (data) {
-                console.log(data);
-                $localstorage.setObject('User', data);
-                $ionicLoading.hide();
-                $state.go('app.home');
-            });
+            console.log('Doing register', $scope.newUser);
+            if ($scope.newUser.password !== $scope.newUser.confirmPassword) {
+                alert('Le mot de passe et sa confirmation ne correspondent pas.');
+            }
+            else {
+                $ionicLoading.show({
+                    template: 'Finalisation...'
+                });
+                var tmp = $localstorage.getObject('user.temp');
+                var user = angular.extend(tmp, $scope.newUser);
+
+                console.log(user);
+                var userClass = new User(user);
+                userClass.$save().then(function (data) {
+                    console.log(data);
+                    $localstorage.setObject('User', data);
+                    $ionicLoading.hide();
+                    $state.go('app.home');
+                });
+            }
         };
 
 
@@ -223,7 +250,8 @@ angular.module('colette.controllers', [])
         };
         var onFail = function (e) {
             console.log("On fail " + e);
-        }
+        };
+
         $scope.send = function () {
             var myImg = $scope.picData;
             var options = new FileUploadOptions();
@@ -235,173 +263,34 @@ angular.module('colette.controllers', [])
             options.params = params;
             var ft = new FileTransfer();
             ft.upload(myImg, encodeURI("https://example.com/posts/"), onUploadSuccess, onUploadFail, options);
-        }
+        };
 
 
     })
 
-        .controller('UserCtrl', function ($scope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
-                                                  $ionicBackdrop, $ionicLoading, $cordovaGeolocation, $ionicScrollDelegate,
-                                                  $ionicViewSwitcher,
-                                                  uiCalendarConfig, User, Intervenant, Meeting, Commentaire) {
+    .controller('UserCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
+                                      $ionicBackdrop, $ionicLoading, $cordovaGeolocation, $ionicScrollDelegate,
+                                      $ionicViewSwitcher,
+                                      uiCalendarConfig, User, Intervenant, Meeting, Commentaire) {
 
-            moment.locale('fr', {
-                months: "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
-                monthsShort: "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split("_"),
-                weekdays: "dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi".split("_"),
-                weekdaysShort: "dim._lun._mar._mer._jeu._ven._sam.".split("_"),
-                weekdaysMin: "Di_Lu_Ma_Me_Je_Ve_Sa".split("_"),
-                longDateFormat: {
-                    LT: "HH:mm",
-                    LTS: "HH:mm:ss",
-                    L: "DD/MM/YYYY",
-                    LL: "D MMMM YYYY",
-                    LLL: "D MMMM YYYY LT",
-                    LLLL: "dddd D MMMM YYYY LT"
-                },
-                calendar: {
-                    sameDay: "[Aujourd'hui à] LT",
-                    nextDay: '[Demain à] LT',
-                    nextWeek: 'dddd [à] LT',
-                    lastDay: '[Hier à] LT',
-                    lastWeek: 'dddd [dernier à] LT',
-                    sameElse: 'L'
-                },
-                relativeTime: {
-                    future: "dans %s",
-                    past: "il y a %s",
-                    s: "quelques secondes",
-                    m: "une minute",
-                    mm: "%d minutes",
-                    h: "une heure",
-                    hh: "%d heures",
-                    d: "un jour",
-                    dd: "%d jours",
-                    M: "un mois",
-                    MM: "%d mois",
-                    y: "une année",
-                    yy: "%d années"
-                },
-                ordinalParse: /\d{1,2}(er|ème)/,
-                ordinal: function (number) {
-                    return number + (number === 1 ? 'er' : 'ème');
-                },
-                meridiemParse: /PD|MD/,
-                isPM: function (input) {
-                    return input.charAt(0) === 'M';
-                },
-                // in case the meridiem units are not separated around 12, then implement
-                // this function (look at locale/id.js for an example)
-                // meridiemHour : function (hour, meridiem) {
-                //     return /* 0-23 hour, given meridiem token and hour 1-12 */
-                // },
-                meridiem: function (hours, minutes, isLower) {
-                    return hours < 12 ? 'h' : 'h';
-                },
-                week: {
-                    dow: 1, // Monday is the first day of the week.
-                    doy: 4  // The week that contains Jan 4th is the first week of the year.
-                }
-            });
+        $rootScope.menuScrollLeft();
 
-
-            $scope.User = $localstorage.getObject('User');
-            console.log($scope.User._id);
-
-
-            $scope.eventSources = [];
-
-            $scope.uiConfig = {
-                calendar: {
-                    lang: 'fr',
-                    selectable: true,
-                    editable: false,
-                    slotEventOverlap: false,
-                    firstDay: 1,
-                    defaultView: 'agendaWeek',
-                    views: {
-                        defaultView: 'agendaWeek'
-                    },
-                    header: {
-                        left: 'prev',
-                        center: 'title',
-                        right: 'next'
-                    },
-                    slotDuration: '01:00:00',
-                    defaultTimedEventDuration: '01:00:00',
-                    allDaySlot: false,
-                    defaultDate: new moment(),
-                    axisFormat: 'HH',
-                    selectHelper: true,
-                    height: 'auto',
-                    minTime: '08:00:00',
-                    maxTime: '21:00:00',
-                    select: function (start, end) {
-                        console.log(events);
-                        var events = uiCalendarConfig.calendars.myCalendar.fullCalendar('clientEvents');
-                        console.log(events);
-
-                        for (var i in events) {
-                            var mStart = new moment(start);
-                            var mEnd = new moment(end);
-                            console.log(events[i].start, events[i].end, start, end);
-                            if (events[i].start.isBetween(start, end) || events[i].end.isBetween(start, end)
-                                || mStart.isBetween(events[i].start, events[i].end) || mEnd.isBetween(events[i].start, events[i].end)
-                            ) {
-                                uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
-                                return alert("Cet horaire n'est pas disponible dans vos agendas communs");
-                            }
-                        }
-                        start.locale('fr');
-                        if (confirm('Proposer un rendez-vous à ' + $scope.focusIntervenant.firstname + ' le ' + start.format("D MMM YY") + ' à ' + start.format("HH:mm") + ' ? ')) {
-                            var meeting = {
-                                clientId: $scope.User._id,
-                                intervenantId: $scope.focusIntervenant._id,
-                                start: start,
-                                end: end,
-                                skill: $scope.search ? $scope.search.skills : null,
-                                status: "attente-intervenant",
-                                type: "rdv-innitial"
-                            };
-
-                            var m = new Meeting(meeting);
-                            m.$save().then(function () {
-                                meeting.title = 'Rendez vous avec : ' + $scope.focusIntervenant.firstname;
-                                meeting.className = 'assertive-bg';
-                                console.log(meeting);
-                                //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
-
-                                uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
-                                alert("Votre demande de rendez vous a bien été transmise à " + $scope.focusIntervenant.firstname + ". Elle vous répondra très rapidement.");
-                                $scope.agendaModal.hide();
-                            });
-                        }
-                        uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
-
-                    }
-                }
-            };
-        })
-    .controller('IntervenantsCtrl', function ($scope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
-                                              $ionicBackdrop, $ionicLoading, $cordovaGeolocation, $ionicScrollDelegate,
-                                              $ionicViewSwitcher,
-                                              uiCalendarConfig, User, Intervenant, Meeting, Commentaire) {
 
         moment.locale('fr', {
-            months : "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
-            monthsShort : "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split("_"),
-            weekdays : "dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi".split("_"),
-            weekdaysShort : "dim._lun._mar._mer._jeu._ven._sam.".split("_"),
-            weekdaysMin : "Di_Lu_Ma_Me_Je_Ve_Sa".split("_"),
-            longDateFormat : {
-                LT : "HH:mm",
-                LTS : "HH:mm:ss",
-                L : "DD/MM/YYYY",
-                LL : "D MMMM YYYY",
-                LLL : "D MMMM YYYY LT",
-                LLLL : "dddd D MMMM YYYY LT"
+            months: "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
+            monthsShort: "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split("_"),
+            weekdays: "dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi".split("_"),
+            weekdaysShort: "dim._lun._mar._mer._jeu._ven._sam.".split("_"),
+            weekdaysMin: "Di_Lu_Ma_Me_Je_Ve_Sa".split("_"),
+            longDateFormat: {
+                LT: "HH:mm",
+                LTS: "HH:mm:ss",
+                L: "DD/MM/YYYY",
+                LL: "D MMMM YYYY",
+                LLL: "D MMMM YYYY LT",
+                LLLL: "dddd D MMMM YYYY LT"
             },
-            calendar : {
+            calendar: {
                 sameDay: "[Aujourd'hui à] LT",
                 nextDay: '[Demain à] LT',
                 nextWeek: 'dddd [à] LT',
@@ -409,23 +298,23 @@ angular.module('colette.controllers', [])
                 lastWeek: 'dddd [dernier à] LT',
                 sameElse: 'L'
             },
-            relativeTime : {
-                future : "dans %s",
-                past : "il y a %s",
-                s : "quelques secondes",
-                m : "une minute",
-                mm : "%d minutes",
-                h : "une heure",
-                hh : "%d heures",
-                d : "un jour",
-                dd : "%d jours",
-                M : "un mois",
-                MM : "%d mois",
-                y : "une année",
-                yy : "%d années"
+            relativeTime: {
+                future: "dans %s",
+                past: "il y a %s",
+                s: "quelques secondes",
+                m: "une minute",
+                mm: "%d minutes",
+                h: "une heure",
+                hh: "%d heures",
+                d: "un jour",
+                dd: "%d jours",
+                M: "un mois",
+                MM: "%d mois",
+                y: "une année",
+                yy: "%d années"
             },
-            ordinalParse : /\d{1,2}(er|ème)/,
-            ordinal : function (number) {
+            ordinalParse: /\d{1,2}(er|ème)/,
+            ordinal: function (number) {
                 return number + (number === 1 ? 'er' : 'ème');
             },
             meridiemParse: /PD|MD/,
@@ -437,12 +326,220 @@ angular.module('colette.controllers', [])
             // meridiemHour : function (hour, meridiem) {
             //     return /* 0-23 hour, given meridiem token and hour 1-12 */
             // },
-            meridiem : function (hours, minutes, isLower) {
+            meridiem: function (hours, minutes, isLower) {
+                return 'h';
+            },
+            week: {
+                dow: 1, // Monday is the first day of the week.
+                doy: 4  // The week that contains Jan 4th is the first week of the year.
+            }
+        });
+
+
+        $scope.User = $localstorage.getObject('User');
+        console.log($scope.User._id);
+
+
+        $scope.eventSources = [];
+
+        //BASIC CONFIG
+        $scope.uiConfig = {
+            calendar: {
+                lang: 'fr',
+                selectable: true,
+                editable: false,
+                slotEventOverlap: false,
+                firstDay: 1,
+                defaultView: 'agendaWeek',
+                views: {
+                    agendaWeek: {
+                        minTime: '08:00:00',
+                        maxTime: '21:00:00'
+                    }
+                },
+                header: {
+                    left: 'prev',
+                    center: 'title',
+                    right: 'next'
+                },
+                slotDuration: '01:00:00',
+                defaultTimedEventDuration: '01:00:00',
+                allDaySlot: false,
+                defaultDate: new moment(),
+                axisFormat: 'HH[h]',
+                selectHelper: true,
+                height: '726px',
+                minTime: '08:00:00',
+                maxTime: '21:00:00',
+                timeFormat: {
+                    agendaWeek: 'HH:mm'
+                },
+                columnFormat: {
+                    agendaWeek: "dddd DD"
+                },
+                select: function (start, end) {
+                    var events = uiCalendarConfig.calendars.myCalendar.fullCalendar('clientEvents');
+                   /*
+                    for (var i in events) {
+                        var mStart = new moment(start);
+                        var mEnd = new moment(end);
+                        console.log(events[i].start, events[i].end, start, end);
+                        if (events[i].start.isBetween(start, end) || events[i].end.isBetween(start, end)
+                            || mStart.isBetween(events[i].start, events[i].end) || mEnd.isBetween(events[i].start, events[i].end)
+                        ) {
+                            uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
+                            return alert("Cet horaire n'est pas disponible dans vos agendas communs");
+                        }
+                    }
+
+                    */
+
+
+                    start.locale('fr');
+                    if (confirm('Rendre le créneau de ' + start.format("HH:mm") + ' à ' + end.format("HH:mm") + ' indisponible dans votre calendrier ?')) {
+                        var meeting = {
+                            beneficiaireId: $scope.User._id,
+                            intervenantId: null,
+                            start: start,
+                            end: end,
+                            skill: $scope.search ? $scope.search.skills : null,
+                            status: "attente-intervenant",
+                            type: "creneau-occupe",
+                            title: "Vous n'êtes pas disponible"
+                        };
+
+                        var m = new Meeting(meeting);
+                        m.$save().then(function () {
+                            meeting.title = "Vous n'êtes pas disponible";
+                            meeting.className = 'balanced-bg';
+                            //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
+
+                            uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
+                            alert("Votre créneau a bien été vérouillé.");
+                        });
+                    }
+                    uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
+
+                }
+            }
+        };
+
+
+        //MOVE THE CALENDAR TO THE NEXT WEEK
+        $scope.moveNextWeek = function () {
+            uiCalendarConfig.calendars.myCalendar.fullCalendar('next');
+        };
+
+        //MOVE THE CALENDAR TO THE PREVIOUS WEEK
+        $scope.movePreviousWeek = function () {
+            uiCalendarConfig.calendars.myCalendar.fullCalendar('previous');
+        };
+
+        var meetingsList = Meeting.query({'query[beneficiaireId]': $scope.User._id});
+        meetingsList.$promise.then(function (data) {
+            $scope.eventSources = [];
+            uiCalendarConfig.calendars.myCalendar.fullCalendar("render");
+            data = data.map(function (d) {
+                if (d.intervenantId) {
+                    d.className = 'assertive-bg';
+                    if (!d.title) {
+                        d.title = 'Mon rendez-vous avec ' + d.intervenantId;
+                    }
+                }
+                else {
+                    d.className = 'black-bg';
+                }
+
+                //$scope.eventSources.push(d);
+                return d;
+            });
+
+            if (data.length > 0) {
+                uiCalendarConfig.calendars.myCalendar.fullCalendar('addEventSource', {events: data});
+            }
+
+
+            /*
+             if (data) {
+             $scope.eventSources = data;
+             }
+             else{
+             $scope.eventSources = [];
+             }
+             */
+
+            //uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
+            console.log(uiCalendarConfig.calendars);
+
+            $timeout(function () {
+
+            }, 250);
+
+        });
+
+    })
+    .controller('IntervenantsCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
+                                              $ionicBackdrop, $ionicLoading, $cordovaGeolocation, $ionicScrollDelegate, $anchorScroll,
+                                              $ionicViewSwitcher,
+                                              uiCalendarConfig, User, Intervenant, Meeting, Commentaire) {
+
+
+        moment.locale('fr', {
+            months: "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
+            monthsShort: "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split("_"),
+            weekdays: "dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi".split("_"),
+            weekdaysShort: "dim._lun._mar._mer._jeu._ven._sam.".split("_"),
+            weekdaysMin: "Di_Lu_Ma_Me_Je_Ve_Sa".split("_"),
+            longDateFormat: {
+                LT: "HH:mm",
+                LTS: "HH:mm:ss",
+                L: "DD/MM/YYYY",
+                LL: "D MMMM YYYY",
+                LLL: "D MMMM YYYY LT",
+                LLLL: "dddd D MMMM YYYY LT"
+            },
+            calendar: {
+                sameDay: "[Aujourd'hui à] LT",
+                nextDay: '[Demain à] LT',
+                nextWeek: 'dddd [à] LT',
+                lastDay: '[Hier à] LT',
+                lastWeek: 'dddd [dernier à] LT',
+                sameElse: 'L'
+            },
+            relativeTime: {
+                future: "dans %s",
+                past: "il y a %s",
+                s: "quelques secondes",
+                m: "une minute",
+                mm: "%d minutes",
+                h: "une heure",
+                hh: "%d heures",
+                d: "un jour",
+                dd: "%d jours",
+                M: "un mois",
+                MM: "%d mois",
+                y: "une année",
+                yy: "%d années"
+            },
+            ordinalParse: /\d{1,2}(er|ème)/,
+            ordinal: function (number) {
+                return number + (number === 1 ? 'er' : 'ème');
+            },
+            meridiemParse: /PD|MD/,
+            isPM: function (input) {
+                return input.charAt(0) === 'M';
+            },
+            // in case the meridiem units are not separated around 12, then implement
+            // this function (look at locale/id.js for an example)
+            // meridiemHour : function (hour, meridiem) {
+            //     return /* 0-23 hour, given meridiem token and hour 1-12 */
+            // },
+            meridiem: function (hours, minutes, isLower) {
                 return hours < 12 ? 'h' : 'h';
             },
-            week : {
-                dow : 1, // Monday is the first day of the week.
-                doy : 4  // The week that contains Jan 4th is the first week of the year.
+            week: {
+                dow: 1, // Monday is the first day of the week.
+                doy: 4  // The week that contains Jan 4th is the first week of the year.
             }
         });
 
@@ -481,9 +578,7 @@ angular.module('colette.controllers', [])
                 minTime: '08:00:00',
                 maxTime: '21:00:00',
                 select: function (start, end) {
-                    console.log(events);
                     var events = uiCalendarConfig.calendars.modalCalendar.fullCalendar('clientEvents');
-                    console.log(events);
 
                     for (var i in events) {
                         var mStart = new moment(start);
@@ -497,15 +592,16 @@ angular.module('colette.controllers', [])
                         }
                     }
                     start.locale('fr');
-                    if (confirm('Proposer un rendez-vous à ' + $scope.focusIntervenant.firstname + ' le ' + start.format("D MMM YY") + ' à ' + start.format("HH:mm") + ' ? ') ){
+                    if (confirm('Proposer un rendez-vous à ' + $scope.focusIntervenant.firstname + ' le ' + start.format("D MMM YY") + ' à ' + start.format("HH:mm") + ' ? ')) {
                         var meeting = {
-                            clientId: $scope.User._id,
+                            beneficiaireId: $scope.User._id,
                             intervenantId: $scope.focusIntervenant._id,
                             start: start,
                             end: end,
                             skill: $scope.search ? $scope.search.skills : null,
                             status: "attente-intervenant",
-                            type: "rdv-innitial"
+                            type: "rdv-initial",
+                            title: "Rendez-vous avec " + $scope.focusIntervenant.firstname
                         };
 
                         var m = new Meeting(meeting);
@@ -525,7 +621,6 @@ angular.module('colette.controllers', [])
                 }
             }
         };
-
 
 
         $scope.originalCount = 0;
@@ -564,7 +659,6 @@ angular.module('colette.controllers', [])
             $scope.intervenants.$promise.then(function (intervenants) {
                 $scope.originalCount = $scope.finalCount;
                 $scope.finalCount = intervenants.length;
-                console.log($scope.finalCount, $scope.originalCount);
                 $localstorage.setObject('intervenants', intervenants);
             });
         };
@@ -600,7 +694,8 @@ angular.module('colette.controllers', [])
                     }
                 }
             }
-
+            $anchorScroll('#internenant-' + $scope.focusIntervenant.code);
+            $ionicScrollDelegate.$getByHandle('#internenant-' + $scope.focusIntervenant.code).anchorScroll();
             $scope.commentaires = Commentaire.query({'query[intervenant]': $scope.focusIntervenant.code});
 
             $scope.modal.show();
@@ -614,7 +709,7 @@ angular.module('colette.controllers', [])
             });
             // $scope.modal.hide();
             console.log(intervenantId);
-            for (var i = 0 ; i < $scope.intervenants.length; i++) {
+            for (var i = 0; i < $scope.intervenants.length; i++) {
                 if ($scope.intervenants[i]._id === intervenantId) {
                     $scope.focusIntervenant = $scope.intervenants[i];
                     break;
@@ -634,11 +729,14 @@ angular.module('colette.controllers', [])
                 $scope.agendaModal.show();
                 uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
                 data = data.map(function (d) {
-                    if (d.clientId === $scope.User._id) {
+                    if (d.beneficiaireId === $scope.User._id) {
                         d.className = 'assertive-bg';
-                        d.title = 'Mon rendez-vous';
+                        d.title = 'Mon rendez-vous<br> avec ' + $scope.focusIntervenant.firstname;
                     }
-
+                    else {
+                        d.className = 'calm-bg';
+                        d.title = $scope.focusIntervenant.firstname + " n'est pas disponible";
+                    }
                     //$scope.eventSources.push(d);
                     return d;
                 });
@@ -666,6 +764,56 @@ angular.module('colette.controllers', [])
                 }, 250);
 
             });
+
+
+            var myMeetingsList = Meeting.query({'query[beneficiaireId]': $scope.User._id});
+            myMeetingsList.$promise.then(function (data) {
+                $scope.eventSources = [];
+                $scope.agendaModal.show();
+                uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
+                var events = [];
+
+                for (var i in data) {
+                    var d = data[i];
+                    if (d.intervenantId) {
+                        d.className = 'assertive-bg';
+                        if (d.intervenantId === $scope.focusIntervenant._id) {
+                            continue;
+                        }
+                    }
+                    else {
+                        d.className = 'calm-bg';
+                        d.title = "Vous n'est pas disponible";
+                    }
+                    //$scope.eventSources.push(d);
+                    return d;
+                }
+
+                $ionicLoading.hide();
+
+                if (data.length > 0) {
+                    uiCalendarConfig.calendars.modalCalendar.fullCalendar('addEventSource', {events: data});
+                }
+
+
+                /*
+                 if (data) {
+                 $scope.eventSources = data;
+                 }
+                 else{
+                 $scope.eventSources = [];
+                 }
+                 */
+
+                //uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
+                console.log(uiCalendarConfig.calendars);
+
+                $timeout(function () {
+
+                }, 250);
+
+            });
+
 
         };
 
@@ -727,16 +875,17 @@ angular.module('colette.controllers', [])
 
 
             for (var i in $scope.intervenants) {
-                var latlng = new google.maps.LatLng($scope.intervenants[i].location.lat, $scope.intervenants[i].location.lng);
+                var interv = $scope.intervenants[i];
+                var latlng = new google.maps.LatLng(interv.location.lat, interv.location.lng);
                 var marker = new google.maps.Marker({
                     position: latlng,
                     map: $scope.map,
                     animation: google.maps.Animation.DROP,
-                    title: $scope.intervenants[i].firstname,
-                    icon: '/img/intervenants/map-' + $scope.intervenants[i].firstname.toLowerCase() + '-' + ($scope.focusIntervenant._id === $scope.intervenants[i]._id ? 'rose' : 'bleu') + '.png'
+                    title: interv.firstname,
+                    icon: '/img/intervenants/map-' + interv.firstname.toLowerCase() + '-' + ($scope.focusIntervenant._id === interv._id ? 'rose' : 'bleu') + '.png'
                 });
                 google.maps.event.addListener(marker, 'click', function () {
-                    $scope.openProfileModal($scope.intervenants[i]._id);
+                    $scope.openProfileModal(interv._id);
                 });
             }
         }
