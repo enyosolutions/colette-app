@@ -176,7 +176,7 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise(window.localStorage.getItem('User') ? '/app/home' : '/login');
 
 
     });
