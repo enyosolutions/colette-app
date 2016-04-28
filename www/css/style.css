@@ -43,6 +43,8 @@ h3 {
     letter-spacing: -1px;
 }
 
+/*.pane.view.open*/
+
 /**
 MENU LEFT
 */
@@ -54,8 +56,11 @@ MENU LEFT
     transition: width 200ms linear;
 }
 
+.pane.open .view-container {
+    transform: translate3d(100px, 0, 0)!important;
+}
 
-.left-menu.open {
+.pane.open .left-menu {
     width: 200px !important;
 }
 
@@ -63,22 +68,26 @@ MENU LEFT
     height: 18%;
 }
 
-.left-menu.open .item {
+.pane.open .left-menu .item {
     width: 100% !important;
 }
 
-.left-menu.open .button-back .fa-angle-left:before {
+.button-back {
+    margin-bottom: 15px;
+}
+
+.pane.open .left-menu .button-back .fa-angle-left:before {
     content: "Retour";
     font-family: "raleway";
     font-weight: 100;
     font-size: 40px;
 }
 
-.left-menu .item .subtext {
+.pane .left-menu .subtext {
     display: none;
 }
 
-.left-menu.open .item .subtext {
+.pane.open .left-menu .subtext {
     display: block;
 }
 
@@ -119,8 +128,15 @@ MENU LEFT
     background: transparent;
 }
 
-.list .item-complex:nth-child(2), .list .item-complex:nth-child(3), .list .item-complex:nth-child(4) {
-    margin: 1px 10% 0;
+/*.menu a.item-content i.fa {
+    margin: 50px 0 5px;
+}
+.menu.open a.item-content i.fa {
+    margin: 20px 0 5px;
+}*/
+
+.pane.open .left-menu .list .item-complex:nth-child(2), .pane.open .left-menu .list .item-complex:nth-child(3), .pane.open .left-menu .list .item-complex:nth-child(4) {
+    margin: 1px 0 0 10%;
     width: 80%!important;
 }
 
@@ -622,6 +638,14 @@ form.step3 {
     background-size: cover;
 }
 
+.intervenants-panel .scroll {
+    height: initial;
+}
+
+.intervenants-panel .scroll-view.overflow-scroll {
+    padding-right: 100px;
+}
+
 /**
 * NATURAL FORM
 */
@@ -744,6 +768,7 @@ form.step3 {
     font-size: 330px;
     font-weight: 100;
     letter-spacing: -10px;
+    margin-top: 200px;
     margin-right: 10px;
     margin-left: 30px;
 }
