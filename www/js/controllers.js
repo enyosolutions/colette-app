@@ -8,7 +8,8 @@ angular
 
         $rootScope.menuScrollRight = function (evt) {
             console.log('scroll right');
-            if (evt.gesture.distance > 300) {
+            console.log(evt);
+            if (evt && evt.gesture.distance > 300) {
                 $rootScope.menuIsOpen = true;
             }
         };
@@ -64,12 +65,20 @@ angular
             });
             if (!$scope.loginData.email || $scope.loginData.email == "") {
                 $ionicLoading.hide();
-                $ionicPopup.alert({title: 'Bonjour Colette', text: 'Vérifiez votre adresse email.'});
-                $ionicLoading.hide();
+                $ionicPopup.alert({title: 'Bonjour Colette', template: 'Vérifiez votre adresse email.', buttons: [{
+                    text: "OK",
+                    type: 'button-assertive'
+                }]});
             }
             else if (!$scope.loginData.password || $scope.loginData.password == "") {
-                $ionicPopup.alert({title: 'Bonjour Colette', text: 'Vérifiez le mot de passe que vous avez saisi.'});
                 $ionicLoading.hide();
+                $ionicPopup.alert({title: 'Bonjour Colette', template: 'Vérifiez le mot de passe que vous avez saisi.',
+                    buttons: [{
+                        text: "OK",
+                        type: 'button-assertive'
+                    }]
+                });
+
             }
             else {
                 $localstorage.set('login', $scope.loginData);
@@ -81,11 +90,19 @@ angular
                     } else {
                         $ionicPopup.alert({
                             title: 'Bonjour Colette',
-                            text: "Nous n'avons pas réussi à vous identifier."
+                            template: "Nous n'avons pas réussi à vous identifier.",
+                            buttons: [{
+                                text: "OK",
+                                type: 'button-assertive'
+                            }]
                         });
                     }
                     $ionicLoading.hide();
                 });
+
+                $timeout(function(){
+                    $ionicLoading.hide();
+                },4000);
             }
 
         }
@@ -433,7 +450,8 @@ angular
             console.log(evt.gesture);
             console.log(evt.gesture.distance);
             console.log('next week');
-            if (evt.gesture.distance > 400) {
+
+            if (evt.gesture.distance > 650) {
                 $ionicLoading.show({
                     template: 'Chargement'
                 });
@@ -447,7 +465,7 @@ angular
 
         //MOVE THE CALENDAR TO THE PREVIOUS WEEK
         $scope.movePreviousWeek = function (evt) {
-            if (evt.gesture.distance > 400) {
+            if (evt.gesture.distance > 650) {
                 $ionicLoading.show({
                     template: 'Chargement'
                 });
@@ -654,14 +672,16 @@ angular
              template: 'Recherche'
              });*/
             $ionicViewSwitcher.nextDirection('forward');
-            $state.go('app.intervenants-resultats', {search: JSON.stringify($scope.search), 'test': 'test'});
+            $state.go('app.intervenants-resultats', {search: JSON.stringify($scope.search)});
         };
 
 
         //Launch the search on the server
         $scope.execSearch = function () {
+            console.log("exec search");
             $scope.backButtonLink = "#/app/intervenants/recherche";
             $scope.showBackButton = true;
+            console.log($state.params.search, $scope.search);
 
             $ionicScrollDelegate.scrollTo(0, 0, true);
             if ($state.params.search) {
