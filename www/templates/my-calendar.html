@@ -1,6 +1,6 @@
 <ion-nav-view name="myAgendaContent" class="my-agenda my-agenda-panel">
     <div class="user-agenda">
-        <ion-scroll direction="x" overflow-scroll="true" class="document-list infinite-list" on-swipe-right="moveNextWeek()" on-swipe-left="movePreviousWeek()">
+        <ion-scroll direction="x" overflow-scroll="true" class="document-list infinite-list" on-swipe-left="moveNextWeek($event)" on-swipe-right="movePreviousWeek($event)" >
             <div class="document-item welcome-text-section">
                 <h1 class="balanced"><i class="fa fa-calendar-check-o fa-2x"></i><br/>Votre calendrier</h1>
                 <h3 class="calm">Vous pouvez retrouver ici tous vos rendez-vous et vos disponibilités sur les semaines à venir.</h3>

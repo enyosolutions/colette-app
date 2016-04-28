@@ -39,7 +39,7 @@
     </form>
 
     <ion-scroll direction="x" overflow-scroll="true" class="document-list infinite-list" >
-        <ul class="list-inline" on-swipe="menuScrollLeft()">
+        <ul class="list-inline" on-swipe-left="menuScrollLeft()" on-swipe-right="menuScrollRight()">
             <li class="document-item results-recap-section">
                 <div class="results-count" count-to="{{ finalCount }}" value="{{ originalCount }}" duration="0.5"></div>
                 <div class="results-text">résultats correspondent à votre recherche</div>

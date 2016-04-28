@@ -6,20 +6,22 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', 'ngResource', 'ngCordova', 'ui.calendar', 'countTo'])
     .config(['$sceDelegateProvider', function ($sceDelegateProvider) {
-        $sceDelegateProvider.resourceUrlWhitelist(['self', 'http://colette.dev/**']);
+        $sceDelegateProvider.resourceUrlWhitelist(['self', 'http://colette.dev/**', 'http://colette.enyosolutions.com/**']);
     }])
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                //cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 cordova.plugins.Keyboard.disableScroll(true);
 
             }
             if (window.StatusBar) {
+                // $ionicPlatform.fullScreen();
                 // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
+                ionic.Platform.fullScreen();
+                StatusBar.hide();
             }
         });
     })
@@ -50,6 +52,7 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 templateUrl: 'templates/register/step1-intro.html',
                 controller: 'RegisterCtrl'
             })
+
             .state('register-step1-form', {
                 url: '/register/step1/form',
                 templateUrl: 'templates/register/step1-form.html',
