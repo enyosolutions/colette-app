@@ -1,6 +1,7 @@
 /*
 
   MENU LEFT
+  HOME PAGE                     : home page after connexion
   LANDING PAGE                  : intro page that leads to registration or connexion
   LOGIN PAGE                    : Login page
   REGISTER PAGES                : pages for registering in the app
@@ -235,6 +236,106 @@ textarea.ng-invalid:not(.ng-untouched) + .error-message {
     display: block;
     color: red;
 }
+
+
+/**
+
+LANDING PAGE
+
+*/
+
+.home-panel .document-item {
+    height: initial;
+    transform: translateY(6%);
+}
+
+.home-panel .document-list .notification-section .card.notification  {
+    height: initial;
+    padding: 80px 30px;
+    margin: 0;
+}
+
+.home-panel .card.notification {
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 500;
+    color: #1F565B;
+    background-color: #F6F0F1;
+}
+
+.home-panel .document-list .welcome-text-section {
+    width: 300px;
+    margin: 170px 80px;
+}
+
+.home-panel .card.notification .fa {
+    font-size: 50px;
+}
+
+.home-panel .card.notification h2 {
+    font-size: 35px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    width: 400px;
+
+}
+
+.home-panel ul.list-inline li.document-item.welcome-text-section h2 {
+    font-size: 4em;
+    color: #1F565B;
+    vertical-align: middle;
+    text-align: left;
+    top: 15%;
+}
+
+.home-panel .home-action.card {
+    margin: 0;
+    padding: 50px 30px 0;
+    background: #F6F0F1;
+    width: 400px;
+
+}
+
+.home-panel .document-item .home-action.card:first-child {
+    margin-bottom: 20px;
+}
+
+.home-panel .home-action.card .action-title {
+    font-size: 35px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: #1F565B;
+    text-align: center;
+}
+
+.home-panel button.button-assertive {
+    display: block;
+    text-align: center;
+    margin: 30px auto 0;
+    text-transform: uppercase;
+}
+
+.home-panel button.button-assertive:after {
+    text-transform: uppercase;
+}
+
+.home-panel .action-description {
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 500;
+    color: #1F565B;
+    background-color: #F6F0F1;
+    text-align: center;
+}
+
+.home-panel .ionicons.ion-bag.action-icon {
+    width: 100%;
+    font-size: 50px;
+    color: #1F565B;
+    text-align: center;
+    margin: 0 auto 33px;
+}
+
 /**
 
 LANDING PAGE
