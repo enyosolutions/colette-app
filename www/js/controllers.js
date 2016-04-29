@@ -803,7 +803,7 @@ angular
                 }
             });
 
-
+/*
             var myMeetingsList = Meeting.query({'query[beneficiaireId]': $scope.User._id});
             myMeetingsList.$promise.then(function (data) {
                 $scope.eventSources = [];
@@ -833,15 +833,6 @@ angular
                 }
 
 
-                /*
-                 if (data) {
-                 $scope.eventSources = data;
-                 }
-                 else{
-                 $scope.eventSources = [];
-                 }
-                 */
-
                 //uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
                 console.log(uiCalendarConfig.calendars);
 
@@ -850,7 +841,7 @@ angular
                 }, 250);
 
             });
-
+*/
 
         };
 
