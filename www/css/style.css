@@ -1027,7 +1027,6 @@ INTERVENANTS AGENDA
     text-align: center;
 }
 
-
 .intervenant-agenda .button-return {
     position: fixed;
     top: 0;
@@ -1035,9 +1034,53 @@ INTERVENANTS AGENDA
 }
 
 .user-agenda .fc-time-grid .fc-slats td {
-    height: 2.5em!important;
-    border-bottom: 0;
+    height: 3.1em!important;
+    padding: 0;
+    color: #583B50;
     border: 5px solid rgba(255, 255, 255, 0)!important;
+}
+
+.fc-day-header {
+   border-right: 5px solid #CBDADD!important;
+}
+
+.fc-slats {
+    background: url("../img/planning-v3.png") 36px 0 no-repeat;
+    background-size: 853px 572px;
+}
+
+.fc-event .fc-content {
+    width: 116px;
+}
+
+.fc-bg {
+    opacity: 0;
+}
+
+.fc .fc-axis {
+    vertical-align: -webkit-baseline-middle;
+}
+
+.fc-time-grid .fc-slats, .fc-time-grid > hr {
+    border: none;
+}
+
+.fc-time-grid .fc-slats table tbody tr:first-child td.fc-axis.fc-time.fc-widget-content {
+    opacity: 0;
+}
+
+.fc-toolbar {
+    opacity: 0;
+    margin-bottom: 0;
+}
+
+hr.fc-divider {
+    opacity: 0;
+}
+
+.user-agenda .fc-time-grid .fc-slats td {
+    background: rgba(255, 255, 255, 0)!important;
+    -webkit-transform: translateY(-10px);
 }
 
 .my-agenda h1.balanced {
@@ -1084,11 +1127,25 @@ body .pane .view-container .my-agenda {
     font-size: 16px;
 }
 
+
+.fc-bg td {
+    background-color: rgb(255, 255, 255);
+    border: 5px solid rgba(255, 255, 255, 0);
+    transform: translateX(0px);
+}
+
+.fc-bg td.fc-axis {
+    background-color: rgba(255, 255, 255, 0);
+    border: 5px solid rgba(255, 255, 255, 0);
+    transform: translateX(0px);
+
+}
+
 .fc-row.fc-widget-header {
     margin: 3px 0;
 }
 
-.user-agenda .fc-time-grid .fc-slats td {
+/*.user-agenda .fc-time-grid .fc-slats td {
     height: 2em;
     border-bottom: 0;
     background-color: rgb(255, 255, 255);
@@ -1096,7 +1153,7 @@ body .pane .view-container .my-agenda {
     margin: 10px;
     padding: 10px;
     transform: translateY(0px);
-}
+}*/
 
 
 
