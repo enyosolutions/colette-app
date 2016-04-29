@@ -374,7 +374,7 @@ angular
                 views: {
                     agendaWeek: {
                         minTime: '08:00:00',
-                        maxTime: '21:00:00'
+                        maxTime: '20:00:00'
                     }
                 },
                 header: {
@@ -390,7 +390,8 @@ angular
                 selectHelper: true,
                 height: '726px',
                 minTime: '08:00:00',
-                maxTime: '21:00:00',
+                maxTime: '20:00:00',
+                hiddenDays:[0],
                 timeFormat: {
                     agendaWeek: 'HH:mm'
                 },
@@ -618,8 +619,10 @@ angular
                 selectHelper: true,
                 height: 'auto',
                 minTime: '08:00:00',
-                maxTime: '21:00:00',
-                select: function (start, end) {
+
+                maxTime: '20:00:00',
+                hiddenDays:[0],
+                    select: function (start, end) {
                     var events = uiCalendarConfig.calendars.modalCalendar.fullCalendar('clientEvents');
 
                     for (var i in events) {
