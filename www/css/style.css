@@ -1009,7 +1009,6 @@ INTERVENANTS AGENDA
 }
 
 
-
 .intervenant-agenda {
     background-color: #F6F0F1;
 }
@@ -1035,10 +1034,71 @@ INTERVENANTS AGENDA
     left: 0;
 }
 
-.fc-time-grid .fc-slats td {
-    height: 2.5em;
+.user-agenda .fc-time-grid .fc-slats td {
+    height: 2.5em!important;
     border-bottom: 0;
+    border: 5px solid rgba(255, 255, 255, 0)!important;
 }
+
+.my-agenda h1.balanced {
+    font-weight: 100;
+    text-transform: none;
+    font-size: 65px;
+}
+
+.my-agenda h3.calm {
+    color: #583B50;
+    font-size: 25px;
+    font-family: helvetica;
+    font-weight: 100;
+    line-height: 36px; 
+}
+
+.my-agenda .fa-calendar-check-o {
+    color: #1F565B;
+    font-size: 50px;
+    margin: 20px 0 20px;
+}
+
+.document-list .welcome-text-section {
+    width: 300px;
+    margin: 100px 80px;
+
+}
+
+body .pane .view-container .my-agenda {
+    transform: translate3d(0, 0, 0)!important;
+}
+
+.fc-unthemed th, .fc-unthemed td, .fc-unthemed thead, .fc-unthemed tbody, .fc-unthemed .fc-divider, .fc-unthemed .fc-row, .fc-unthemed .fc-popover {
+    border-color: rgba(221, 221, 221, 0);
+}
+
+.fc-day-header {
+    background-color: #3F98A7;
+    color: white;
+    padding: 10px!important;
+    font-family: helvetica;
+    text-transform: uppercase;
+    text-align: left!important;
+    font-size: 16px;
+}
+
+.fc-row.fc-widget-header {
+    margin: 3px 0;
+}
+
+.user-agenda .fc-time-grid .fc-slats td {
+    height: 2em;
+    border-bottom: 0;
+    background-color: rgb(255, 255, 255);
+    border: 5px solid rgba(255, 255, 255, 0);
+    margin: 10px;
+    padding: 10px;
+    transform: translateY(0px);
+}
+
+
 
 
 /* LOGIN PAGE */

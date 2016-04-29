@@ -1,12 +1,12 @@
 angular
     .module('colette.controllers', [])
-    .run(function ($rootScope, $timeout, $state) {
+    .run(function ($rootScope, $timeout, $state, $localstorage) {
         $rootScope.menuScrollLeft = function () {
             console.log('scroll left');
             $rootScope.menuIsOpen = false;
         };
 
-        $rootScope.menuScrollRight = function () {
+        $rootScope.menuScrollRight = function (evt) {
             console.log('scroll right');
             if (evt.gesture.distance > 300) {
                 $rootScope.menuIsOpen = true;
@@ -20,6 +20,12 @@ angular
          $state.go('app.home');
 
          }, 20000);*/
+
+
+        if($localstorage.getObject('User')){
+            $state.go('app.home');
+
+        }
     })
     .controller('AppCtrl', function ($scope, $rootScope, $state, $ionicModal, $ionicPopup, $timeout, $localstorage, $ionicLoading, $ionicHistory, $ionicViewSwitcher, User, Intervenant) {
         // With the new view caching in Ionic, Controllers are only called
