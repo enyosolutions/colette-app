@@ -166,8 +166,17 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                         controller: 'UserCtrl'
                     }
                 }
-            }).
-            state('app.notifications', {
+            })
+            .state('app.my-agenda-intervenants', {
+                url: '/my-agenda?intervenant=:id',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/my-calendar.html',
+                        controller: 'UserCtrl'
+                    }
+                }
+            })
+            .state('app.notifications', {
                 url: '/notifications',
                 views: {
                     'menuContent': {

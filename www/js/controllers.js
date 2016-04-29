@@ -526,6 +526,31 @@ angular
 
         });
 
+        console.log($state.params);
+        if($state.params.intervenantId) {
+            var IntervenantMeetingsList = Meeting.query({'query[intervenantId]': $state.params.intervenantId});
+            IntervenantMeetingsList.$promise.then(function (data) {
+                $scope.eventSources = [];
+                uiCalendarConfig.calendars.myCalendar.fullCalendar("render");
+                data = data.map(function (d) {
+                    if (d.intervenantId && d.beneficiaireId === $scope.User._id) {
+                        d.className = 'assertive-bg';
+                    }
+                    else {
+                        d.className = 'calm-bg';
+                    }
+                    return d;
+                });
+
+                if (data.length > 0) {
+                    uiCalendarConfig.calendars.myCalendar.fullCalendar('addEventSource', {events: data});
+                }
+
+            });
+
+
+        }
+
     })
     .controller('IntervenantsCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
                                               $ionicBackdrop, $ionicLoading, $cordovaGeolocation, $ionicScrollDelegate, $anchorScroll,
@@ -721,7 +746,7 @@ angular
         // Create the profile modal that we will use later
         $ionicModal.fromTemplateUrl('templates/intervenants/profile.html', {
             scope: $scope,
-            hideDelay: 220
+            hideDelay: 0
         }).then(function (modal) {
             $scope.modal = modal;
             $ionicBackdrop.release();
@@ -729,8 +754,7 @@ angular
 
         // Create the modal for the planning
         $ionicModal.fromTemplateUrl('templates/intervenants/agenda.html', {
-            scope: $scope,
-            hideDelay: 220
+            scope: $scope
         }).then(function (modal) {
             $scope.agendaModal = modal;
             $ionicBackdrop.release();
@@ -753,7 +777,7 @@ angular
             $timeout(function () {
                 console.log('test');
                 $scope.openAgendaModal(intervenantId);
-            }, 1000);
+            }, 200);
 
         };
 
