@@ -1039,17 +1039,39 @@ form.step3 {
     font-weight: 400;
 }
 
-.intervenant-profile .profile-info h1 {
+.header-intervenant-profile-detail {
+    position: absolute;
+    top: 0;
+    right: 0%;
+    left: 277px;
+    height: 73px;
+    background-color: white;
+    z-index: 2;
+}
+
+.intervenant-profile .header-intervenant-profile-detail h1 {
     background-color: #3F98A7;
+    position: absolute;
+    z-index: 2;
     color: #fff;
     top: 0;
     text-align: center;
     font-weight: 100;
-    width: 350px;
-    margin: 0 auto;
+    width: 70%;
+    margin: 0 15%;
     padding: 15px 0;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+
+.intervenant-profile .scroll {
+    padding: 70px 0;
+}
+
+.intervenant-profile .scroll .fc-slats {
+    background: url("../img/planning-v3.png") 28px 0 no-repeat;
+    background-size: 404px 392px;
 }
 
 .intervenant-profile .button-return {
@@ -1164,7 +1186,7 @@ INTERVENANTS AGENDA
    border-right: 5px solid #CBDADD!important;
 }
 
-.fc-scroller.fc-time-grid-container {
+.my-agenda .fc-scroller.fc-time-grid-container {
     height: 580px!important;
 }
 
@@ -1202,7 +1224,7 @@ hr.fc-divider {
     opacity: 0;
 }
 
-.user-agenda .fc-time-grid .fc-slats td {
+.my-agenda .user-agenda .fc-time-grid .fc-slats td {
     background: rgba(255, 255, 255, 0)!important;
     -webkit-transform: translateY(-10px);
 }
@@ -1227,7 +1249,7 @@ hr.fc-divider {
     margin: 20px 0 20px;
 }
 
-.document-list .welcome-text-section {
+.my-agenda .document-list .welcome-text-section {
     width: 300px;
     margin: 100px 80px;
 
@@ -1241,7 +1263,7 @@ body .pane .view-container .my-agenda {
     border-color: rgba(221, 221, 221, 0);
 }
 
-.fc-day-header {
+.my-agenda .fc-day-header {
     background-color: #3F98A7;
     color: white;
     padding: 10px!important;
@@ -1252,20 +1274,20 @@ body .pane .view-container .my-agenda {
 }
 
 
-.fc-bg td {
+.my-agenda .fc-bg td {
     background-color: rgb(255, 255, 255);
     border: 5px solid rgba(255, 255, 255, 0);
     transform: translateX(0px);
 }
 
-.fc-bg td.fc-axis {
+.my-agenda .fc-bg td.fc-axis {
     background-color: rgba(255, 255, 255, 0);
     border: 5px solid rgba(255, 255, 255, 0);
     transform: translateX(0px);
 
 }
 
-.fc-row.fc-widget-header {
+.my-agenda .fc-row.fc-widget-header {
     margin: 3px 0;
 }
 
