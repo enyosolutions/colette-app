@@ -66,3 +66,4 @@ angular.module('colette.services', ['ngResource'])
 function transformGet(json, headerGetter) {
     return angular.fromJson(json).body;
 }
+
