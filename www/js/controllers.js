@@ -670,10 +670,6 @@ angular
         $scope.originalCount = 0;
         $scope.finalCount = 0;
         $scope.doSearch = function () {
-
-            /*$ionicLoading.show({
-             template: 'Recherche'
-             });*/
             $ionicViewSwitcher.nextDirection('forward');
             $state.go('app.intervenants-resultats', {search: JSON.stringify($scope.search)});
         };
@@ -745,6 +741,7 @@ angular
             $scope.commentaires = Commentaire.query({'query[intervenant]': $scope.focusIntervenant.code});
 
             $scope.modal.show();
+            $scope.openAgendaModal();
             $ionicBackdrop.release();
         };
 
@@ -772,8 +769,7 @@ angular
             var meetingsList = Meeting.query({'query[intervenantId]': $scope.focusIntervenant._id});
             meetingsList.$promise.then(function (data) {
                 $scope.eventSources = [];
-                $scope.agendaModal.show();
-                uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
+                // $scope.agendaModal.show();
                 data = data.map(function (d) {
                     if (d.beneficiaireId === $scope.User._id) {
                         d.className = 'assertive-bg';
@@ -783,31 +779,14 @@ angular
                         d.className = 'calm-bg';
                         d.title = $scope.focusIntervenant.firstname + " n'est pas disponible";
                     }
-                    //$scope.eventSources.push(d);
+
                     return d;
                 });
-                $ionicLoading.hide();
+                // $ionicLoading.hide();
 
                 if (data.length > 0) {
                     uiCalendarConfig.calendars.modalCalendar.fullCalendar('addEventSource', {events: data});
                 }
-
-
-                /*
-                 if (data) {
-                 $scope.eventSources = data;
-                 }
-                 else{
-                 $scope.eventSources = [];
-                 }
-                 */
-
-                //uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
-                console.log(uiCalendarConfig.calendars);
-
-                $timeout(function () {
-
-                }, 250);
 
             });
 
@@ -815,7 +794,6 @@ angular
             var myMeetingsList = Meeting.query({'query[beneficiaireId]': $scope.User._id});
             myMeetingsList.$promise.then(function (data) {
                 $scope.eventSources = [];
-                $scope.agendaModal.show();
                 uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
                 var events = [];
 
