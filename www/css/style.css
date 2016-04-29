@@ -50,6 +50,14 @@ h3 {
 MENU LEFT
 */
 
+.pane.view.open .menu-content.pane {
+    transform: translate3d(0, 0, 0)!important;
+    width: 824px!important;
+    padding-right: 0;
+    right: 0;
+    left: 200px;
+}
+
 .left-menu {
     width: 100px !important;
     z-index: 2;
@@ -57,9 +65,9 @@ MENU LEFT
     transition: width 200ms linear;
 }
 
-.pane.open .view-container {
-    transform: translate3d(100px, 0, 0)!important;
-}
+/*.pane.open .view-container {
+    transform: translate3d(100px, 0, 0);   
+}*/
 
 .pane.open .left-menu {
     width: 200px !important;
@@ -244,9 +252,20 @@ LANDING PAGE
 
 */
 
+.home-panel {
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background-color: rgba(216, 216, 216, 0);
+}
+
 .home-panel .document-item {
     height: initial;
     transform: translateY(6%);
+}
+
+.home-panel .menu-content.pane {
+    width: inherit;
 }
 
 .home-panel .document-list .notification-section .card.notification  {
@@ -728,10 +747,6 @@ form.step3 {
 
 */
 
-.home-panel   {
-    background-color: #D8D8D8;
-}
-
 .intervenants-panel {
     background: url('../img/bg/colette-floue.png') no-repeat;
     background-position: top left;
@@ -982,9 +997,9 @@ form.step3 {
     border-radius: 15px;
     top: 2%;
     bottom: -5%;
-    left: 14%;
-    right: 10%;
-    width: 80%;
+    left: 21%;
+    width: 75%;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6);
 }
 
 .intervenant-profile .calendar-image img {
@@ -1066,7 +1081,7 @@ form.step3 {
 }
 
 .intervenant-profile .commentaire-text {
-    width: 300px;
+    width: 265px;
     margin: 0 0 0 20px;
     color: #1F565B;
     vertical-align: middle;
@@ -1084,6 +1099,10 @@ form.step3 {
 .intervenant-profile .diploma {
     font-weight: 500;
     font-style: italic;
+}
+
+.card-intervenant.profile-side .actions {
+    margin-top: 50px;
 }
 
 /**
@@ -1145,9 +1164,13 @@ INTERVENANTS AGENDA
    border-right: 5px solid #CBDADD!important;
 }
 
+.fc-scroller.fc-time-grid-container {
+    height: 580px!important;
+}
+
 .fc-slats {
-    background: url("../img/planning-v3.png") 36px 0 no-repeat;
-    background-size: 853px 572px;
+    background: url("../img/planning-v3.png") 38px 0 no-repeat;
+    background-size: 749px 570px;
 }
 
 .fc-event .fc-content {
