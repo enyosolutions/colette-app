@@ -1,5 +1,4 @@
-<ion-content class="intervenants-panel intervenants-results-panel" view-title="Intervants" >
-    <ion-scroll direction="x" overflow-scroll="true" class="document-list infinite-list">
+<ion-nav-view class="intervenants-panel intervenants-results-panel" view-title="Intervants" >
     <form class="natural-form" >
         <div class="">
             <div class="calm">
@@ -38,7 +37,7 @@
             </div>
         </div>
     </form>
-
+    <ion-scroll direction="x" overflow-scroll="true" class="document-list infinite-list">
         <ul class="list-inline" on-swipe-left="menuScrollLeft($event)" on-swipe-right="menuScrollRight($event)">
             <li class="document-item results-recap-section">
                 <div class="results-count" count-to="{{ finalCount }}" value="{{ originalCount }}" duration="0.5"></div>
@@ -72,4 +71,4 @@
 
         </ul>
     </ion-scroll>
-</ion-content>
+</ion-nav-view>

@@ -45,8 +45,17 @@
                     </div>
 
                     <div class="calendar-image">
+                        <!--
                         <img src="img/planning-v2.png" alt="planning"
                              ng-click="openAgendaModal('{{ focusIntervenant._id }}')"/>
+                             -->
+
+
+                        <div ui-calendar="uiConfig.calendar" ng-model="eventSources" id="profile-calendar"
+                             calendar="modalCalendar">
+
+                            test
+                             </div>
                     </div>
 
 
