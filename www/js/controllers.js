@@ -777,7 +777,7 @@ angular
             $timeout(function () {
                 console.log('test');
                 $scope.openAgendaModal(intervenantId);
-            }, 200);
+            }, 300);
 
         };
 

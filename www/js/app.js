@@ -168,7 +168,7 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 }
             })
             .state('app.my-agenda-intervenants', {
-                url: '/my-agenda?intervenant=:id',
+                url: '/my-agenda?intervenant=:intervenantId',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/my-calendar.html',
