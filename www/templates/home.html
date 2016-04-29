@@ -1,4 +1,5 @@
-<ion-scroll direction="x" class="home-panel" view-title="Home" on-swipe-left="menuScrollLeft($event)" on-swipe-right="menuScrollRight($event)">
+<ion-scroll direction="x" class="home-panel" view-title="Home" on-swipe-left="menuScrollLeft($event)"
+            on-swipe-right="menuScrollRight($event)">
     <div class="document-list infinite-list">
         <ul class="list-inline">
             <li class="document-item welcome-text-section">
@@ -6,51 +7,62 @@
             </li>
             <li class="document-item notification-section">
                 <div class="card notification">
-                    <div class="button square notification-header" href="#/app/notifications">
-                        <i class="ionicons ion-bag"></i>
-                        1 notification
-                    </div>
-                    <br>
-                    Vous cherchez une aide ménagère pour 20h par mois.
-                    <br><br>
-                    Nous avons 2 personnes à vous recommander.
-                    <br><br>
-                    <button class="button button-assertive">VOIR LES 2 INTERVENANTS</button>
-                </div>
-            </li>
-            <li class="document-item actions-section">
-                <div class="actions row">
-                    <div class="col col-50">
-                        <button class="button action" href="#/app/notifications">
-                            <i class="ionicons ion-bag"></i>
-                            Mon planning
-                        </button>
-                    </div>
-                    <div class="col col-50">
-                        <button class="button action col-offset-4 col-48" href="#/app/notifications">
-                            <i class="ionicons ion-bag"></i>
-                            Ma communauté
-                        </button>
+                    <i class="fa fa-bell-o"></i>
+                    <h2 class="notification-title">
+                        x choses à faire
+                    </h2>
 
-                    </div>
+                    x choses sont en attente de décision de votre part.
+                    <br><br>
+                    Pour voir la liste, allez dans la rubrique choses à faire dans la navigation latérale, ou en cliquant ci-dessous.
+                    <br><br>
+                    <button class="button button-assertive">VOIR MES x choses à faire</button>
                 </div>
             </li>
-            <li class="document-item actions-section">
-                    <div class="col col-100">
-                        <button class="button action col-48" href="#/app/notifications">
-                            <i class="ionicons ion-bag"></i>
-                            Mon planning
-                        </button>
-                    </div>
-                    <div class="col col-50">
-                        <button class="button action col-offset-4 col-48" href="#/app/notifications">
-                            <i class="ionicons ion-bag"></i>
-                            Ma communauté
-                        </button>
-                    </div>
+            <li class="document-item">
+                <div class="home-action card">
+                    <i class="ionicons ion-bag action-icon"></i>
 
+                    <div class="action-title">Ma Recherche</div>
+                    <div class="action-description">Trouver un intervenant</div>
+                    <button class="button button-assertive" href="#/app/notifications">
+                        Lancer une recherche
+                    </button>
                 </div>
+                <div class="home-action card">
+                    <i class="ionicons ion-bag action-icon"></i>
+
+                    <div class="action-title">Mon planning</div>
+                    <div class="action-description">Gérer votre semaine</div>
+                    <button class="button button-assertive" href="#/app/my-calendar">
+                        Voir mon planning
+                    </button>
+                </div>
+
             </li>
-        </ul>
+
+            <li class="document-item">
+                <div class="home-action card">
+                    <i class="ionicons ion-bag action-icon"></i>
+
+                    <div class="action-title">Ma communauté</div>
+                    <div class="action-description">Gérer ma communauté</div>
+                    <button class="button button-assertive" href="#/app/notifications">
+                        Voir ma communauté
+                    </button>
+                </div>
+                <div class="home-action card">
+                    <i class="ionicons ion-bag action-icon"></i>
+
+                    <div class="action-title">Besoin d'aide</div>
+                    <div class="action-description">Les réponses à vos questions</div>
+                    <button class="button button-assertive" href="#/app/my-calendar">
+                        Poser ma question
+                    </button>
+                </div>
+
+            </li>
+
+    </ul>
     </div>
 </ion-scroll>
