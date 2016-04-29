@@ -28,7 +28,10 @@
                            href="#section-commentaires"><i
                                 class="fa fa-angle-right"></i> Voir ses commentaires</a>
                         <button class="button button-assertive button-new-interview button-block"
-                                ng-click="openAgendaModal('{{ focusIntervenant._id }}')"><i
+                                ui-sref="app.my-agenda-intervenants({intervenant: focusIntervenant._id })"
+                                ng-click="closeModal()"
+                                nav-direction="enter"
+                                ><i
                                 class="fa fa-angle-right"></i> Proposer un entretien
                         </button>
                     </div>
