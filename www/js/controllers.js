@@ -3,12 +3,14 @@ angular
     .run(function ($rootScope, $timeout, $state, $localstorage) {
         $rootScope.menuScrollLeft = function () {
             console.log('scroll left');
+            return;
             $rootScope.menuIsOpen = false;
         };
 
         $rootScope.menuScrollRight = function (evt) {
             console.log('scroll right');
             console.log(evt);
+            return;
             if (evt && evt.gesture.distance > 300) {
                 $rootScope.menuIsOpen = true;
             }
@@ -23,7 +25,7 @@ angular
          }, 20000);*/
 
 
-        if($localstorage.getObject('User')){
+        if ($localstorage.getObject('User')) {
             $state.go('app.home');
 
         }
@@ -65,14 +67,17 @@ angular
             });
             if (!$scope.loginData.email || $scope.loginData.email == "") {
                 $ionicLoading.hide();
-                $ionicPopup.alert({title: 'Bonjour Colette', template: 'Vérifiez votre adresse email.', buttons: [{
-                    text: "OK",
-                    type: 'button-assertive'
-                }]});
+                $ionicPopup.alert({
+                    title: 'Bonjour Colette', template: 'Vérifiez votre adresse email.', buttons: [{
+                        text: "OK",
+                        type: 'button-assertive'
+                    }]
+                });
             }
             else if (!$scope.loginData.password || $scope.loginData.password == "") {
                 $ionicLoading.hide();
-                $ionicPopup.alert({title: 'Bonjour Colette', template: 'Vérifiez le mot de passe que vous avez saisi.',
+                $ionicPopup.alert({
+                    title: 'Bonjour Colette', template: 'Vérifiez le mot de passe que vous avez saisi.',
                     buttons: [{
                         text: "OK",
                         type: 'button-assertive'
@@ -100,9 +105,9 @@ angular
                     $ionicLoading.hide();
                 });
 
-                $timeout(function(){
+                $timeout(function () {
                     $ionicLoading.hide();
-                },4000);
+                }, 4000);
             }
 
         }
@@ -391,7 +396,7 @@ angular
                 height: '726px',
                 minTime: '08:00:00',
                 maxTime: '20:00:00',
-                hiddenDays:[0],
+                hiddenDays: [0],
                 timeFormat: {
                     agendaWeek: 'HH:mm'
                 },
@@ -399,6 +404,7 @@ angular
                     agendaWeek: "dddd DD"
                 },
                 select: function (start, end) {
+                    console.log('my calendar event');
                     var events = uiCalendarConfig.calendars.myCalendar.fullCalendar('clientEvents');
                     /*
                      for (var i in events) {
@@ -486,7 +492,7 @@ angular
                 if (d.intervenantId) {
                     d.className = 'assertive-bg';
                     if (!d.title) {
-                        d.title = 'Mon rendez-vous avec ' + d.intervenantId;
+                        d.title =  d.intervenantId;
                     }
                 }
                 else {
@@ -621,8 +627,8 @@ angular
                 minTime: '08:00:00',
 
                 maxTime: '20:00:00',
-                hiddenDays:[0],
-                    select: function (start, end) {
+                hiddenDays: [0],
+                select: function (start, end) {
                     var events = uiCalendarConfig.calendars.modalCalendar.fullCalendar('clientEvents');
 
                     for (var i in events) {
@@ -645,12 +651,12 @@ angular
                             skill: $scope.search ? $scope.search.skills : null,
                             status: "attente-intervenant",
                             type: "rdv-initial",
-                            title: "Rendez-vous avec " + $scope.focusIntervenant.firstname
+                            title: $scope.focusIntervenant.firstname
                         };
 
                         var m = new Meeting(meeting);
                         m.$save().then(function () {
-                            meeting.title = 'Rendez vous avec : ' + $scope.focusIntervenant.firstname;
+                            meeting.title = $scope.focusIntervenant.firstname;
                             meeting.className = 'assertive-bg';
                             console.log(meeting);
                             //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
@@ -670,6 +676,10 @@ angular
         $scope.originalCount = 0;
         $scope.finalCount = 0;
         $scope.doSearch = function () {
+
+            /*$ionicLoading.show({
+             template: 'Recherche'
+             });*/
             $ionicViewSwitcher.nextDirection('forward');
             $state.go('app.intervenants-resultats', {search: JSON.stringify($scope.search)});
         };
@@ -711,7 +721,6 @@ angular
         // Create the profile modal that we will use later
         $ionicModal.fromTemplateUrl('templates/intervenants/profile.html', {
             scope: $scope,
-            animation: 'animated bounceIn',
             hideDelay: 220
         }).then(function (modal) {
             $scope.modal = modal;
@@ -721,7 +730,6 @@ angular
         // Create the modal for the planning
         $ionicModal.fromTemplateUrl('templates/intervenants/agenda.html', {
             scope: $scope,
-            animation: 'animated bounceIn',
             hideDelay: 220
         }).then(function (modal) {
             $scope.agendaModal = modal;
@@ -737,12 +745,16 @@ angular
                 }
             }
             $anchorScroll('#internenant-' + $scope.focusIntervenant.code);
-            $ionicScrollDelegate.$getByHandle('#internenant-' + $scope.focusIntervenant.code).anchorScroll();
+            //  $ionicScrollDelegate.$getByHandle('#internenant-' + $scope.focusIntervenant.code).anchorScroll();
             $scope.commentaires = Commentaire.query({'query[intervenant]': $scope.focusIntervenant.code});
 
             $scope.modal.show();
-            $scope.openAgendaModal();
             $ionicBackdrop.release();
+            $timeout(function () {
+                console.log('test');
+                $scope.openAgendaModal(intervenantId);
+            }, 1000);
+
         };
 
         $scope.closeAgenda = function () {
@@ -761,6 +773,7 @@ angular
             if (!$scope.focusIntervenant || $scope.focusIntervenant._id !== intervenantId) {
 
             }
+            uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
             uiCalendarConfig.calendars.modalCalendar.fullCalendar('removeEvents');
             $ionicBackdrop.release();
             $timeout(function () {
@@ -769,17 +782,18 @@ angular
             var meetingsList = Meeting.query({'query[intervenantId]': $scope.focusIntervenant._id});
             meetingsList.$promise.then(function (data) {
                 $scope.eventSources = [];
-                // $scope.agendaModal.show();
+                //$scope.agendaModal.show();
+                uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
                 data = data.map(function (d) {
                     if (d.beneficiaireId === $scope.User._id) {
                         d.className = 'assertive-bg';
-                        d.title = 'Mon rendez-vous avec ' + $scope.focusIntervenant.firstname;
+                        d.title = $scope.focusIntervenant.firstname;
                     }
                     else {
                         d.className = 'calm-bg';
                         d.title = $scope.focusIntervenant.firstname + " n'est pas disponible";
                     }
-
+                    //$scope.eventSources.push(d);
                     return d;
                 });
                 // $ionicLoading.hide();
@@ -787,13 +801,13 @@ angular
                 if (data.length > 0) {
                     uiCalendarConfig.calendars.modalCalendar.fullCalendar('addEventSource', {events: data});
                 }
-
             });
 
 
             var myMeetingsList = Meeting.query({'query[beneficiaireId]': $scope.User._id});
             myMeetingsList.$promise.then(function (data) {
                 $scope.eventSources = [];
+                //  $scope.agendaModal.show();
                 uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
                 var events = [];
 
@@ -813,7 +827,6 @@ angular
                     return d;
                 }
 
-                $ionicLoading.hide();
 
                 if (data.length > 0) {
                     uiCalendarConfig.calendars.modalCalendar.fullCalendar('addEventSource', {events: data});
