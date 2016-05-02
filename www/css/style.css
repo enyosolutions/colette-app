@@ -310,12 +310,14 @@ LANDING PAGE
     height: 296px;
     margin-top: -11px;
     padding-top: 130px;
+    background-color: #F56D74!important;
 }
 
 .actionToAddSomething .home-action.card .action-title {
     font-size: 100px!important;
-    font-family: arial;
+    font-family: -webkit-pictograph, serif;
     margin-top: 80px;
+    color: #F6F0F1!important;
 }
 
 .home-panel ul.list-inline li.document-item.welcome-text-section h2 {
@@ -1392,6 +1394,11 @@ body .pane .view-container .my-agenda {
 }
 
 
+.my-agenda .fc-time-grid-container {
+    height: 575px!important;
+}
+
+
 
 /**
 * ON WORKING PAGE
@@ -1405,7 +1412,7 @@ body .pane .view-container .my-agenda {
     font-weight: 200;
     text-align: center;
     width: 600px;
-    margin: 220px auto 100px;
+    margin: 280px auto 100px;
 }
 
 .playlist .goBack {
@@ -1427,3 +1434,11 @@ body .pane .view-container .my-agenda {
     padding: 0;
     text-transform: uppercase;
 }
+
+/*
+POPUP ALERT
+*/
+
+.popup-container.active .popup {
+}
+
