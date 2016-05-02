@@ -312,6 +312,12 @@ LANDING PAGE
     padding-top: 130px;
 }
 
+.actionToAddSomething .home-action.card .action-title {
+    font-size: 100px!important;
+    font-family: arial;
+    margin-top: 80px;
+}
+
 .home-panel ul.list-inline li.document-item.welcome-text-section h2 {
     font-size: 75px;
     color: #1F565B;
@@ -786,8 +792,12 @@ form.step3 {
 
 .intervenants-natural-form form {
     height: 300px;
-    top: 45%;
+    top: 40%;
     margin-top: -150px;
+}
+
+.intervenants-natural-form form .button.button-next {
+    top: 61%;
 }
 
 .intervenants-natural-form .form-text-section {
@@ -916,7 +926,7 @@ form.step3 {
     display: inline-block;
     width: 300px;
     font-size: 35px;
-    font-weight: 400;
+    font-weight: 200;
     line-height: 1em;
 }
 
@@ -1104,7 +1114,7 @@ form.step3 {
     padding: 0;
     color: #F56D74;
     -webkit-appearance: none;
-        background: none;
+    background: none;
     box-shadow: none;
     border: none;
 }
