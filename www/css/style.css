@@ -88,7 +88,7 @@ MENU LEFT
 .pane.open .left-menu .button-back .fa-angle-left:before {
     content: "Retour";
     font-family: "raleway";
-    font-weight: 100;
+    font-weight: 200;
     font-size: 32px;
 }
 
@@ -589,31 +589,24 @@ body {
     margin-top: 5px;
 }
 
-input[type="radio"]:checked,
-input[type="radio"]:not(:checked) {
+.register-page input[type="radio"]:checked,
+.register-page input[type="radio"]:not(:checked) {
     width: 26px !important;
     height: 26px;
     padding: 0;
     margin: 0;
+    margin-right: 10px;
     border: 3px solid #1F565B;
     border-radius: 100%;
     flex: none!important;
 }
 
-.item-input span {
-    margin: 0 80px 0 10px !important;
-    flex: none !important;
-    display: block;
-    width: 26px !important;
-    height: 26px;
-    padding: 0;
-    margin: 0;
-    border: 3px solid #1F565B;
-    border-radius: 100%;
+.register-page input[type="radio"]:nth-child(2) {
+    margin-left: 50px;
 }
 
 
-input[type="radio"]:checked:after {
+.register-page input[type="radio"]:checked:after {
     content: "";
     display: block;
     width: 14px;
@@ -623,11 +616,8 @@ input[type="radio"]:checked:after {
     border-radius: 100%;
 }
 
-input[type="radio"]:nth-child(2) {
-    margin-left: 80px;
-}
-
-input[type="radio"]:checked {
+input[type="radio"].female {
+    margin-left: 80px!important;
 }
 
 .item-select:after {
@@ -770,7 +760,7 @@ form.step3 {
     vertical-align: middle;
     text-align: left;
     top: 15%;
-    font-weight: 100;
+    font-weight: 200;
     text-transform: none;
 }
 
@@ -889,7 +879,7 @@ form.step3 {
 .results-recap-section .results-count {
     display: inline-block;
     font-size: 330px;
-    font-weight: 100;
+    font-weight: 200;
     letter-spacing: -10px;
     margin-top: 200px;
     margin-right: 10px;
@@ -1067,7 +1057,7 @@ form.step3 {
     color: #fff;
     top: 0;
     text-align: center;
-    font-weight: 100;
+    font-weight: 200;
     width: 70%;
     margin: 0 15%;
     padding: 15px 0;
@@ -1253,7 +1243,7 @@ hr.fc-divider {
 }
 
 .my-agenda h1.balanced {
-    font-weight: 100;
+    font-weight: 200;
     text-transform: none;
     font-size: 65px;
 }
@@ -1262,7 +1252,7 @@ hr.fc-divider {
     color: #583B50;
     font-size: 25px;
     font-family: helvetica;
-    font-weight: 100;
+    font-weight: 200;
     line-height: 36px; 
 }
 
@@ -1364,7 +1354,7 @@ body .pane .view-container .my-agenda {
     line-height: 75px;
     font-family: raleway;
     text-transform: none;
-    font-weight: 100;
+    font-weight: 200;
     text-align: center;
     width: 600px;
     margin: 220px auto 100px;
