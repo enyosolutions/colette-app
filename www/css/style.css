@@ -255,6 +255,7 @@ LANDING PAGE
 
 */
 
+
 .home-panel {
     top: 0;
     bottom: 0;
@@ -384,7 +385,7 @@ LANDING PAGE
 */
 
 .landing-page {
-    background: url('../img/bg/colette.jpg') no-repeat;
+    background: url('../img/bonjour-colette-firstpage.png') no-repeat;
     background-position: top left;
     background-attachment: fixed;
     background-size: cover;
@@ -404,7 +405,7 @@ LANDING PAGE
 .landing-page .intro-section {
     position: absolute;
     left: 100px;
-    top: 200px;
+    top: 440px;
     width: 500px;
 }
 
