@@ -300,7 +300,7 @@ angular
 
     .controller('UserCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
                                       $ionicBackdrop, $ionicLoading, $cordovaGeolocation, $ionicScrollDelegate,
-                                      $ionicViewSwitcher,
+                                      $ionicViewSwitcher, $ionicPopup,
                                       uiCalendarConfig, User, Intervenant, Meeting, Commentaire) {
 
         $rootScope.menuIsOpen = true;
@@ -428,33 +428,44 @@ angular
 
 
                     start.locale('fr');
-                    if (confirm('Rendre le créneau de ' + start.format("HH:mm") + ' à ' + end.format("HH:mm") + ' indisponible dans votre calendrier ?')) {
-                        var meeting = {
-                            beneficiaireId: $scope.User._id,
-                            intervenantId: null,
-                            start: start,
-                            end: end,
-                            skill: $scope.search ? $scope.search.skills : null,
-                            status: "attente-intervenant",
-                            type: "creneau-occupe",
-                            title: "Vous n'êtes pas disponible"
-                        };
+                    var texte = 'Rendre le créneau de ' + start.format("HH:mm") + ' à ' + end.format("HH:mm") + ' indisponible dans votre calendrier ?';
+                    var confirmPopup = $ionicPopup.confirm({
+                        title: 'Bonjour Colette', template: texte
+                        ,
+                        okText: "OK",
+                        okType: 'button-assertive',
+                        cancelText: "Annuler"
+                    });
 
-                        var m = new Meeting(meeting);
-                        m.$save().then(function () {
-                            meeting.title = "Vous n'êtes pas disponible";
-                            meeting.className = 'balanced-bg';
-                            //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
+                    confirmPopup.then(function(res){
+                        if (res ) {
+                            var meeting = {
+                                beneficiaireId: $scope.User._id,
+                                intervenantId: null,
+                                start: start,
+                                end: end,
+                                skill: $scope.search ? $scope.search.skills : null,
+                                status: "attente-intervenant",
+                                type: "creneau-occupe",
+                                title: "Vous n'êtes pas disponible"
+                            };
 
-                            uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
-                            $ionicPopup.alert({
-                                title: 'Bonjour Colette', template: 'Votre créneau a bien été vérouillé.', buttons: [{
-                                    text: "OK",
-                                    type: 'button-assertive'
-                                }]
+                            var m = new Meeting(meeting);
+                            m.$save().then(function () {
+                                meeting.title = "Vous n'êtes pas disponible";
+                                meeting.className = 'balanced-bg';
+                                //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
+
+                                uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
+                                $ionicPopup.alert({
+                                    title: 'Bonjour Colette', template: 'Votre créneau a bien été vérouillé.', buttons: [{
+                                        text: "OK",
+                                        type: 'button-assertive'
+                                    }]
+                                });
                             });
-                        });
-                    }
+                        }
+                    });
                     uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
 
                 }
