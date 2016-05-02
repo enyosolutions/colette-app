@@ -74,11 +74,11 @@ MENU LEFT
 }
 
 .main-menu .item {
-    height: 133px;
+    height: 111px;
 }
 
 .pane.open .left-menu .item {
-    width: 100% !important;
+    width: 201px !important;
 }
 
 .button-back {
@@ -98,6 +98,7 @@ MENU LEFT
 
 .pane.open .left-menu .subtext {
     display: block;
+    font-size: 14px;
 }
 
 .menu .button-back {
@@ -134,17 +135,24 @@ MENU LEFT
 .menu .item-content {
     height: 100%;
     background: transparent;
+    padding: 16px 0;
+    text-align: center;
 }
 
-.pane.open .left-menu .list .item-complex:nth-child(1), .pane.open .left-menu .list .item-complex:nth-child(2), .pane.open .left-menu .list .item-complex:nth-child(3), .pane.open .left-menu .list .item-complex:nth-child(4), .pane.open .left-menu .list .item-complex:nth-child(5) {
+.pane.open .left-menu .list .item-complex:nth-child(1),
+.pane.open .left-menu .list .item-complex:nth-child(2),
+.pane.open .left-menu .list .item-complex:nth-child(3),
+.pane.open .left-menu .list .item-complex:nth-child(4),
+.pane.open .left-menu .list .item-complex:nth-child(5),
+.pane.open .left-menu .list .item-complex:nth-child(6) {
     margin: 1px 0 0 10%;
     width: 80%!important;
     border-bottom: 1px solid #8E627B;
 }
 
-.fa-home, .fa-briefcase, .fa-search, .fa-calendar-check-o, .fa-question {
+.fa-home, .fa-briefcase, .fa-search, .fa-calendar-check-o, .fa-users, .fa-question {
     color: #8E627B;
-    margin: 15px 0 10px;
+    margin: 10px 0;
     font-size: 28px;
 }
 
@@ -155,9 +163,14 @@ MENU LEFT
 .item.active, .item.activated, .item-complex.active .item-content, .item-complex.activated .item-content, .item .item-content.active, .item .item-content.activated {
     background-color: #583B50!important;
 }
+
+/*.item.item-complex.active {
+
+}*/
+
 .item.item-complex.active .item-content i.fa {
-    color: #8E627B;
-    margin: 15px 0 10px;
+    color: #FFFFFF;
+    margin: 10px 0;
     font-size: 28px; 
 }
 
@@ -326,12 +339,13 @@ LANDING PAGE
     text-align: center;
 }
 
-.home-panel .ionicons.ion-bag.action-icon {
-    width: 100%;
+.home-panel img {
+    display: block;
+    height: 52px;
     font-size: 50px;
     color: #1F565B;
     text-align: center;
-    margin: 0 auto 33px;
+    margin: 0px auto 31px;
 }
 
 /**
@@ -1006,6 +1020,10 @@ form.step3 {
 .intervenant-profile .profile-info {
     position: relative;
     padding: 0 30px;
+}
+
+.intervenants-panel #calendar-section {
+    min-height: 327px;
 }
 
 .profile-info .calm, .profile-info a.calm {
