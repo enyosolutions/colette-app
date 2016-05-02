@@ -10,13 +10,15 @@
                           ui-sref="app.home"
                           ng-click="menuScrollRight()"
                         >
-                    <i class="fa fa-home fa-2x"></i>
-                    <!-- <i class="fa fa-circle-thin fa-stack-2x"></i> -->
+                    <img src="img/nav/ico-home.png" alt="">
                     <div class="subtext">Accueil</div>
                 </ion-item>
-                <ion-item menu-close ui-sref="app.notifications" ui-sref-active="active">
-                    <i class="fa fa-briefcase fa-2x"></i>
-                    <div class="subtext">2 Choses à faire</div>
+                <ion-item  
+                    ui-sref="app.encours"
+                    ng-click="menuScrollRight()"
+                    nav-direction="enter">
+                    <img src="img/nav/ico-cloche.png" alt="">
+                    <div class="subtext">2 choses à faire</div>
                 </ion-item>
 
 
@@ -26,7 +28,7 @@
                           ui-sref="app.intervenants-recherche"
                           ui-sref-active="active"
                         >
-                    <i class="fa fa-search fa-2x"></i>
+                    <img src="img/nav/ico-loupe.png" alt="">
                     <div class="subtext">J'ai besoin de... </div>
                 </ion-item>
 
@@ -37,7 +39,7 @@
                           ui-sref="app.my-agenda"
                           ng-click="menuScrollRight()"
                         >
-                    <i class="fa fa-calendar-check-o fa-2x"></i>
+                    <img src="img/nav/ico-calendar.png" alt="">
                     <div class="subtext">Mon planning</div>
                 </ion-item>
 
@@ -46,7 +48,7 @@
                           ui-sref-active="active"
                           ui-sref="app.encours"
                         >
-                    <i class="fa fa-users fa-2x"></i>
+                    <img src="img/nav/ico-communaute.png" alt="">
                     <div class="subtext">Ma communauté</div>
                 </ion-item>
 
@@ -55,7 +57,7 @@
                     ui-sref="app.encours"
                     ng-click="menuScrollRight()"
                     nav-direction="enter">
-                    <i class="fa fa-question fa-2x"></i>
+                    <img src="img/nav/ico-help.png" alt="">
                     <div class="subtext">Aide et mon compte</div>
                 </ion-item>
 

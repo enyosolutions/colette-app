@@ -140,6 +140,11 @@ MENU LEFT
     text-align: center;
 }
 
+.main-menu .item-content img {
+    width: 30px;
+    margin-top: 8px;
+}
+
 .pane.open .left-menu .list .item-complex:nth-child(1),
 .pane.open .left-menu .list .item-complex:nth-child(2),
 .pane.open .left-menu .list .item-complex:nth-child(3),
@@ -1325,8 +1330,6 @@ body .pane .view-container .my-agenda {
     line-height: 64px!important;
     padding: 0 20px;
 }
-
-
 
 
 /**
