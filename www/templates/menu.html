@@ -4,16 +4,15 @@
 
         <ion-content class="main-menu">
             <ion-list>
-                <ion-item nav-transition="ios" class="button-home"
+                <ion-item nav-transition="ios"
                           nav-direction="enter"
                           ui-sref-active="active"
                           ui-sref="app.home"
                           ng-click="menuScrollRight()"
                         >
-                    <span class="fa-stack fa-lg">
-                    <i class="fa fa-home fa-stack-1x"></i>
-                    <i class="fa fa-circle-thin fa-stack-2x"></i>
-                        </span>
+                    <i class="fa fa-home fa-2x"></i>
+                    <!-- <i class="fa fa-circle-thin fa-stack-2x"></i> -->
+                    <div class="subtext">Accueil</div>
                 </ion-item>
                 <ion-item menu-close ui-sref="app.notifications" ui-sref-active="active">
                     <i class="fa fa-briefcase fa-2x"></i>
@@ -22,7 +21,7 @@
 
 
                 <ion-item
-                        nav-direction="enter"
+                          nav-direction="enter"
                           ng-click="menuScrollRight()"
                           ui-sref="app.intervenants-recherche"
                           ui-sref-active="active"
@@ -32,12 +31,13 @@
                 </ion-item>
                 <!--
                 INTERVENANT RECHERCHE
-                                <ion-item menu-close
-                                          ui-sref-active="active"
-                                          ui-sref="app.intervenants-recherche"
-                                        >
-                                    <i class="fa fa-users fa-2x"></i>
-                                </ion-item>
+                    <ion-item menu-close
+                              ui-sref-active="active"
+                              ui-sref="app.intervenants-recherche"
+                            >
+                        <i class="fa fa-users fa-2x"></i>
+                        <div class="subtext">Intervenant... </div>
+                    </ion-item>
                 -->
                 <ion-item
                           nav-direction="enter"
