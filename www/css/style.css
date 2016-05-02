@@ -841,6 +841,13 @@ form.step3 {
     font-size: 65px!important;
 }
 
+.intervenants-results-panel .form-text, .intervenants-results-panel .calm .item-select select.input-item {
+    letter-spacing: -1px;
+    display: inline-block;
+    line-height: 55px;
+    font-size: 35px!important;
+}
+
 .natural-form ul li {
     margin-left: 45px;
     padding-left: 10px;
@@ -1096,6 +1103,10 @@ form.step3 {
     line-height: 40px;
     padding: 0;
     color: #F56D74;
+    -webkit-appearance: none;
+        background: none;
+    box-shadow: none;
+    border: none;
 }
 
 
