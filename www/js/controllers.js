@@ -2,19 +2,10 @@ angular
     .module('colette.controllers', [])
     .run(function ($rootScope, $timeout, $state, $localstorage) {
         $rootScope.menuScrollLeft = function () {
-            console.log('scroll left');
             return;
-            $rootScope.menuIsOpen = false;
         };
 
-        $rootScope.menuScrollRight = function (evt) {
-            console.log('scroll right');
-            console.log(evt);
-            return;
-            if (evt && evt.gesture.distance > 300) {
-                $rootScope.menuIsOpen = true;
-            }
-        };
+        $rootScope.menuScrollRight = function (evt) {};
 
 
         /*        setTimeout(function () {
@@ -39,6 +30,7 @@ angular
         //});
 
         $rootScope.menuIsOpen = true;
+        $scope.showBackButton = true;
 
 
         $scope.range = function (min, max, step) {
@@ -110,6 +102,15 @@ angular
                 }, 4000);
             }
 
+        };
+
+
+        if ($state.is('app.home')) {
+            console.log('is home');
+            $scope.showBackButton = false;
+        }
+        else {
+            $scope.showBackButton = true;
         }
 
     })
@@ -122,6 +123,16 @@ angular
         // listen for the $ionicView.enter event:
         //$scope.$on('$ionicView.enter', function(e) {
         //});
+
+        if ($state.is('app.home')) {
+            console.log('is home');
+            $scope.showBackButton = false;
+        }
+        else {
+            $scope.showBackButton = true;
+        }
+
+
         try {
             if (!$localstorage.getObject('user.temp')) {
                 $localstorage.setObject('user.temp', {});
@@ -183,8 +194,6 @@ angular
             var tmp = $localstorage.getObject('user.temp');
             var user = angular.extend(tmp, $scope.newUser);
             $localstorage.setObject('user.temp', user);
-            console.log(user);
-
             $state.go('register-step3-intro');
         };
 
@@ -194,7 +203,6 @@ angular
             $ionicLoading.show({
                 template: 'Inscription...'
             });
-            console.log('Doing register', $scope.newUser);
 
             // Add extra data to the user account;
             var tmp = $localstorage.getObject('user.temp');
@@ -222,7 +230,6 @@ angular
         $scope.doRegisterStep4 = function () {
 
 
-            console.log('Doing register', $scope.newUser);
             if ($scope.newUser.password !== $scope.newUser.confirmPassword) {
                 $ionicPopup.alert({
                     title: 'Bonjour Colette',
@@ -240,18 +247,16 @@ angular
                 var tmp = $localstorage.getObject('user.temp');
                 var user = angular.extend(tmp, $scope.newUser);
 
-                console.log(user);
                 var userClass = new User(user);
                 userClass.$save().then(function (data) {
-                    console.log(data);
                     $localstorage.setObject('User', data);
                     $ionicLoading.hide();
                     $state.go('app.home');
                 });
 
-                $timeout(function(){
+                $timeout(function () {
                     $ionicLoading.hide();
-                },5000);
+                }, 5000);
             }
         };
 
@@ -408,7 +413,8 @@ angular
 
                 var texte = 'Proposer un rendez-vous à ' + $state.params.firstname + ' le ' + start.format("D MMM YY") + ' à ' + start.format("HH:mm") + ' ? ';
                 var confirmPopup = $ionicPopup.confirm({
-                    title: 'Bonjour Colette', template: texte,
+                    title: 'Bonjour Colette',
+                    template: texte,
                     okText: "OK",
                     okType: 'button-assertive',
                     cancelText: "Annuler"
@@ -457,8 +463,6 @@ angular
                     okType: 'button-assertive',
                     cancelText: "Annuler"
                 });
-
-
 
 
                 confirmPopup.then(function (res) {
@@ -624,6 +628,7 @@ angular
                     }
                     else {
                         d.className = 'calm-bg';
+                        d.title = $state.params.firstname + "n'est pas disponible";
                     }
                     return d;
                 });
@@ -708,7 +713,7 @@ angular
         console.log($scope.User._id);
 
 
-        $scope.showBackButton = true;
+        $scope.hideBackButton = true;
         $scope.backButtonLink = "#/app/intervenants/recherche";
 
         // CONFIGURATION FOR THE CALENDAR
@@ -745,9 +750,9 @@ angular
             }
         };
 
-
         $scope.originalCount = 0;
         $scope.finalCount = 0;
+
         $scope.doSearch = function () {
 
             /*$ionicLoading.show({
@@ -878,7 +883,6 @@ angular
                     else {
                         d.className = 'calm-bg';
                         d.title = $scope.focusIntervenant.firstname + " n'est pas disponible";
-                        d.title = " Non disponible";
                     }
                     //$scope.eventSources.push(d);
                     return d;
@@ -941,7 +945,6 @@ angular
         });
 
         if ($state.is('app.intervenants-resultats')) {
-
             $scope.execSearch();
         }
 
