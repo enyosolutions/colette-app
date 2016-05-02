@@ -37,7 +37,7 @@
             </div>
         </div>
     </form>
-    <ion-scroll direction="x" overflow-scroll="true" class="document-list infinite-list">
+    <ion-scroll direction="x" overflow-scroll="true" class="document-list infinite-list" delegate-handle="intervenants-handle">
         <ul class="list-inline" on-swipe-left="menuScrollLeft($event)" on-swipe-right="menuScrollRight($event)">
             <li class="document-item results-recap-section">
                 <div class="results-count" count-to="{{ finalCount }}" value="{{ originalCount }}" duration="0.5"></div>
