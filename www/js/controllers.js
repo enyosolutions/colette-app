@@ -820,7 +820,7 @@ angular
                 }
             }
 
-            $scope.scrollToSection('intervenant-' + $scope.focusIntervenant.code);
+            // $scope.scrollToSection('intervenant-' + $scope.focusIntervenant.code);
             $scope.commentaires = Commentaire.query({'query[intervenant]': $scope.focusIntervenant.code});
 
             $scope.modal.show();
