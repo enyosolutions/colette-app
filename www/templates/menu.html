@@ -13,14 +13,15 @@
                     <img src="img/nav/ico-home.png" alt="">
                     <div class="subtext">Accueil</div>
                 </ion-item>
+                
                 <ion-item  
                     ui-sref="app.encours"
                     ng-click="menuScrollRight()"
+                    ui-sref-active="active"
                     nav-direction="enter">
                     <img src="img/nav/ico-cloche.png" alt="">
                     <div class="subtext">2 choses à faire</div>
                 </ion-item>
-
 
                 <ion-item
                           nav-direction="enter"
@@ -31,7 +32,6 @@
                     <img src="img/nav/ico-loupe.png" alt="">
                     <div class="subtext">J'ai besoin de... </div>
                 </ion-item>
-
                 
                 <ion-item
                           nav-direction="enter"
@@ -42,7 +42,6 @@
                     <img src="img/nav/ico-calendar.png" alt="">
                     <div class="subtext">Mon planning</div>
                 </ion-item>
-
 
                 <ion-item menu-close
                           ui-sref-active="active"
@@ -56,6 +55,7 @@
                 <ion-item  
                     ui-sref="app.encours"
                     ng-click="menuScrollRight()"
+                    ui-sref-active="active"
                     nav-direction="enter">
                     <img src="img/nav/ico-help.png" alt="">
                     <div class="subtext">Aide et mon compte</div>

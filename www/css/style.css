@@ -143,6 +143,11 @@ MENU LEFT
 .main-menu .item-content img {
     width: 30px;
     margin-top: 8px;
+    opacity: 0.5;
+}
+
+.main-menu .item-complex.active img {
+    opacity: 1
 }
 
 .pane.open .left-menu .list .item-complex:nth-child(1),
