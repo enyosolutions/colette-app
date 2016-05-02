@@ -628,7 +628,7 @@ angular
                     }
                     else {
                         d.className = 'calm-bg';
-                        d.title = $state.params.firstname + "n'est pas disponible";
+                        d.title = $state.params.firstname + " n'est pas disponible";
                     }
                     return d;
                 });
