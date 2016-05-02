@@ -224,7 +224,12 @@ angular
 
             console.log('Doing register', $scope.newUser);
             if ($scope.newUser.password !== $scope.newUser.confirmPassword) {
-                alert('Le mot de passe et sa confirmation ne correspondent pas.');
+                $ionicPopup.alert({
+                    title: 'Bonjour Colette', template: 'Le mot de passe et sa confirmation ne correspondent pas.', buttons: [{
+                        text: "OK",
+                        type: 'button-assertive'
+                    }]
+                });
             }
             else {
                 $ionicLoading.show({
@@ -442,7 +447,12 @@ angular
                             //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
 
                             uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
-                            alert("Votre créneau a bien été vérouillé.");
+                            $ionicPopup.alert({
+                                title: 'Bonjour Colette', template: 'Votre créneau a bien été vérouillé.', buttons: [{
+                                    text: "OK",
+                                    type: 'button-assertive'
+                                }]
+                            });
                         });
                     }
                     uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
@@ -553,11 +563,11 @@ angular
 
     })
     .controller('IntervenantsCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
-                                              $ionicBackdrop, $ionicLoading, $cordovaGeolocation, $ionicScrollDelegate, $anchorScroll,
+                                              $ionicBackdrop, $ionicLoading, $cordovaGeolocation, $ionicScrollDelegate, $anchorScroll, $ionicPosition,
                                               $ionicViewSwitcher,
                                               uiCalendarConfig, User, Intervenant, Meeting, Commentaire) {
 
-
+        // CALENDAR IN FRENCH
         moment.locale('fr', {
             months: "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
             monthsShort: "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split("_"),
@@ -624,8 +634,9 @@ angular
 
         $scope.showBackButton = true;
         $scope.backButtonLink = "#/app/intervenants/recherche";
-        $scope.eventSources = [];
 
+        // CONFIGURATION FOR THE CALENDAR
+        $scope.eventSources = [];
         $scope.uiConfig = {
             calendar: {
                 lang: 'fr',
@@ -663,7 +674,13 @@ angular
                             || mStart.isBetween(events[i].start, events[i].end) || mEnd.isBetween(events[i].start, events[i].end)
                         ) {
                             uiCalendarConfig.calendars.modalCalendar.fullCalendar('unselect');
-                            return alert("Cet horaire n'est pas disponible dans vos agendas communs");
+                            $ionicPopup.alert({
+                                title: 'Bonjour Colette', template: "Cet horaire n'est pas disponible dans vos agendas communs", buttons: [{
+                                    text: "OK",
+                                    type: 'button-assertive'
+                                }]
+                            });
+
                         }
                     }
                     start.locale('fr');
@@ -687,7 +704,14 @@ angular
                             //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
 
                             uiCalendarConfig.calendars.modalCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
-                            alert("Votre demande de rendez vous a bien été transmise à " + $scope.focusIntervenant.firstname + ". Elle vous répondra très rapidement.");
+                            var txt = "Votre demande de rendez vous a bien été transmise à " + $scope.focusIntervenant.firstname + ". Elle vous répondra très rapidement.";
+
+                            $ionicPopup.alert({
+                                title: 'Bonjour Colette', template: txt, buttons: [{
+                                    text: "OK",
+                                    type: 'button-assertive'
+                                }]
+                            });
                             $scope.agendaModal.hide();
                         });
                     }
@@ -775,10 +799,16 @@ angular
             $scope.modal.show();
             $ionicBackdrop.release();
             $timeout(function () {
-                console.log('test');
-                $scope.openAgendaModal(intervenantId);
+                $scope.openAgendaModal($scope.focusIntervenant._id);
             }, 300);
 
+        };
+
+        $scope.scrollToSection = function(section){
+            console.log(section);
+            var quotePosition = $ionicPosition.position(angular.element(document.getElementById(section + '-section')));
+            console.log(quotePosition);
+            $ionicScrollDelegate.$getByHandle('profile-handle').scrollTo(quotePosition.left, quotePosition.top, true);
         };
 
         $scope.closeAgenda = function () {
