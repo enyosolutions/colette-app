@@ -1034,6 +1034,8 @@ form.step3 {
     min-height: 327px;
 }
 
+
+
 .profile-info .calm, .profile-info a.calm {
     font-size: 20px;
     line-height: 28px;
@@ -1338,9 +1340,17 @@ body .pane .view-container .my-agenda {
     text-align: center;
 }
 
+.my-agenda .fc-title {
+    font-weight: 600;
+}
+
 .my-agenda #profile-calendar {
     margin-right: 60px;
     width: 792px;
+}
+
+.my-agenda .fc-event-container .calm {
+    background-color: #1D565A;
 }
 
 
