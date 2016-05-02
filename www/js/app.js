@@ -176,11 +176,11 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                     }
                 }
             })
-            .state('app.notifications', {
-                url: '/notifications',
+            .state('app.encours', {
+                url: '/encours',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/notifications.html'
+                        templateUrl: 'templates/encours.html'
                     }
                 }
             });
