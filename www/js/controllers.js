@@ -114,7 +114,7 @@ angular
 
     })
     .
-    controller('RegisterCtrl', function ($scope, $state, $ionicModal, $timeout, $localstorage, $ionicLoading, $ionicViewSwitcher, User, $cordovaImagePicker) {
+    controller('RegisterCtrl', function ($scope, $state, $ionicModal, $timeout, $localstorage, $timeout, $ionicLoading, $ionicPopup, $ionicViewSwitcher, User, $cordovaImagePicker) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -248,6 +248,10 @@ angular
                     $ionicLoading.hide();
                     $state.go('app.home');
                 });
+
+                $timeout(function(){
+                    $ionicLoading.hide();
+                },5000);
             }
         };
 
@@ -636,7 +640,7 @@ angular
     })
     .controller('IntervenantsCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicModal, $timeout, $localstorage, $ionicHistory,
                                               $ionicBackdrop, $ionicLoading, $cordovaGeolocation, $ionicScrollDelegate, $anchorScroll, $ionicPosition,
-                                              $ionicViewSwitcher,
+                                              $ionicViewSwitcher, $ionicPopup,
                                               uiCalendarConfig, User, Intervenant, Meeting, Commentaire) {
 
         // CALENDAR IN FRENCH
@@ -874,6 +878,7 @@ angular
                     else {
                         d.className = 'calm-bg';
                         d.title = $scope.focusIntervenant.firstname + " n'est pas disponible";
+                        d.title = " Non disponible";
                     }
                     //$scope.eventSources.push(d);
                     return d;
