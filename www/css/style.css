@@ -255,6 +255,11 @@ LANDING PAGE
 
 */
 
+.button.button-assertive.button-connex {
+    margin: 15px 10px;
+    /*line-height: 40px!important;*/
+}
+
 
 .home-panel {
     top: 0;
@@ -305,6 +310,10 @@ LANDING PAGE
 
 .actionToAddSomething {
     margin-top: 18px;
+}
+
+.intro-section h2 {
+    margin-bottom: 30px;
 }
 
 .actionToAddSomething .home-action.card {
@@ -408,7 +417,6 @@ LANDING PAGE
     top: 440px;
     width: 500px;
 }
-
 
 /**
 LOGIN PAGE
@@ -850,8 +858,12 @@ form.step3 {
 .natural-form .item-select select, .natural-form .form-text {
     letter-spacing: -1px;
     display: inline-block;
-    line-height: 75px;
-    font-size: 65px!important;
+    line-height: 70px;
+    font-size: 60px!important;
+}
+
+.intervenants-panel.intervenants-natural-form.pane .clearfix {
+    height: 25px;
 }
 
 .intervenants-results-panel .form-text, .intervenants-results-panel .calm .item-select select.input-item {
