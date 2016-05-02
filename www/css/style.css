@@ -409,7 +409,6 @@ LANDING PAGE
     width: 500px;
 }
 
-
 /**
 LOGIN PAGE
 */
@@ -850,8 +849,12 @@ form.step3 {
 .natural-form .item-select select, .natural-form .form-text {
     letter-spacing: -1px;
     display: inline-block;
-    line-height: 75px;
-    font-size: 65px!important;
+    line-height: 70px;
+    font-size: 60px!important;
+}
+
+.intervenants-panel.intervenants-natural-form.pane .clearfix {
+    height: 25px;
 }
 
 .intervenants-results-panel .form-text, .intervenants-results-panel .calm .item-select select.input-item {
