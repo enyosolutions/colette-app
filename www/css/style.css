@@ -143,6 +143,11 @@ MENU LEFT
 .main-menu .item-content img {
     width: 30px;
     margin-top: 8px;
+    opacity: 0.5;
+}
+
+.main-menu .item-complex.active img {
+    opacity: 1
 }
 
 .pane.open .left-menu .list .item-complex:nth-child(1),
@@ -268,15 +273,15 @@ LANDING PAGE
 
 .home-panel .document-list .notification-section .card.notification  {
     height: initial;
-    padding: 80px 30px;
+    padding: 74px 30px 73px;
     margin: 0;
 }
 
 .home-panel .card.notification {
     font-size: 24px;
     line-height: 30px;
-    font-weight: 500;
-    color: #1F565B;
+    font-weight: 300;
+    color: #583B50;
     background-color: #F6F0F1;
 }
 
@@ -293,12 +298,22 @@ LANDING PAGE
     font-size: 35px;
     font-weight: 900;
     margin-bottom: 20px;
-    width: 400px;
+/*    width: 400px;*/
 
 }
 
+.actionToAddSomething {
+    margin-top: 18px;
+}
+
+.actionToAddSomething .home-action.card {
+    height: 296px;
+    margin-top: -11px;
+    padding-top: 130px;
+}
+
 .home-panel ul.list-inline li.document-item.welcome-text-section h2 {
-    font-size: 65px;
+    font-size: 75px;
     color: #1F565B;
     vertical-align: middle;
     text-align: left;
@@ -339,8 +354,8 @@ LANDING PAGE
 .home-panel .action-description {
     font-size: 24px;
     line-height: 30px;
-    font-weight: 500;
-    color: #1F565B;
+    font-weight: 300;
+    color: #583B50;
     background-color: #F6F0F1;
     text-align: center;
 }
@@ -771,7 +786,7 @@ form.step3 {
 
 .intervenants-natural-form form {
     height: 300px;
-    top: 50%;
+    top: 45%;
     margin-top: -150px;
 }
 
@@ -815,15 +830,21 @@ form.step3 {
     direction: ltr;
     color: #F56D74;
     font-family: "Raleway";
-    font-weight: 300;
-    letter-spacing: -1px;
-    font-size: 35px!important;
+    font-weight: 200;
     text-decoration: underline;
+
 }
-.natural-form .form-text {
+.natural-form .item-select select, .natural-form .form-text {
     letter-spacing: -1px;
     display: inline-block;
-    line-height: 50px;
+    line-height: 75px;
+    font-size: 65px!important;
+}
+
+.intervenants-results-panel .form-text, .intervenants-results-panel .calm .item-select select.input-item {
+    letter-spacing: -1px;
+    display: inline-block;
+    line-height: 55px;
     font-size: 35px!important;
 }
 
@@ -1082,6 +1103,10 @@ form.step3 {
     line-height: 40px;
     padding: 0;
     color: #F56D74;
+    -webkit-appearance: none;
+        background: none;
+    box-shadow: none;
+    border: none;
 }
 
 
