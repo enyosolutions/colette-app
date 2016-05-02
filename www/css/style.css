@@ -386,7 +386,7 @@ LOGIN PAGE
 */
 
 .login-page , .register-page, .inapp-page  {
-    background: url('../img/bg/colette-floue.png') no-repeat;
+    background: url('../img/bg/colette-floue-2.png') no-repeat;
     background: rgba(255, 255, 255, 0);
     background-position: top left;
     background-attachment: fixed;
@@ -443,7 +443,7 @@ REGISTER PAGES
 */
 
 body {
-    background: url('../img/bg/colette-floue.png') no-repeat;
+    background: url('../img/bg/colette-floue-2.png') no-repeat;
     background-size: cover;
 }
 
@@ -742,7 +742,7 @@ form.step3 {
 */
 
 .intervenants-panel {
-    background: url('../img/bg/colette-floue.png') no-repeat;
+    background: url('../img/bg/colette-floue-2.png') no-repeat;
     background-position: top left;
     background-attachment: fixed;
     background-size: cover;
@@ -833,9 +833,13 @@ form.step3 {
 }
 
 .natural-form ul li {
-        margin-left: 45px;
+    margin-left: 45px;
     padding-left: 10px;
     list-style-type: decimal;
+}
+
+.natural-form ul {
+    margin: 30px 0;
 }
 
 .calm, a.calm {
@@ -1349,3 +1353,39 @@ body .pane .view-container .my-agenda {
     width: 792px;
 }
 
+
+
+/**
+* ON WORKING PAGE
+*/
+
+.pane .playlist h1 {
+    font-size: 55px;
+    line-height: 75px;
+    font-family: raleway;
+    text-transform: none;
+    font-weight: 100;
+    text-align: center;
+    width: 600px;
+    margin: 220px auto 100px;
+}
+
+.playlist .goBack {
+    background: none;
+    border: none;
+}
+.playlist .goBack a {
+    height: 65px;
+    width: 120px;
+    margin: 0 auto;
+    font-size: 15px;
+    text-align: center;
+    line-height: 65px;
+    font-weight: 600;
+    color: white;
+    background-color: #F56D74;
+    border-radius: 0;
+    border: none;
+    padding: 0;
+    text-transform: uppercase;
+}
