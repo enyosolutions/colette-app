@@ -255,6 +255,11 @@ LANDING PAGE
 
 */
 
+.button.button-assertive.button-connex {
+    margin: 15px 10px;
+    /*line-height: 40px!important;*/
+}
+
 
 .home-panel {
     top: 0;
@@ -305,6 +310,10 @@ LANDING PAGE
 
 .actionToAddSomething {
     margin-top: 18px;
+}
+
+.intro-section h2 {
+    margin-bottom: 30px;
 }
 
 .actionToAddSomething .home-action.card {
