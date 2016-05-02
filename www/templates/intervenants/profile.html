@@ -27,7 +27,9 @@
                         <button class="button button-clear button-open-map button-assertive button-block"
                            ng-click="scrollToSection('commentaires-section', 'profile-handle')"><i
                                 class="fa fa-angle-right"></i> Voir ses commentaires</button>
-                        <a class="button button-clear button-open-map button-assertive button-block" href="#/app/intervenants/map/{{focusIntervenant._id}}"  nav-direction="forward"
+                        <a class="button button-clear button-open-map button-assertive button-block" href="#/app/intervenants/map/{{focusIntervenant._id}}"
+                           nav-direction="enter"
+                           ng-click="closeModal()"
                                 > <i
                                 class="fa fa-angle-right"></i> Voir sur une carte</a>
                         <button class="button button-assertive button-new-interview button-block"
@@ -72,8 +74,8 @@
                     <div class="commentaires" id="commentaires-section">
                         <div class="commentaire" ng-repeat="commentaire in commentaires">
                             <div class="info-commentateur">
-                                <img src="img/mamie.png" alt="planning" class="round"/>
-                                <div class="commentaire-metadata">{{ commentaire.beneficiaire}}</div>
+                                <img src="img/beneficiaires/snap-benef-{{ commentaire.beneficiaire  | lowercase}}.png" alt="planning" class="round"/>
+                                <div class="commentaire-metadata">{{ commentaire.beneficiaire}} {{ commentaire.age}}</div>
                             </div>
                             <div class="commentaire-text">{{ commentaire.text}}</div>
 

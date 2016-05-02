@@ -5,7 +5,8 @@ angular
             return;
         };
 
-        $rootScope.menuScrollRight = function (evt) {};
+        $rootScope.menuScrollRight = function (evt) {
+        };
 
 
         /*        setTimeout(function () {
@@ -107,10 +108,14 @@ angular
 
         if ($state.is('app.home')) {
             console.log('is home');
-            $scope.showBackButton = false;
+            $timeout(function(){
+            $rootScope.showBackButton = false;
+            });
         }
         else {
-            $scope.showBackButton = true;
+            $timeout(function() {
+                $rootScope.showBackButton = true;
+            });
         }
 
     })
@@ -126,10 +131,14 @@ angular
 
         if ($state.is('app.home')) {
             console.log('is home');
-            $scope.showBackButton = false;
+            $timeout(function(){
+                $scope.showBackButton = false;
+            });
         }
         else {
-            $scope.showBackButton = true;
+            $timeout(function() {
+                $scope.showBackButton = true;
+            });
         }
 
 
@@ -314,7 +323,20 @@ angular
                                       $ionicViewSwitcher, $ionicPopup,
                                       uiCalendarConfig, User, Intervenant, Meeting, Commentaire) {
 
-        $rootScope.menuIsOpen = true;
+        $rootScope.showBackButton = true;
+
+
+        if ($state.is('app.home')) {
+            console.log('is home');
+            $timeout(function(){
+                $rootScope.showBackButton = false;
+            });
+        }
+        else {
+            $timeout(function() {
+                $rootScope.showBackButton = true;
+            });
+        }
 
 
         moment.locale('fr', {
@@ -949,7 +971,7 @@ angular
         }
 
         if ($state.is('app.intervenants-map-user') || $state.is('app.intervenants-map') || $state.is('app.intervenants-agenda')) {
-
+            console.log($state.params);
             var options = {timeout: 10000, enableHighAccuracy: true};
 
             $scope.User = $localstorage.getObject('User');
@@ -965,6 +987,7 @@ angular
                 }
             }
 
+            console.log($state.params.intervenantId);
             var location = {lat: 1, lng: 1};
             if ($scope.focusIntervenant && $scope.focusIntervenant.location) {
                 location = $scope.focusIntervenant.location;
@@ -972,25 +995,35 @@ angular
             else if ($scope.User.location) {
                 location = $scope.User.location;
             }
-            var myLatlng = new google.maps.LatLng(location.lat, location.lng);
+            var myLatLng = new google.maps.LatLng(location.lat, location.lng);
 
-
+            console.log(location);
             var mapOptions = {
-                center: myLatlng,
+                center: myLatLng,
                 zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
 
 
-            $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            if (!$scope.map) {
+                var map = document.getElementById("map");
+                $scope.map = new google.maps.Map(map, mapOptions);
+                $scope.markers = [];
 
+            }
+            else {
+                for (var i = 0; i < markers.length; i++) {
+                    $scope.markers.setMap(null);
+                }
+                $scope.markers = [];
+            }
+            console.log($scope.map);
             var marker = new google.maps.Marker({
-                position: myLatlng,
+                position: myLatLng,
                 map: $scope.map,
                 title: 'moi',
                 animation: google.maps.Animation.DROP
             });
-
 
             for (var i in $scope.intervenants) {
                 var interv = $scope.intervenants[i];

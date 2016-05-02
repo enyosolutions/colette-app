@@ -153,7 +153,7 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 url: '/intervenants/intervenants/:intervenantId/agenda',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/intervenants/agenda.html',
+                        templateUrl: 'templates/intervenants/map.html',
                         controller: 'IntervenantsCtrl'
                     }
                 }
