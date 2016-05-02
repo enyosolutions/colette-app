@@ -18,8 +18,7 @@ angular
 
 
         if ($localstorage.getObject('User')) {
-            $state.go('app.home');
-
+            //$state.go('app.home');
         }
     })
     .controller('AppCtrl', function ($scope, $rootScope, $state, $ionicModal, $ionicPopup, $timeout, $localstorage, $ionicLoading, $ionicHistory, $ionicViewSwitcher, User, Intervenant) {
