@@ -792,8 +792,8 @@ angular
                     }
                 }
             }
-            $anchorScroll('#internenant-' + $scope.focusIntervenant.code);
-            //  $ionicScrollDelegate.$getByHandle('#internenant-' + $scope.focusIntervenant.code).anchorScroll();
+
+            $scope.scrollToSection('intervenant-' + $scope.focusIntervenant.code);
             $scope.commentaires = Commentaire.query({'query[intervenant]': $scope.focusIntervenant.code});
 
             $scope.modal.show();
@@ -804,11 +804,19 @@ angular
 
         };
 
-        $scope.scrollToSection = function(section){
+        $scope.scrollToSection = function(section, handle){
             console.log(section);
             var quotePosition = $ionicPosition.position(angular.element(document.getElementById(section)));
             console.log(quotePosition.top);
-            $ionicScrollDelegate.$getByHandle('profile-handle').scrollTo(quotePosition.left, quotePosition.top, true);
+
+            // if there is no handle, use the profile page handle
+            if(handle){
+                $ionicScrollDelegate.$getByHandle(handle).scrollTo(quotePosition.left, quotePosition.top, true);
+            }
+            else{
+                $ionicScrollDelegate.scrollTo(quotePosition.left, quotePosition.top, true);
+            }
+
     };
 
         $scope.closeAgenda = function () {
