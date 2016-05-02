@@ -5,7 +5,12 @@
             <h2 class="balanced">Votre recherche</h2>
 
             <div class="calm">
-                <div class="form-text">Je veux voir des intervenants</div>
+                <div class="form-text">Je veux voir des</div><br>
+
+<ul>
+    <li>
+        
+                <div class="form-text"> intervenants</div>
                 <div class="item item-select input-item first-input">
                     <select ng-model="search.skills" class="input-item item-large input-assertive">
                         <option value>.........</option>
@@ -28,6 +33,11 @@
 
                 </div>
                 <div class="clearfix"></div>
+
+    </li>
+    <li>
+
+
                 <div class="form-text text-part-two">classés par</div>
                 <div class="item item-select input-item second-input">
                     <select ng-model="search.sort" class="input-item assertive">
@@ -37,6 +47,10 @@
                         <option value="distance">proximité géographique</option>
                     </select>
                 </div>
+
+    </li>
+</ul>
+
             </div>
         </div>
         <button class="button button-assertive button-next" type="submit"><i class="fa fa-angle-right"></i> Rechercher

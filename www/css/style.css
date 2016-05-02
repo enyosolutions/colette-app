@@ -102,8 +102,9 @@ MENU LEFT
 }
 
 .menu .button-back {
+    margin-bottom: 0;
     background-color: #F56D74;
-    height: 100px;
+    height: 97px;
     width: 100%;
     color: white;
     border-radius: 0;
@@ -275,7 +276,7 @@ LANDING PAGE
 }
 
 .home-panel .document-list .welcome-text-section {
-    width: 300px;
+    width: 400px;
     margin: 170px 80px;
 }
 
@@ -292,7 +293,7 @@ LANDING PAGE
 }
 
 .home-panel ul.list-inline li.document-item.welcome-text-section h2 {
-    font-size: 4em;
+    font-size: 65px;
     color: #1F565B;
     vertical-align: middle;
     text-align: left;
@@ -764,17 +765,24 @@ form.step3 {
 }
 
 .natural-form h2 {
-    text-transform: uppercase;
+    font-size: 70px;
+    color: #1F565B;
+    vertical-align: middle;
+    text-align: left;
+    top: 15%;
+    font-weight: 100;
+    text-transform: none;
 }
 
 .intervenants-natural-form form {
-    height: 159px;
+    height: 300px;
     top: 50%;
-    margin-top: -79.5px;
+    margin-top: -150px;
 }
 
 .intervenants-natural-form .form-text-section {
     font-size: 1em;
+    width: 600px;
 }
 
 .intervenants-results-panel .natural-form {
@@ -814,14 +822,20 @@ form.step3 {
     font-family: "Raleway";
     font-weight: 300;
     letter-spacing: -1px;
-    font-size: 30px!important;
+    font-size: 35px!important;
     text-decoration: underline;
 }
 .natural-form .form-text {
     letter-spacing: -1px;
     display: inline-block;
-    line-height: 40px;
-    font-size: 30px!important;
+    line-height: 50px;
+    font-size: 35px!important;
+}
+
+.natural-form ul li {
+        margin-left: 45px;
+    padding-left: 10px;
+    list-style-type: decimal;
 }
 
 .calm, a.calm {
@@ -1059,10 +1073,14 @@ form.step3 {
 
 .intervenant-profile .header-intervenant-profile-detail .ion-close {
     position: absolute;
-    right: 20px;
-    top: 20px;
-    font-size: 30px;
-    color: #583B50;
+    right: 15px;
+    top: 15px;
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    color: #F56D74;
 }
 
 
@@ -1251,9 +1269,8 @@ hr.fc-divider {
 }
 
 .my-agenda .document-list .welcome-text-section {
-    width: 300px;
+    width: 400px;
     margin: 100px 80px;
-
 }
 
 body .pane .view-container .my-agenda {
