@@ -832,6 +832,12 @@ form.step3 {
     font-size: 35px!important;
 }
 
+.natural-form ul li {
+        margin-left: 45px;
+    padding-left: 10px;
+    list-style-type: decimal;
+}
+
 .calm, a.calm {
     margin-top: 40px;
 }
