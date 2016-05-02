@@ -168,7 +168,7 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 }
             })
             .state('app.my-agenda-intervenants', {
-                url: '/my-agenda?intervenant=:intervenantId',
+                url: '/my-agenda/:intervenantId-:firstname',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/my-calendar.html',
@@ -185,7 +185,7 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise(window.localStorage.getItem('User') ? '/app/home' : '/login');
+        $urlRouterProvider.otherwise(window.localStorage.getItem('User') ? '/app/home' : '/');
 
 
     });

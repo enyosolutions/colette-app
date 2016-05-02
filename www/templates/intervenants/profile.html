@@ -28,7 +28,7 @@
                            ng-click="scrollToSection('commentaires-section', 'profile-handle')"><i
                                 class="fa fa-angle-right"></i> Voir ses commentaires</button>
                         <button class="button button-assertive button-new-interview button-block"
-                                ui-sref="app.my-agenda-intervenants({intervenantId: focusIntervenant._id })"
+                                ui-sref="app.my-agenda-intervenants({intervenantId: focusIntervenant._id, firstname: focusIntervenant.firstname  })"
                                 ng-click="closeModal()"
                                 nav-direction="enter"
                                 ><i

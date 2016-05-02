@@ -225,7 +225,9 @@ angular
             console.log('Doing register', $scope.newUser);
             if ($scope.newUser.password !== $scope.newUser.confirmPassword) {
                 $ionicPopup.alert({
-                    title: 'Bonjour Colette', template: 'Le mot de passe et sa confirmation ne correspondent pas.', buttons: [{
+                    title: 'Bonjour Colette',
+                    template: 'Le mot de passe et sa confirmation ne correspondent pas.',
+                    buttons: [{
                         text: "OK",
                         type: 'button-assertive'
                     }]
@@ -367,70 +369,125 @@ angular
 
 
         $scope.User = $localstorage.getObject('User');
-        console.log($scope.User._id);
-
-
         $scope.eventSources = [];
 
-        var createPrivateEvent  = function (start, end) {
+
+        $scope.intervenants = Intervenant.query({});
+
+
+        var createPrivateEvent = function (start, end) {
             console.log('my calendar event');
             var events = uiCalendarConfig.calendars.myCalendar.fullCalendar('clientEvents');
-            /*
-             for (var i in events) {
-             var mStart = new moment(start);
-             var mEnd = new moment(end);
-             console.log(events[i].start, events[i].end, start, end);
-             if (events[i].start.isBetween(start, end) || events[i].end.isBetween(start, end)
-             || mStart.isBetween(events[i].start, events[i].end) || mEnd.isBetween(events[i].start, events[i].end)
-             ) {
-             uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
-             return alert("Cet horaire n'est pas disponible dans vos agendas communs");
-             }
-             }
-
-             */
-
 
             start.locale('fr');
-            var texte = 'Rendre le créneau de ' + start.format("HH:mm") + ' à ' + end.format("HH:mm") + ' indisponible dans votre calendrier ?';
-            var confirmPopup = $ionicPopup.confirm({
-                title: 'Bonjour Colette', template: texte
-                ,
-                okText: "OK",
-                okType: 'button-assertive',
-                cancelText: "Annuler"
-            });
 
-            confirmPopup.then(function(res){
-                if (res ) {
-                    var meeting = {
-                        beneficiaireId: $scope.User._id,
-                        intervenantId: null,
-                        start: start,
-                        end: end,
-                        skill: $scope.search ? $scope.search.skills : null,
-                        status: "attente-intervenant",
-                        type: "creneau-occupe",
-                        title: "Vous n'êtes pas disponible"
-                    };
-
-                    var m = new Meeting(meeting);
-                    m.$save().then(function () {
-                        meeting.title = "Vous n'êtes pas disponible";
-                        meeting.className = 'balanced-bg';
-                        //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
-
-                        uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
+            if ($state.params.intervenantId) {
+                for (var i in events) {
+                    var mStart = new moment(start);
+                    var mEnd = new moment(end);
+                    if (events[i].start.isBetween(start, end) || events[i].end.isBetween(start, end)
+                        || mStart.isBetween(events[i].start, events[i].end) || mEnd.isBetween(events[i].start, events[i].end)
+                    ) {
+                        uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
                         $ionicPopup.alert({
-                            title: 'Bonjour Colette', template: 'Votre créneau a bien été vérouillé.', buttons: [{
+                            title: 'Bonjour Colette',
+                            template: "Cet horaire n'est pas disponible dans vos agendas communs",
+                            buttons: [{
                                 text: "OK",
                                 type: 'button-assertive'
                             }]
                         });
-                    });
+
+                    }
                 }
-            });
-            uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
+
+
+                var texte = 'Proposer un rendez-vous à ' + $state.params.firstname + ' le ' + start.format("D MMM YY") + ' à ' + start.format("HH:mm") + ' ? ';
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Bonjour Colette', template: texte,
+                    okText: "OK",
+                    okType: 'button-assertive',
+                    cancelText: "Annuler"
+                });
+
+                confirmPopup.then(function (resp) {
+                    if (resp) {
+                        var meeting = {
+                            beneficiaireId: $scope.User._id,
+                            intervenantId: $state.params.intervenantId,
+                            start: start,
+                            end: end,
+                            skill: $scope.search ? $scope.search.skills : null,
+                            status: "attente-intervenant",
+                            type: "rdv-initial",
+                            title: $state.params.firstname
+                        };
+
+                        var m = new Meeting(meeting);
+                        m.$save().then(function () {
+                            meeting.title = $state.params.firstname;
+                            meeting.className = 'assertive-bg';
+                            console.log(meeting);
+                            //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
+
+                            uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
+                            var txt = "Votre demande de rendez vous a bien été transmise à " + $state.params.firstname + ". Elle vous répondra très rapidement.";
+
+                            $ionicPopup.alert({
+                                title: 'Bonjour Colette', template: txt, buttons: [{
+                                    text: "OK",
+                                    type: 'button-assertive'
+                                }]
+                            });
+                        });
+                    }
+                });
+            }
+            else {
+
+
+                var texte = 'Rendre le créneau de ' + start.format("HH:mm") + ' à ' + end.format("HH:mm") + ' indisponible dans votre calendrier ?';
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Bonjour Colette', template: texte,
+                    okText: "OK",
+                    okType: 'button-assertive',
+                    cancelText: "Annuler"
+                });
+
+
+
+
+                confirmPopup.then(function (res) {
+                    if (res) {
+                        var meeting = {
+                            beneficiaireId: $scope.User._id,
+                            intervenantId: null,
+                            start: start,
+                            end: end,
+                            skill: $scope.search ? $scope.search.skills : null,
+                            status: "attente-intervenant",
+                            type: "creneau-occupe",
+                            title: "Vous n'êtes pas disponible"
+                        };
+
+                        var m = new Meeting(meeting);
+                        m.$save().then(function () {
+                            meeting.title = "Vous n'êtes pas disponible";
+                            meeting.className = 'balanced-bg';
+                            //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
+
+                            uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
+                            $ionicPopup.alert({
+                                title: 'Bonjour Colette', template: 'Votre créneau a bien été vérouillé.', buttons: [{
+                                    text: "OK",
+                                    type: 'button-assertive'
+                                }]
+                            });
+                        });
+                    }
+                });
+                uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
+            }
 
         };
 
@@ -515,7 +572,7 @@ angular
                 if (d.intervenantId) {
                     d.className = 'assertive-bg';
                     if (!d.title) {
-                        d.title =  d.intervenantId;
+                        d.title = d.intervenantId;
                     }
                 }
                 else {
@@ -549,8 +606,10 @@ angular
 
         });
 
-        console.log($state.params);
-        if($state.params.intervenantId) {
+
+        if ($state.params.intervenantId) {
+            console.log($state.params);
+            $scope.intervenant = {_id: $state.params.intervenantId, firstname: $state.params.firstname};
             var IntervenantMeetingsList = Meeting.query({'query[intervenantId]': $state.params.intervenantId});
             IntervenantMeetingsList.$promise.then(function (data) {
                 $scope.eventSources = [];
@@ -650,77 +709,12 @@ angular
 
         // CONFIGURATION FOR THE CALENDAR
         $scope.eventSources = [];
-        var createEventWithIntervenant = function (start, end) {
-            var events = uiCalendarConfig.calendars.modalCalendar.fullCalendar('clientEvents');
 
-            for (var i in events) {
-                var mStart = new moment(start);
-                var mEnd = new moment(end);
-                if (events[i].start.isBetween(start, end) || events[i].end.isBetween(start, end)
-                    || mStart.isBetween(events[i].start, events[i].end) || mEnd.isBetween(events[i].start, events[i].end)
-                ) {
-                    uiCalendarConfig.calendars.modalCalendar.fullCalendar('unselect');
-                    $ionicPopup.alert({
-                        title: 'Bonjour Colette', template: "Cet horaire n'est pas disponible dans vos agendas communs", buttons: [{
-                            text: "OK",
-                            type: 'button-assertive'
-                        }]
-                    });
-
-                }
-            }
-            start.locale('fr');
-            var texte = 'Proposer un rendez-vous à ' + $scope.focusIntervenant.firstname + ' le ' + start.format("D MMM YY") + ' à ' + start.format("HH:mm") + ' ? ';
-            var confirmPopup = $ionicPopup.confirm({
-                title: 'Bonjour Colette', template: texte
-                ,
-                okText: "OK",
-                okType: 'button-assertive',
-                cancelText: "Annuler"
-            });
-
-            confirmPopup.then(function(resp){
-                if (resp) {
-                    var meeting = {
-                        beneficiaireId: $scope.User._id,
-                        intervenantId: $scope.focusIntervenant._id,
-                        start: start,
-                        end: end,
-                        skill: $scope.search ? $scope.search.skills : null,
-                        status: "attente-intervenant",
-                        type: "rdv-initial",
-                        title: $scope.focusIntervenant.firstname
-                    };
-
-                    var m = new Meeting(meeting);
-                    m.$save().then(function () {
-                        meeting.title = $scope.focusIntervenant.firstname;
-                        meeting.className = 'assertive-bg';
-                        console.log(meeting);
-                        //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
-
-                        uiCalendarConfig.calendars.modalCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
-                        var txt = "Votre demande de rendez vous a bien été transmise à " + $scope.focusIntervenant.firstname + ". Elle vous répondra très rapidement.";
-
-                        $ionicPopup.alert({
-                            title: 'Bonjour Colette', template: txt, buttons: [{
-                                text: "OK",
-                                type: 'button-assertive'
-                            }]
-                        });
-                        $scope.agendaModal.hide();
-                    });
-                }
-            });
-
-            uiCalendarConfig.calendars.modalCalendar.fullCalendar('unselect');
-
-            };
 
         $scope.uiConfig = {
             calendar: {
                 lang: 'fr',
-                selectable: true,
+                selectable: false,
                 editable: false,
                 slotEventOverlap: false,
                 firstDay: 1,
@@ -743,8 +737,7 @@ angular
                 minTime: '08:00:00',
 
                 maxTime: '20:00:00',
-                hiddenDays: [0],
-                select: createEventWithIntervenant
+                hiddenDays: [0]
             }
         };
 
@@ -831,20 +824,20 @@ angular
 
         };
 
-        $scope.scrollToSection = function(section, handle){
+        $scope.scrollToSection = function (section, handle) {
             console.log(section);
             var quotePosition = $ionicPosition.position(angular.element(document.getElementById(section)));
             console.log(quotePosition.top);
 
             // if there is no handle, use the profile page handle
-            if(handle){
+            if (handle) {
                 $ionicScrollDelegate.$getByHandle(handle).scrollTo(quotePosition.left, quotePosition.top, true);
             }
-            else{
+            else {
                 $ionicScrollDelegate.scrollTo(quotePosition.left, quotePosition.top, true);
             }
 
-    };
+        };
 
         $scope.closeAgenda = function () {
             $scope.agendaModal.hide();
@@ -892,45 +885,45 @@ angular
                 }
             });
 
-/*
-            var myMeetingsList = Meeting.query({'query[beneficiaireId]': $scope.User._id});
-            myMeetingsList.$promise.then(function (data) {
-                $scope.eventSources = [];
-                //  $scope.agendaModal.show();
-                uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
-                var events = [];
+            /*
+             var myMeetingsList = Meeting.query({'query[beneficiaireId]': $scope.User._id});
+             myMeetingsList.$promise.then(function (data) {
+             $scope.eventSources = [];
+             //  $scope.agendaModal.show();
+             uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
+             var events = [];
 
-                for (var i in data) {
-                    var d = data[i];
-                    if (d.intervenantId) {
-                        d.className = 'assertive-bg';
-                        if (d.intervenantId === $scope.focusIntervenant._id) {
-                            continue;
-                        }
-                    }
-                    else {
-                        d.className = 'calm-bg';
-                        d.title = "Vous n'est pas disponible";
-                    }
-                    //$scope.eventSources.push(d);
-                    return d;
-                }
-
-
-                if (data.length > 0) {
-                    uiCalendarConfig.calendars.modalCalendar.fullCalendar('addEventSource', {events: data});
-                }
+             for (var i in data) {
+             var d = data[i];
+             if (d.intervenantId) {
+             d.className = 'assertive-bg';
+             if (d.intervenantId === $scope.focusIntervenant._id) {
+             continue;
+             }
+             }
+             else {
+             d.className = 'calm-bg';
+             d.title = "Vous n'est pas disponible";
+             }
+             //$scope.eventSources.push(d);
+             return d;
+             }
 
 
-                //uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
-                console.log(uiCalendarConfig.calendars);
+             if (data.length > 0) {
+             uiCalendarConfig.calendars.modalCalendar.fullCalendar('addEventSource', {events: data});
+             }
 
-                $timeout(function () {
 
-                }, 250);
+             //uiCalendarConfig.calendars.modalCalendar.fullCalendar("render");
+             console.log(uiCalendarConfig.calendars);
 
-            });
-*/
+             $timeout(function () {
+
+             }, 250);
+
+             });
+             */
 
         };
 
