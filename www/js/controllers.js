@@ -504,7 +504,7 @@ angular
                         m.$save().then(function () {
                             meeting.title = "Vous n'êtes pas disponible";
                             meeting.className = 'balanced-bg';
-                            //  uiCalendarConfig.calendars.profileCalendar.fullCalendar('unselect');
+                             uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
 
                             uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
                             $ionicPopup.alert({
