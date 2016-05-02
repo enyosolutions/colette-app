@@ -18,14 +18,14 @@
                     </div>
                     <div class="actions">
                         <button class="button button-clear button-open-map button-assertive button-block"
-                           ng-click="scrollToSection('presentation')"> <i
+                           ng-click="scrollToSection('presentation-section')"> <i
                                 class="fa fa-angle-right"></i> Voir sa présentation</button>
                         <button class="button button-clear button-open-map button-assertive button-block"
-                                ng-click="scrollToSection('calendar')"><i
+                                ng-click="scrollToSection('calendar-section')"><i
                                 class="fa fa-angle-right"></i> Voir son planning
                         </button>
                         <button class="button button-clear button-open-map button-assertive button-block"
-                           ng-click="scrollToSection('commentaires')"><i
+                           ng-click="scrollToSection('commentaires-section')"><i
                                 class="fa fa-angle-right"></i> Voir ses commentaires</button>
                         <button class="button button-assertive button-new-interview button-block"
                                 ui-sref="app.my-agenda-intervenants({intervenantId: focusIntervenant._id })"
@@ -38,11 +38,11 @@
                 </div>
                 <div class="header-intervenant-profile-detail">
                     <h1 class="price">{{ focusIntervenant.price}}€ par heure</h1>
-                    <i class="ion-close"></i>
+                    <i class="ion-close" ng-click="closeModal()" ></i>
                 </div>
                     
-            <ion-content>
-                <div class="profile-info" id="profile-info" delegate-handle="profile-handle">
+            <ion-content delegate-handle="profile-handle">
+                <div class="profile-info" id="profile-info">
 
                     <div class="calm bio" id="presentation-section">
                         {{ focusIntervenant.bio }}
@@ -51,7 +51,7 @@
                         {{ focusIntervenant.diploma }}
                     </div>
 
-                    <div class="calendar-image" id="calendar-section">
+                    <div class="calendar-image" id="calendar-section" >
                         <!--
                         <img src="img/planning-v2.png" alt="planning"
                              ng-click="openAgendaModal('{{ focusIntervenant._id }}')"/>

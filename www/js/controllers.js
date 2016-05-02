@@ -806,10 +806,10 @@ angular
 
         $scope.scrollToSection = function(section){
             console.log(section);
-            var quotePosition = $ionicPosition.position(angular.element(document.getElementById(section + '-section')));
-            console.log(quotePosition);
+            var quotePosition = $ionicPosition.position(angular.element(document.getElementById(section)));
+            console.log(quotePosition.top);
             $ionicScrollDelegate.$getByHandle('profile-handle').scrollTo(quotePosition.left, quotePosition.top, true);
-        };
+    };
 
         $scope.closeAgenda = function () {
             $scope.agendaModal.hide();

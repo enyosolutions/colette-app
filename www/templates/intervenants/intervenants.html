@@ -44,7 +44,7 @@
                 <div class="results-text">résultats correspondent à votre recherche</div>
                 <i class="fa fa-angle-right fa-4x assertive"></i>
             </li>
-            <li class="document-item intervenant" ng-repeat="intervenant in intervenants"  id="#intervenant-{{ intervenant.code }}">
+            <li class="document-item intervenant" ng-repeat="intervenant in intervenants"  id="intervenant-{{ intervenant.code }}">
                 <div class="card card-intervenant" >
                     <div class="top-block" ng-click="openProfileModal('{{intervenant._id}}')">
                     <img class="round" alt="{{ intervenant.firstname }}" src="img/intervenants/snap-{{ intervenant.code }}.jpg"/>
