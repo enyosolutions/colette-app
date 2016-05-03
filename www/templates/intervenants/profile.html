@@ -27,9 +27,11 @@
                         <button class="button button-clear button-open-map button-assertive button-block"
                            ng-click="scrollToSection('commentaires-section', 'profile-handle')"><i
                                 class="fa fa-angle-right"></i> Voir ses commentaires</button>
-                        <a class="button button-clear button-open-map button-assertive button-block" href="#/app/intervenants/map/{{focusIntervenant._id}}"  nav-direction="forward"
+                        <button class="button button-clear button-open-map button-assertive button-block" ng-click="openMap('{{focusIntervenant._id}}')"
+                           nav-direction="enter"
+                           ng-click="closeModal()"
                                 > <i
-                                class="fa fa-angle-right"></i> Voir sur une carte</a>
+                                class="fa fa-angle-right"></i> Voir sur une carte</button>
                         <button class="button button-assertive button-new-interview button-block"
                                 ui-sref="app.my-agenda-intervenants({intervenantId: focusIntervenant._id, firstname: focusIntervenant.firstname  })"
                                 ng-click="closeModal()"
@@ -64,7 +66,6 @@
                         <div ui-calendar="uiConfig.calendar" ng-model="eventSources" id="profile-calendar"
                              calendar="modalCalendar">
 
-                            test
                              </div>
                     </div>
 
@@ -72,8 +73,8 @@
                     <div class="commentaires" id="commentaires-section">
                         <div class="commentaire" ng-repeat="commentaire in commentaires">
                             <div class="info-commentateur">
-                                <img src="img/mamie.png" alt="planning" class="round"/>
-                                <div class="commentaire-metadata">{{ commentaire.beneficiaire}}</div>
+                                <img src="img/beneficiaires/snap-benef-{{ commentaire.beneficiaire  | lowercase}}.png" alt="planning" class="round"/>
+                                <div class="commentaire-metadata">{{ commentaire.beneficiaire}} {{ commentaire.age}}</div>
                             </div>
                             <div class="commentaire-text">{{ commentaire.text}}</div>
 

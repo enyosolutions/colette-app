@@ -129,7 +129,7 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 }
             })
 
-
+/*
             .state('app.intervenants-map', {
                 url: '/intervenants/map',
                 views: {
@@ -139,9 +139,9 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                     }
                 }
             })
-
+*/
             .state('app.intervenants-map-user', {
-                url: '/intervenants/map/:intervenantId',
+                url: '/intervenants/map',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/intervenants/map.html',
@@ -153,7 +153,7 @@ angular.module('colette', ['ionic', 'colette.controllers', 'colette.services', '
                 url: '/intervenants/intervenants/:intervenantId/agenda',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/intervenants/agenda.html',
+                        templateUrl: 'templates/intervenants/map.html',
                         controller: 'IntervenantsCtrl'
                     }
                 }
