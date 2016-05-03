@@ -1,6 +1,6 @@
 angular
     .module('colette.controllers', [])
-    .run(function ($rootScope, $timeout, $state, $localstorage) {
+    .run(function ($rootScope, $timeout, $state, $localstorage, Intervenant) {
         $rootScope.menuScrollLeft = function () {
             return;
         };
@@ -20,6 +20,12 @@ angular
         if ($localstorage.getObject('User')) {
             //$state.go('app.home');
         }
+
+        var intervenantsQuery = Intervenant.query();
+        intervenantsQuery.$promise.then(function (intervenants) {
+            $localstorage.setObject('intervenantsFullList', intervenants);
+        });
+
     })
     .controller('AppCtrl', function ($scope, $rootScope, $state, $ionicModal, $ionicPopup, $timeout, $localstorage, $ionicLoading, $ionicHistory, $ionicViewSwitcher, User, Intervenant) {
         // With the new view caching in Ionic, Controllers are only called
@@ -107,12 +113,12 @@ angular
 
         if ($state.is('app.home')) {
             console.log('is home');
-            $timeout(function(){
-            $rootScope.showBackButton = false;
+            $timeout(function () {
+                $rootScope.showBackButton = false;
             });
         }
         else {
-            $timeout(function() {
+            $timeout(function () {
                 $rootScope.showBackButton = true;
             });
         }
@@ -130,12 +136,12 @@ angular
 
         if ($state.is('app.home')) {
             console.log('is home');
-            $timeout(function(){
+            $timeout(function () {
                 $scope.showBackButton = false;
             });
         }
         else {
-            $timeout(function() {
+            $timeout(function () {
                 $scope.showBackButton = true;
             });
         }
@@ -225,7 +231,7 @@ angular
                         lng: results[0].geometry.location.lng()
                     };
                 } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
+                    // alert('Geocode was not successful for the following reason: ' + status);
                 }
                 $localstorage.setObject('user.temp', user);
                 $ionicLoading.hide();
@@ -327,12 +333,12 @@ angular
 
         if ($state.is('app.home')) {
             console.log('is home');
-            $timeout(function(){
+            $timeout(function () {
                 $rootScope.showBackButton = false;
             });
         }
         else {
-            $timeout(function() {
+            $timeout(function () {
                 $rootScope.showBackButton = true;
             });
         }
@@ -503,7 +509,7 @@ angular
                         m.$save().then(function () {
                             meeting.title = "Vous n'êtes pas disponible";
                             meeting.className = 'balanced-bg';
-                             uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
+                            uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
 
                             uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', meeting, true); // stick? = true
                             $ionicPopup.alert({
@@ -969,54 +975,93 @@ angular
             $scope.execSearch();
         }
 
-        if ($state.is('app.intervenants-map-user') || $state.is('app.intervenants-map') || $state.is('app.intervenants-agenda')) {
-            console.log($state.params);
-            var options = {timeout: 10000, enableHighAccuracy: true};
+        var location = {lat: 48.8588377, lng: 2.2775169};
+        $scope.User = $localstorage.getObject('User');
+        if ($scope.User.location) {
+            location = $scope.User.location;
+        }
 
-            $scope.User = $localstorage.getObject('User');
-            $scope.intervenants = $localstorage.getObject('intervenants');
-            $scope.focusIntervenant = undefined;
+        var myLatLng = new google.maps.LatLng(location.lat, location.lng);
 
-            if ($state.params.intervenantId) {
-                var focusIntervenantId = $state.params.intervenantId;
-                for (var i in $scope.intervenants) {
-                    if (focusIntervenantId === $scope.intervenants[i]._id) {
-                        $scope.focusIntervenant = $scope.intervenants[i];
-                    }
+        var mapOptions = {
+            center: myLatLng,
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+
+        $scope.openMap = function (intervenantId) {
+            $localstorage.set('map-intervenant-id', intervenantId);
+
+            var intervenantsFull = $localstorage.getObject('intervenantsFullList');
+
+            for (var i in intervenantsFull) {
+                console.log(intervenantsFull[i]._id);
+                if (intervenantId === intervenantsFull[i]._id) {
+                    $scope.focusIntervenant = intervenantsFull[i];
                 }
+
             }
+            setMapCenter($scope.focusIntervenant.location.lat, $scope.focusIntervenant.location.lng);
+            $scope.closeModal();
+           // $timeout(function(){google.maps.event.trigger($scope.map, 'resize');},3000);
+            $state.go('app.intervenants-map-user');
+        }
 
-            console.log($state.params.intervenantId);
-            var location = {lat: 1, lng: 1};
-            if ($scope.focusIntervenant && $scope.focusIntervenant.location) {
-                location = $scope.focusIntervenant.location;
+        var setMapCenter = function (lat, lng) {
+            if ($scope.map) {
+                $scope.map.center.latitude = location.lat;
+                $scope.map.center.longitude = location.lng;
+                $timeout(function () {
+                    $scope.$apply();
+                }, 1000);
             }
-            else if ($scope.User.location) {
-                location = $scope.User.location;
-            }
-            var myLatLng = new google.maps.LatLng(location.lat, location.lng);
-
-            console.log(location);
-            var mapOptions = {
-                center: myLatLng,
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
+        };
 
 
-            if (!$scope.map) {
-                var map = document.getElementById("map");
-                $scope.map = new google.maps.Map(map, mapOptions);
-                $scope.markers = [];
-
+        if ($state.is('app.intervenants-map-user') || $state.is('app.intervenants-map') || $state.is('app.intervenants-agenda')) {
+            if (!$scope.mapInitialized) {
+                console.log('******Map init');
+                console.log('******Map init');
+                console.log('******Map init');
+                $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                $scope.mapInitialized = true;
             }
             else {
+                console.log('******ALREADY init');
+                console.log('******ALREADY init');
+                console.log('******ALREADY init');
+            }
+
+            var intervenantId = $localstorage.get('map-intervenant-id', intervenantId);
+            $scope.intervenants = $localstorage.getObject('intervenants');
+            var intervenantsFull = $localstorage.getObject('intervenantsFullList');
+
+            for (var i in intervenantsFull) {
+                console.log(intervenantsFull[i]._id);
+                if (intervenantId === intervenantsFull[i]._id) {
+                    $scope.focusIntervenant = intervenantsFull[i];
+                }
+
+            }
+
+            console.log($scope.focusIntervenant.firstname);
+            if (!$scope.focusIntervenant) {
+                return
+            }
+            setMapCenter($scope.focusIntervenant.location.lat, $scope.focusIntervenant.location.lng);
+            location = $scope.focusIntervenant.location;
+
+
+            if ($scope.markers) {
                 for (var i = 0; i < markers.length; i++) {
                     $scope.markers.setMap(null);
                 }
-                $scope.markers = [];
             }
+            $scope.markers = [];
+
             console.log($scope.map);
+
             var marker = new google.maps.Marker({
                 position: myLatLng,
                 map: $scope.map,
@@ -1038,6 +1083,9 @@ angular
                     $scope.openProfileModal(interv._id);
                 });
             }
+
         }
-    });
+    }
+)
+;
 

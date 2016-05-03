@@ -60,9 +60,9 @@
                     </div>
                     </div>
                     <div class="action-block">
-                    <a class="button button-clear button-open-map button-assertive button-block" href="#/app/intervenants/map/{{intervenant._id}}"  nav-direction="forward"
+                    <button class="button button-clear button-open-map button-assertive button-block" ng-click="openMap('{{ intervenant._id }}')"  nav-direction="forward"
                             > <i
-                            class="fa fa-angle-right"></i> Voir sur une carte</a>
+                            class="fa fa-angle-right"></i> Voir sur une carte</button>
                     <button class="button button-assertive button-open-profile button-block" ng-click="openProfileModal('{{intervenant._id}}')"> <i
                             class="fa fa-angle-right"></i> Voir la fiche</button>
                     </div>
