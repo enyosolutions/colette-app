@@ -6,7 +6,7 @@
                 <h1 class="balanced" ng-if="intervenant"><i class="fa fa-calendar-check-o fa-2x"></i><br/>Prendre un rendez-vous</h1>
 
                 <h3 ng-if="!intervenant" class="calm">Vous pouvez retrouver ici tous vos rendez-vous et vos disponibilités sur les semaines à venir.</h3>
-                <h3 ng-if="intervenant" class="calm">Cliquez sur une case libre de votre calendrier afin de proposer un rendez-vous à <strong>{{intervenant.firstname}}</strong>.</h3>
+                <h3 ng-if="intervenant" class="calm">Ce calendrier présente les disponibilités de <strong>{{intervenant.firstname}}</strong> ainsi que les votres. Cliquez sur une case vide pour choisir une date et une heure de rendez-vous correspondantes.</h3>
             </div>
             <div ui-calendar="uiConfig.calendar" ng-model="eventSources" id="profile-calendar" calendar="myCalendar">
                  </div>

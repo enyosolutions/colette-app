@@ -50,6 +50,10 @@ h3 {
 MENU LEFT
 */
 
+.main-menu .scroll {
+    height: 99%;
+
+}
 .pane.view.open .menu-content.pane {
     transform: translate3d(0, 0, 0)!important;
     width: 824px!important;
@@ -223,6 +227,7 @@ MENU LEFT
 .list-inline {
     white-space:nowrap;
     height: 100%;
+    margin-top: 90px;
 }
 
 
@@ -237,6 +242,7 @@ input.ng-invalid:not(.ng-untouched),
 select.ng-invalid:not(.ng-untouched),
 textarea.ng-invalid:not(.ng-untouched) {
     border: 3px solid red;
+    background-color: red;
 }
 .error-message {
     display: none;
@@ -519,23 +525,41 @@ body {
 
 .register-intro-page .page-title {
     top: 50%;
-    margin: -50px 0 0 50px;
-    height: 100px;
+    margin: -78px 0 0 0px;
+    height: auto;
     position: absolute;
 }
 
-.register-intro-page h1, .register-intro-page h2 {
-    color: #2A565C;
+
+
+.register-intro-page .breadcrumb {
+    display: inline-block;
+    width: 29%;
+    margin-right: 3%;
+    color: #3f98a7;
+    background-color: #e9f1f2;
+    padding: 24px 18px;
 }
 
+.register-intro-page .breadcrumb.active {
+    background-color: #3f98a7;
+    color: #fff;
+}
 
 .register-intro-page h1 {
     font-size: 40px;
 }
 
+.register-intro-page .breadcrumb  h1, .register-intro-page .breadcrumb h2 {
+    color: #3f98a7;
+}
+.register-intro-page .breadcrumb.active  h1, .register-intro-page .breadcrumb.active h2 {
+    color: #fff;
+}
+
 .register-intro-page h2 {
-    font-size: 40px;
-    font-weight: 200;
+    font-size: 17px;
+    font-weight: 400;
 }
 
 .register-page .input-legend {
@@ -566,11 +590,11 @@ body {
 .register-page form .input-legend {
     border: none;
     color: #5A3B4F;
-    font-size: 15px;
+    font-size: 20px;
     line-height: 1.5;
     word-wrap: break-word;
     white-space: normal;
-    margin: 12px 0 0 25px;
+    margin: 0px 0 0 25px;
 }
 
 .register-page form .input-item {
@@ -579,7 +603,7 @@ body {
     font-size: 24px;
     border-radius: 5px;
     font-weight: 900;
-        line-height: 25px;
+    line-height: 25px;
 }
 
 ::-webkit-input-placeholder {
@@ -619,7 +643,10 @@ body {
 
 .ng-pristine .row:nth-child(3) .row {
 
-    
+}
+
+.ng-invalid.ng-invalid-required:placeholder-shown {
+    content: "ce champ est obligatoire";
 }
 
 .row:nth-child(3) .item-select {
@@ -706,6 +733,8 @@ input[type="radio"].female {
 
 /* STEP 3 */
 
+
+
 form.step3 {
     width: 85%;
     margin-top: 68px;
@@ -714,11 +743,9 @@ form.step3 {
 .step3 label.item {
     float: left;
     width: 50%;
+    height: 184px;
 }
 
-.ng-invalid.ng-invalid-required:placeholder-shown {
-    content: "ce champ est obligatoire";
-}
 
 .register-page form.step3 .input-legend {
     margin: -10px 0 0 0;
@@ -736,7 +763,7 @@ form.step3 {
 }
 
 .register-page form .input-legend.legendPicture {
-    margin-top: 60px;
+    margin-top: 33px;
 }
 
 .camera {
@@ -760,6 +787,19 @@ form.step3 {
     left: 50%;
     width: 200px;
     margin-left: -100px;
+}
+
+
+
+/*
+ *
+STEP 3
+*
+*/
+
+.register-page.step4 form {
+    width: 80%;
+    margin-top: 17%;
 }
 
 
@@ -993,8 +1033,9 @@ form.step3 {
     line-height: 50px;
 }
 
-.card-intervenant .score {
-
+.card-intervenant .skill {
+    font-size: 20px;
+    padding: 13px 3px;
 }
 
 .card-intervenant .action-block {
@@ -1021,6 +1062,12 @@ form.step3 {
 .score .fa-star {
     font-size: 1.8em;
     margin: 5px 5px;
+    color: #ddd;
+}
+.score .fa-star.active {
+    font-size: 1.8em;
+    margin: 5px 5px;
+    color: #3F98A7;
 }
 
 .card-intervenant .button.button-assertive.button-clear {
@@ -1068,7 +1115,7 @@ form.step3 {
 }
 
 .intervenant-profile .profile-side .button.button-new-interview {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .intervenant-profile .scroll-content {
@@ -1103,21 +1150,25 @@ form.step3 {
     z-index: 2;
 }
 
-.intervenant-profile .header-intervenant-profile-detail h1 {
+.header-intervenant-profile-detail h2 {
+    font-weight: 500;
+    padding: 20px 30px;
+}
+
+.intervenant-profile .profile-side h2 {
     background-color: #3F98A7;
-    position: absolute;
     z-index: 2;
     color: #fff;
     top: 0;
     text-align: center;
-    font-weight: 200;
-    width: 70%;
-    margin: 0 15%;
-    padding: 15px 0;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    font-weight: 400;
+    margin: 10px 0;
+    padding: 15px 2px;
+    border-radius: 10px;
+
 }
 
+.intervenant-profile  .ion-close,
 .intervenant-profile .header-intervenant-profile-detail .ion-close {
     position: absolute;
     right: 15px;
@@ -1137,6 +1188,56 @@ form.step3 {
 
 .intervenant-profile .scroll {
     padding: 70px 0;
+}
+
+.disclaimer-section {
+    z-index: 10;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: max-height 200ms ease, opacity 200ms ease 100ms;
+    transition: max-height 200ms ease, opacity 200ms ease 100ms;
+    background-color: #f6f0f1;
+    text-align: center;
+    padding: 30px 90px;
+}
+.disclaimer .disclaimer-section {
+    max-height: 795px;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: max-height 200ms ease, opacity 200ms ease 100ms;
+    transition: max-height 200ms ease, opacity 200ms ease 100ms;
+}
+
+.disclaimer-section h1 {
+    text-transform: none;
+    font-weight: 300;
+    font-size: 50px;
+}
+
+.disclaimer-section .explanation {
+    color: #583B50;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 25px;
+}
+
+.disclaimer-section .action-buttons {
+    margin-top: 50px;
+
+}
+.disclaimer-section .button {
+    display: block;
+    width: auto;
+    margin: 10px auto;
+    font-weight: 600;
+    color: #fff;
 }
 
 .intervenant-profile .scroll .fc-slats {
@@ -1455,3 +1556,11 @@ POPUP ALERT
 .popup-container.active .popup {
 }
 
+.popup-container .popup {
+    width: 500px;
+}
+.popup-body {
+    font-size: 30px;
+    line-height: 1.2;
+    color: #1F565B;
+}

@@ -6,7 +6,7 @@
 
                 <div class="row">
                     <div class="col col-60">
-                        <input type="text" ng-model="newUser.firstname" class="input-item" required placeholder="Colette">
+                        <input type="text" ng-model="newUser.firstname" class="input-item" required >
                         <div class="error-message">Ce champ est obligatoire</div>
                     </div>
                     <div class="col col-40">
@@ -22,7 +22,7 @@
 
                 <div class="row">
                     <div class="col col-60">
-                        <input type="text" ng-model="newUser.lastname" class="input-item" required placeholder="Dupont">
+                        <input type="text" ng-model="newUser.lastname" class="input-item" required >
                         <div class="error-message">Ce champ est obligatoire</div>
                     </div>
                     <div class="col col-40">
@@ -110,6 +110,7 @@
                 </div>
                 <div class="col col-40">
                     <span class="royal label">&nbsp;</span>
+                    <span class="royal label">&nbsp;</span>
                     <div class="input-legend royal">Tout simplement pour déterminer votre âge.</div>
                 </div>
 
@@ -120,7 +121,7 @@
                 <div class="col col-60 ">
                     <div class="row">
                         <div class="item-input">
-                            <input type="radio" name="user-sex" ng-model="user.sex" ng-value="male" class="male" selected checked/> <span>Homme</span>
+                            <input type="radio" name="user-sex" ng-model="user.sex" ng-value="male" class="male" /> <span>Homme</span>
                             <input type="radio" name="user-sex" ng-model="user.sex" ng-value="female" class="female" /> <span>Femme</span>
                         </div>
                     </div>
@@ -151,6 +152,8 @@
                     </div>
                 </div>
             </label>
+            <a nav-direction="back" class="button button-assertive button-previous" href="#/register/step1/intro"><i
+                    class="fa fa-angle-left"></i></a>
             <button class="button button-assertive button-next" type="submit"><i class="fa fa-angle-right"></i> Suivant</button>
         </form>
     </div>

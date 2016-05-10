@@ -1,70 +1,39 @@
-<ion-nav-view class="intervenants-panel intervenants-results-panel" view-title="Intervants" >
-    <form class="natural-form" >
+<ion-nav-view class="intervenants-panel intervenants-results-panel" view-title="Intervants">
+    <form class="natural-form">
         <div class="">
-            <div class="calm">
-                <div class="form-text">J'ai besoin d'intervenants</div>
-                <div class="item item-select input-item first-input">
-                    <select ng-model="search.skills" class="input-item item-large input-assertive"  ng-change="execSearch()" ng-model-options="{debounce:500}">
-                        <option value>choisir dans la liste</option>
-                        <option value="menage">ménage</option>
-                        <option value="courses">courses</option>
-                        <option value="transport">transport</option>
-                        <option value="cuisine">cuisine</option>
-                        <option value="travaux">travaux</option>
-                        <option value="animaux">animaux</option>
-                        <option value="toilette">toilette</option>
-                        <option value="portage-repas">portage repas</option>
-                        <option value="portage-medicaments">portage médicaments</option>
-                        <option value="depannage">dépannage</option>
-                        <option value="jardinage">jardinage</option>
-                        <option value="aide-menagere">aide-ménagère</option>
-                        <option value="nuit">nuit</option>
-                        <option value="cuisine">cuisine</option>
-                        <option value="objets-connectes">objects connectés</option>
-                    </select>
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-text text-part-two">classés par</div>
-                <div class="item item-select input-item second-input">
-                    <select ng-model="search.sort" class="input-item assertive"  ng-change="execSearch()" ng-model-options="{debounce:500}">
-                        <option value>choisir dans la liste</option>
-                        <option value="friendshipScore">note humaine</option>
-                        <option value="skillsScore">note technique</option>
-                        <option value="distance">proximité géographique</option>
-                    </select>
-                </div>
-
-            </div>
         </div>
     </form>
-    <ion-scroll direction="x" overflow-scroll="true" class="document-list infinite-list" delegate-handle="intervenants-handle">
+    <ion-scroll direction="x" overflow-scroll="true" class="document-list infinite-list"
+                delegate-handle="intervenants-handle">
         <ul class="list-inline" on-swipe-left="menuScrollLeft($event)" on-swipe-right="menuScrollRight($event)">
             <li class="document-item results-recap-section">
                 <div class="results-count" count-to="{{ finalCount }}" value="{{ originalCount }}" duration="0.5"></div>
                 <div class="results-text">résultats correspondent à votre recherche</div>
                 <i class="fa fa-angle-right fa-4x assertive"></i>
             </li>
-            <li class="document-item intervenant" ng-repeat="intervenant in intervenants"  id="intervenant-{{ intervenant.code }}">
-                <div class="card card-intervenant" >
+            <li class="document-item intervenant" ng-repeat="intervenant in intervenants"
+                id="intervenant-{{ intervenant.code }}">
+                <div class="card card-intervenant">
                     <div class="top-block" ng-click="openProfileModal('{{intervenant._id}}')">
-                    <img class="round" alt="{{ intervenant.firstname }}" src="img/intervenants/snap-{{ intervenant.code }}.jpg"/>
+                        <img class="round" alt="{{ intervenant.firstname }}"
+                             src="img/intervenants/snap-{{ intervenant.code }}.jpg"/>
 
-                    <div class="name balanced" >{{ intervenant.firstname }}</div>
-                    <div class="age balanced">{{ intervenant.age }} ans</div>
-                    <div class="score friendship-score">
-                        <i class="fa fa-star color-light-teal"
-                           ng-repeat="n in range(0, intervenant.friendshipScore)"></i>
-                    </div>
-                    <div class="score skills-score">
-                        <i class="fa fa-star royal" ng-repeat="n in range(0, intervenant.skillsScore)"></i>
-                    </div>
+                        <div class="name balanced">{{ intervenant.firstname }}</div>
+                        <div class="age balanced">{{ intervenant.age }} ans</div>
+                        <div class="score friendship-score">
+                            <i class="fa fa-star "
+                               ng-repeat="n in range(0, 3)"
+                               ng-class="{'active':  intervenant.friendshipScore > n }"></i>
+                        </div>
+                        <div class="skill balanced">
+                            Intervenant {{ search.skills }}
+                        </div>
                     </div>
                     <div class="action-block">
-                    <button class="button button-clear button-open-map button-assertive button-block" ng-click="openMap('{{ intervenant._id }}')"  nav-direction="forward"
-                            > <i
-                            class="fa fa-angle-right"></i> Voir sur une carte</button>
-                    <button class="button button-assertive button-open-profile button-block" ng-click="openProfileModal('{{intervenant._id}}')"> <i
-                            class="fa fa-angle-right"></i> Voir la fiche</button>
+                        <button class="button button-assertive button-open-profile button-block"
+                                ng-click="openProfileModal('{{intervenant._id}}')"><i
+                                class="fa fa-angle-right"></i> Voir la fiche
+                        </button>
                     </div>
                 </div>
             </li>

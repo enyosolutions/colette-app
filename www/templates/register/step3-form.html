@@ -1,12 +1,12 @@
 <ion-nav-view name="registerContent" class="register-page register-intro-page">
     <div class="page-body">
         <form ng-submit="doRegisterStep3()" class="step3">
-            <label class="item item-input item-stacked-label col-50">
+            <label class="item item-input item-stacked-label col-50 phone">
                 <span class="royal label">Votre email</span>
 
                 <div class="row">
                     <div class="col">
-                        <input type="email" ng-model="newUser.email" class="input-item" required placeholder="colette_dupont@gmail.com">
+                        <input type="email" ng-model="newUser.email" class="input-item" required >
                         <div class="error-message">Ce champ est obligatoire</div>
                         <div class="input-legend royal">Pour vous connecter à votre compte personnel</div>
                     </div>
@@ -19,46 +19,32 @@
 
                 <div class="row">
                     <div class="col">
-                        <input type="text" ng-model="newUser.phonenumber" class="input-item" required placeholder="01 34 73 36 10">
+                        <input type="text" ng-model="newUser.phonenumber" class="input-item" required>
                         <div class="error-message">Ce champ est obligatoire</div>
                         <div class="input-legend royal">Pour vous contacter si nécessaire</div>
                     </div>
                 </div>
             </label>
 
-            <label class="item item-input item-stacked-label col-50">
+            <label class="item item-input item-stacked-label col-50 phone">
                 <span class="royal label">Votre adresse</span>
 
                 <div class="row">
                     <div class="col">
-                        <input type="text" ng-model="newUser.address" class="input-item"  placeholder="18 rue du Colonel Fabien">
+                        <input type="text" ng-model="newUser.address" class="input-item" >
                         <div class="error-message">Ce champ est obligatoire</div>
                         <div class="input-legend royal">Pour recevoir des services près de chez vous</div>
                     </div>
                 </div>
             </label>
 
-
-            <label class="item item-input item-stacked-label col-50">
-                <span class="royal label">Votre ville</span>
-
-                <div class="row">
-                    <div class="col">
-                        <div class="error-message">Ce champ est obligatoire</div>
-                        <input type="text" ng-model="newUser.city" class="input-item" required placeholder="Marolles en Brie">
-                        <div class="input-legend royal"></div>
-                    </div>
-                </div>
-            </label>
-
-
-            <label class="item item-input item-stacked-label col-50">
+            <label class="item item-input item-stacked-label col-50 phone">
                 <span class="royal label">Votre code postal</span>
 
                 <div class="row">
                     <div class="col">
                         <div class="error-message">Ce champ est obligatoire</div>
-                        <input type="text" ng-model="newUser.zipCode" class="input-item" required placeholder="94440">
+                        <input type="text" ng-model="newUser.zipCode" class="input-item" required >
                         <div class="input-legend royal"></div>
                     </div>
                 </div>
