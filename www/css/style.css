@@ -22,7 +22,7 @@
 body, html, h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6, .button {
   color: #000;
-  font-weight: 500;
+  font-weight: 600;
   font-family: "Raleway", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
 }
 
@@ -32,11 +32,11 @@ h1, h2 {
 
 h1 {
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 h2 {
-    font-weight: 200;
+    font-weight: 300;
 }
 
 h3 { 
@@ -92,7 +92,7 @@ MENU LEFT
 .pane.open .left-menu .button-back .fa-angle-left:before {
     content: "Retour";
     font-family: "raleway";
-    font-weight: 200;
+    font-weight: 300;
     font-size: 32px;
 }
 
@@ -227,9 +227,12 @@ MENU LEFT
 .list-inline {
     white-space:nowrap;
     height: 100%;
-    margin-top: 90px;
 }
 
+
+.intervenants-results-panel .list-inline {
+    margin-top: 90px;
+}
 
 input,
 select,
@@ -292,7 +295,7 @@ LANDING PAGE
 .home-panel .card.notification {
     font-size: 24px;
     line-height: 30px;
-    font-weight: 300;
+    font-weight: 400;
     color: #583B50;
     background-color: #F6F0F1;
 }
@@ -378,7 +381,7 @@ LANDING PAGE
 .home-panel .action-description {
     font-size: 24px;
     line-height: 30px;
-    font-weight: 300;
+    font-weight: 400;
     color: #583B50;
     background-color: #F6F0F1;
     text-align: center;
@@ -450,7 +453,7 @@ LOGIN PAGE
 .login-form h3 {
     font-size: 40px;
     color: #1F565B;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .login-form span {
@@ -560,10 +563,11 @@ body {
 .register-intro-page h2 {
     font-size: 17px;
     font-weight: 400;
+
 }
 
 .register-page .input-legend {
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .register-page form {
@@ -574,7 +578,7 @@ body {
     display: block;
     color: #5A3B4F;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
     padding-left: 10px;
     font-weight: 900;
 }
@@ -828,7 +832,7 @@ STEP 3
     color: #5A3B4F;
     margin-left: 50px;
     font-family: "Raleway";
-    font-weight: 200;
+    font-weight: 300;
 }
 
 .natural-form h2 {
@@ -837,7 +841,7 @@ STEP 3
     vertical-align: middle;
     text-align: left;
     top: 15%;
-    font-weight: 200;
+    font-weight: 300;
     text-transform: none;
 }
 
@@ -891,7 +895,7 @@ STEP 3
     direction: ltr;
     color: #F56D74;
     font-family: "Raleway";
-    font-weight: 200;
+    font-weight: 300;
     text-decoration: underline;
 
 }
@@ -936,7 +940,7 @@ STEP 3
 
 .natural-form .button-next {
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 
@@ -947,7 +951,7 @@ STEP 3
 
 .balanced, a.balanced {
     color: #1F565B;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 40px;
 }
 
@@ -970,7 +974,7 @@ STEP 3
 .results-recap-section .results-count {
     display: inline-block;
     font-size: 330px;
-    font-weight: 200;
+    font-weight: 300;
     letter-spacing: -10px;
     margin-top: 200px;
     margin-right: 10px;
@@ -981,7 +985,7 @@ STEP 3
     display: inline-block;
     width: 300px;
     font-size: 35px;
-    font-weight: 200;
+    font-weight: 300;
     line-height: 1em;
 }
 
@@ -1022,14 +1026,14 @@ STEP 3
 
 
 .card-intervenant .name {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 35px;
 }
 
 
 .card-intervenant .age {
     font-size: 24px;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 50px;
 }
 
@@ -1049,14 +1053,14 @@ STEP 3
     margin: 0 auto;
     width: 208px;
     border-radius: 0px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .card-intervenant .button-open-map {
     margin: 0 auto;
     padding: 0;
     width: 208px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .score .fa-star {
@@ -1137,7 +1141,7 @@ STEP 3
 .profile-info .calm, .profile-info a.calm {
     font-size: 20px;
     line-height: 28px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .header-intervenant-profile-detail {
@@ -1165,7 +1169,6 @@ STEP 3
     margin: 10px 0;
     padding: 15px 2px;
     border-radius: 10px;
-
 }
 
 .intervenant-profile  .ion-close,
@@ -1290,7 +1293,7 @@ STEP 3
 }
 
 .intervenant-profile .diploma {
-    font-weight: 500;
+    font-weight: 600;
     font-style: italic;
 }
 
@@ -1336,7 +1339,7 @@ INTERVENANTS AGENDA
     border: none;
     color: white;
     border-radius: 0;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
 }
 
@@ -1401,7 +1404,7 @@ hr.fc-divider {
 }
 
 .my-agenda h1.balanced {
-    font-weight: 200;
+    font-weight: 300;
     text-transform: none;
     font-size: 65px;
 }
@@ -1410,7 +1413,7 @@ hr.fc-divider {
     color: #583B50;
     font-size: 25px;
     font-family: helvetica;
-    font-weight: 200;
+    font-weight: 300;
     line-height: 36px; 
 }
 
@@ -1495,7 +1498,7 @@ body .pane .view-container .my-agenda {
 }
 
 .my-agenda .fc-title {
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .my-agenda #profile-calendar {
@@ -1523,7 +1526,7 @@ body .pane .view-container .my-agenda {
     line-height: 75px;
     font-family: raleway;
     text-transform: none;
-    font-weight: 200;
+    font-weight: 300;
     text-align: center;
     width: 600px;
     margin: 280px auto 100px;
@@ -1540,7 +1543,7 @@ body .pane .view-container .my-agenda {
     font-size: 15px;
     text-align: center;
     line-height: 65px;
-    font-weight: 600;
+    font-weight: 700;
     color: white;
     background-color: #F56D74;
     border-radius: 0;
@@ -1554,6 +1557,20 @@ POPUP ALERT
 */
 
 .popup-container.active .popup {
+    padding: 30px;
+    width: 350px;
+    background-color: #F3F3F3;
+    color: #583B50;
+    font-size: 16px;
+}
+
+.popup-container.active .popup h3 {
+    color: #583B50;    
+    font-size: 30px;
+}
+
+.popup-buttons .button {
+border: 1px solid #999;
 }
 
 .popup-container .popup {
